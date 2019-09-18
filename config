@@ -1,0 +1,52 @@
+#Cluste CI
+Host strada
+  HostName strada
+  User senior
+  IdentityFile ~/.ssh/my_key
+
+Host sprinter
+  HostName sprinter
+  User senior
+  IdentityFile ~/.ssh/mykey
+
+Host cargo
+  HostName cargo
+  User senior
+  IdentityFile ~/.ssh/mykey
+
+Host fiorino
+  HostName fiorino
+  User senior
+  IdentityFile ~/.ssh/mykey
+
+Host kangoo
+  HostName kangoo
+  User senior
+  IdentityFile ~/.ssh/mykey
+
+Host pampa
+  HostName pampa
+  User senior
+  IdentityFile ~/.ssh/mykey
+
+Host saveiro
+  HostName saveiro
+  User senior
+  IdentityFile ~/.ssh/mykey
+
+Host soul
+  HostName soul
+  User senior
+  IdentityFile ~/.ssh/mykey
+
+###############################################################
+
+Host saveirohom
+  HostName saveirohomologacao
+  User senior
+  IdentityFile ~/.ssh/my_key
+
+Host stradahom
+  HostName stradahomologacao
+  User senior
+  IdentityFile ~/.ssh/my_key
