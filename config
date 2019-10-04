@@ -50,3 +50,8 @@ Host stradahom
   HostName stradahomologacao
   User senior
   IdentityFile ~/.ssh/my_key
+
+Host cig7
+  HostName cig7.senior.com.br
+  User senior
+  IdentityFile ~/.ssh/my_key

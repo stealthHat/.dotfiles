@@ -99,6 +99,8 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 #========================================= My Configs
+# z.sh 
+. ~/z.sh
 
 #source de aliases
 if [ -f ~/.zsh_aliases ]; then
@@ -135,3 +137,4 @@ autoload -Uz _zplugin
 zplugin light zdharma/fast-syntax-highlighting
 zplugin light zsh-users/zsh-autosuggestions
 zplugin light zsh-users/zsh-completions
+if [ /usr/bin/kubectl ]; then source <(kubectl completion zsh); fi
