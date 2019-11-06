@@ -102,6 +102,34 @@ source $ZSH/oh-my-zsh.sh
 # z.sh 
 . ~/z.sh
 
+#vim mode on line 
+bindkey -v
+
+# Better searching in command mode
+bindkey -M vicmd '?' history-incremental-search-backward
+bindkey -M vicmd '/' history-incremental-search-forward
+# Beginning search with arrow keys
+bindkey "^[OA" up-line-or-beginning-search
+bindkey "^[OB" down-line-or-beginning-search
+bindkey -M vicmd "k" up-line-or-beginning-search
+bindkey -M vicmd "j" down-line-or-beginning-search
+
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+precmd() { RPROMPT="" }
+function zle-line-init zle-keymap-select {
+   VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+   RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
+   zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+export KEYTIMEOUT=1
+#
+
 #source de aliases
 if [ -f ~/.zsh_aliases ]; then
 	. ~/.zsh_aliases
