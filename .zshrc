@@ -99,8 +99,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 #========================================= My Configs
-# z.sh 
-. ~/z.sh
 
 #vim mode on line 
 bindkey -v
@@ -166,3 +164,6 @@ zplugin light zdharma/fast-syntax-highlighting
 zplugin light zsh-users/zsh-autosuggestions
 zplugin light zsh-users/zsh-completions
 if [ /usr/bin/kubectl ]; then source <(kubectl completion zsh); fi
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform

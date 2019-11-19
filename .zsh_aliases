@@ -17,7 +17,10 @@ alias k='kubectl'
 alias di='docker image'
 alias vim='nvim'
 alias kp='kubectl get pods'
-
+alias r='rancher'
+alias rk='rancher kubectl'
+alias e='eksctl'
+alias t='terraform'
 #kitty ssh alias
 alias ssh='kitty +kitten ssh'
 
