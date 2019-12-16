@@ -7,4 +7,4 @@ depois disso tem que baixar o thema space ship, rodar os dois comnados seguintes
 
 e para setar o zsh como shell padrao usar: chsh -s $(which zsh)
 
-
+para mudar o home directory do zplugins usar a env var ZPLGM antes da installação 
