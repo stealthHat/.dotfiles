@@ -8,3 +8,4 @@
 next steps: 
 Install tmux-plugins: https://github.com/tmux-plugins/tpm
 Install nord tmux theme: https://github.com/arcticicestudio/nord-tmux
+check out https://github.com/zplug/zplug
