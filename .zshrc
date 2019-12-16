@@ -48,8 +48,8 @@ zle -N zle-keymap-select
 export KEYTIMEOUT=1
 
 #source de aliases
-if [ -f $HOME/.zsh_aliases ]; then
-	source $HOME/.zsh_aliases
+if [ -f $HOME/.config/zsh/.zsh_aliases ]; then
+	source $HOME/.config/zsh/.zsh_aliases
 fi
 
 if [ /usr/bin/kubectl ]; then 
@@ -66,5 +66,3 @@ autoload -Uz _zplugin
 zplugin light zdharma/fast-syntax-highlighting
 zplugin light zsh-users/zsh-autosuggestions
 zplugin light zsh-users/zsh-completions
-
-autoload -U +X bashcompinit && bashcompinit

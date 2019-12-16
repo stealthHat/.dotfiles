@@ -2,5 +2,9 @@ para mudar o diretorio padrao do zsh tem que configurar a variavel de ambiente Z
 
 depois disso tem que baixar o thema space ship, rodar os dois comnados seguintes:
 
- -git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+ - git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
  - ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme 
+
+e para setar o zsh como shell padrao usar: chsh -s $(which zsh)
+
+
