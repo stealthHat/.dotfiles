@@ -46,13 +46,9 @@ zle -N zle-keymap-select
 export KEYTIMEOUT=1
 
 #source de aliases
-if [ -f $HOME/.config/zsh/.zsh_aliases ]; then
-	source $HOME/.config/zsh/.zsh_aliases
-fi
+[ -f $HOME/.config/zsh/.zsh_aliases ] && source $HOME/.config/zsh/.zsh_aliases
 
-if [ /usr/bin/kubectl ]; then 
-	source <(kubectl completion zsh); 
-fi
+[ -f /usr/bin/kubectl ] && source <(kubectl completion zsh); 
 
 #plugins
 source $HOME/.config/zsh/.zplug/init.zsh
