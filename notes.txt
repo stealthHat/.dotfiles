@@ -9,3 +9,5 @@
 next steps: 
 Install tmux-plugins: https://github.com/tmux-plugins/tpm
 Install nord tmux theme: https://github.com/arcticicestudio/nord-tmux
+
+Links that resolve shit: https://www.reddit.com/r/zsh/comments/dwwq6l/trying_to_move_my_z_dotfiles_into_configzsh_but/
