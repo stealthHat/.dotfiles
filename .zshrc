@@ -1,5 +1,8 @@
 export ZSH="$HOME/.config/zsh/.oh-my-zsh"
 
+#plugins
+source $HOME/.config/zsh/.zplug/init.zsh
+
 ZSH_THEME="spaceship"
 
 SPACESHIP_PROMPT_ORDER=(
@@ -20,38 +23,11 @@ SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SYMBOL="❯"
 SPACESHIP_CHAR_SUFFIX=" "
 
-#vim mode on line 
-bindkey -v
-
-# Better searching in command mode
-bindkey -M vicmd '?' history-incremental-search-backward
-bindkey -M vicmd '/' history-incremental-search-forward
-# Beginning search with arrow keys
-bindkey -M vicmd "k" up-line-or-beginning-search
-bindkey -M vicmd "j" down-line-or-beginning-search
-
-bindkey '^w' backward-kill-word
-bindkey '^r' history-incremental-search-backward
-
-precmd() { RPROMPT="" }
-function zle-line-init zle-keymap-select {
-   VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
-   RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
-   zle reset-prompt
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
-
-export KEYTIMEOUT=1
-
 #source de aliases
 [ -f $HOME/.config/zsh/.zsh_aliases ] && source $HOME/.config/zsh/.zsh_aliases
 
 [ -f /usr/bin/kubectl ] && source <(kubectl completion zsh); 
 
-#plugins
-source $HOME/.config/zsh/.zplug/init.zsh
 
 zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 zplug "zdharma/fast-syntax-highlighting"
