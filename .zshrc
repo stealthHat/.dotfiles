@@ -20,8 +20,6 @@ SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SYMBOL="❯"
 SPACESHIP_CHAR_SUFFIX=" "
 
-source $ZSH/oh-my-zsh.sh
-
 #vim mode on line 
 bindkey -v
 
@@ -56,13 +54,12 @@ if [ /usr/bin/kubectl ]; then
 	source <(kubectl completion zsh); 
 fi
 
-### Added by Zplugin's installer
-source '$HOME/.zplugin/bin/zplugin.zsh'
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
-### End of Zplugin installer's chunk
-
 #plugins
-zplugin light zdharma/fast-syntax-highlighting
-zplugin light zsh-users/zsh-autosuggestions
-zplugin light zsh-users/zsh-completions
+source $HOME/.config/zsh/.zplug/init.zsh
+
+zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+zplug "zdharma/fast-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+
+source $ZSH/oh-my-zsh.sh
