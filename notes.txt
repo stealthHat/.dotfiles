@@ -4,7 +4,8 @@
 4 - install oh-my-zsh: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 5 - export ZPLUG_HOME=$HOME/.config/zsh/.zplug (seta a home do zplug)
 6 - curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-7 - zplug install 
+7 - zplug install (ainda nao ta redondo porque o space-ship tem que estar na pasta do oh-my-zsh) 
+8 - install fira-code via package manager
 
 next steps: 
 Install tmux-plugins: https://github.com/tmux-plugins/tpm
