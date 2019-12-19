@@ -1,0 +1,18 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+<C-o>	init.vim	/^map <C-o> :NERDTreeToggle<cr>$/;"	m
+<esc>	init.vim	/^map <esc> :noh<cr>$/;"	m
+<leader><C-f>	init.vim	/^map <leader><C-f> :Rg<cr>$/;"	m
+<leader>F	init.vim	/^map <leader>F :FZF~<cr>$/;"	m
+<leader>f	init.vim	/^map <leader>f :FZF<cr>$/;"	m
+ayucolor	init.vim	/^let ayucolor="mirage" " for mirage version of theme$/;"	v
+g:airline_theme	init.vim	/^let g:airline_theme='dracula'$/;"	v
+g:gutentags_dont_load	init.vim	/^    let g:gutentags_dont_load = 1$/;"	v
+g:python3_host_prog	init.vim	/^let g:python3_host_prog = '\/usr\/bin\/python3'$/;"	v
+g:python_host_prog	init.vim	/^let g:python_host_prog = '\/usr\/bin\/python2'$/;"	v
+mapleader	init.vim	/^let mapleader="\\<SPACE>"$/;"	v
+numbertoggle	init.vim	/^augroup numbertoggle$/;"	a

@@ -25,12 +25,6 @@ Plug 'w0rp/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'SevereOverfl0w/async-clj-omni'
 Plug 'maxbrunsfeld/vim-yankstack'
-Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-" Deoplete
-let g:deoplete#enable_at_startup=1
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
 call plug#end()
 
 let g:python_host_prog = '/usr/bin/python2'
