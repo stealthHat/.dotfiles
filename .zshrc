@@ -1,4 +1,5 @@
 export ZSH="$HOME/.config/zsh/.oh-my-zsh"
+export HISTFILE=$HOME/.config/zsh
 
 #plugin paragraph
 ZSH_THEME="spaceship"
