@@ -1,10 +1,7 @@
 export ZSH="$HOME/.config/zsh/.oh-my-zsh"
 
-#plugins
-source $HOME/.config/zsh/.zplug/init.zsh
-
+#plugin paragraph
 ZSH_THEME="spaceship"
-
 SPACESHIP_PROMPT_ORDER=(
   user          # Username section
   dir           # Current directory section
@@ -23,15 +20,12 @@ SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SYMBOL="❯"
 SPACESHIP_CHAR_SUFFIX=" "
 
-#source de aliases
-[ -f $HOME/.config/zsh/.zsh_aliases ] && source $HOME/.config/zsh/.zsh_aliases
-
-[ -f /usr/bin/kubectl ] && source <(kubectl completion zsh); 
-
-
 zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 zplug "zdharma/fast-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 
-source $ZSH/oh-my-zsh.sh
+#source shit if exists 
+[ -f "$HOME/.config/zsh/.zplug/init.zsh" ] && source "$HOME/.config/zsh/.zplug/init.zsh"
+[ -f "$HOME/.config/zsh/.zsh_aliases" ] && source "$HOME/.config/zsh/.zsh_aliases"
+[ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"

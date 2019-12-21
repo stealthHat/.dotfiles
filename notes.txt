@@ -11,4 +11,5 @@ next steps:
 Install tmux-plugins: https://github.com/tmux-plugins/tpm
 Install nord tmux theme: https://github.com/arcticicestudio/nord-tmux
 
+To change .zsh_history is just change the env var HISTFILE
 AAEEEOO POHA, maybe i found out, is just set on .zshenv o export ZDOTDIR
