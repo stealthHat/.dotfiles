@@ -9,7 +9,7 @@
 
 next steps: 
 Install tmux-plugins: https://github.com/tmux-plugins/tpm
-Install nord tmux theme: https://github.com/arcticicestudio/nord-tmux
+figereout how to move .tmux from home to .config
 
 To change .zsh_history is just change the env var HISTFILE before the .zshrc is source
 AAEEEOO POHA, maybe i found out, is just set on .zshenv o export ZDOTDIR
