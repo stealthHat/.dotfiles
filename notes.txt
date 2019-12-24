@@ -12,4 +12,5 @@ Install tmux-plugins: https://github.com/tmux-plugins/tpm
 figereout how to move .tmux from home to .config
 
 To change .zsh_history is just change the env var HISTFILE before the .zshrc is source
+The plugins need to be afeter the source of zplug on .zhsrc
 AAEEEOO POHA, maybe i found out, is just set on .zshenv o export ZDOTDIR
