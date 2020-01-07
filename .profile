@@ -1,2 +1,3 @@
 export ZDOTDIR=$HOME/.config/zsh
-export BROWSER="brave"
+export BROWSER=$(which brave)
+export EDITOR=$(which nvim)
