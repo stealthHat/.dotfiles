@@ -1,7 +1,6 @@
 export ZSH="$HOME/.config/zsh/.oh-my-zsh"
 export HISTFILE=$HOME/.config/zsh
 
-
 #source shit if exists 
 [ -f "$HOME/.config/zsh/.zplug/init.zsh" ] && source "$HOME/.config/zsh/.zplug/init.zsh"
 [ -f "$HOME/.config/zsh/.zsh_aliases" ] && source "$HOME/.config/zsh/.zsh_aliases"
