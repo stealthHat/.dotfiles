@@ -12,7 +12,6 @@ ln -s $HOME/git/.dotfiles/.zshrc $HOME/.config/zsh
 ln -s $HOME/git/.dotfiles/.zsh_aliases $HOME/.config/zsh
 ln -s $HOME/git/.dotfiles/init.vim $HOME/.config/nvim
 ln -s $HOME/git/.dotfiles/kitty.conf $HOME/.config/kitty
-ln -s $HOME/git/.dotfiles/.zshenv $HOME
 ln -s $HOME/git/.dotfiles/.tmux.conf $HOME
 
 1 - install kitty
