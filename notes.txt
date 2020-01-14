@@ -30,7 +30,9 @@ ln -s $HOME/git/.dotfiles/.tmux.conf $HOME
 13 - install tmux plugin manager: git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 
 next steps: 
--
+install newsbeuter
+install neomutt
+ESTUDAR "tee" URGENTEMENTE
 
 To change .zsh_history is just change the env var HISTFILE before the .zshrc is source
 The plugins need to be afeter the source of zplug on .zhsrc
