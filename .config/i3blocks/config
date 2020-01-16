@@ -5,3 +5,7 @@ markup=pango
 [battery]
 command=battery BAT0
 interval=5
+
+[volume]
+interval=once
+signal=10

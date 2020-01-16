@@ -1,23 +1,25 @@
+#!/bin/sh
+
 #my alias
-alias fucking='sudo'
-alias please='sudo'
-alias c='clear'
-alias d='docker'
-alias sshconfig='vim ~/.ssh/config'
-alias sshkey='cat ~/.ssh/my_key.pub'
-alias zshaliases='nvim $HOME/.config/zsh/.zsh_aliases'
-alias zshrc='nvim $HOME/.config/zsh/.zshrc'
-alias ll='ls -la'
-alias zshupdate='source ~/.zshrc'
-alias git s='git status'
-alias k='kubectl'
-alias di='docker image'
-alias vim='nvim'
-alias kp='kubectl get pods'
-alias r='rancher'
-alias rk='rancher kubectl'
-alias e='eksctl'
-alias t='terraform'
+alias \
+  fucking='sudo' \
+  please='sudo' \
+  sshconfig='vim ~/.ssh/config' \
+  sshkey='cat ~/.ssh/my_key.pub' \
+  zshaliases='nvim $HOME/.config/zsh/.zsh_aliases' \
+  zshrc='nvim $HOME/.config/zsh/.zshrc' \
+  l='ls -la --color=auto --group-directories-first' \
+  zshupdate='source ~/.zshrc' \
+  git s='git status' \
+  k='kubectl' \
+  vim='nvim' \
+  kp='kubectl get pods' \
+  r='rancher' \
+  rk='rancher kubectl' \
+  e='eksctl' \
+  t='terraform' \
+  grep='grep --color=auto' \
+  diff='diff --color=auto'
 
 #kitty ssh alias
 alias ssh='kitty +kitten ssh'
