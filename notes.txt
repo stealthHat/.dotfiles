@@ -1,17 +1,4 @@
-Set necessary folders:
-mkdir -p $HOME/.config/zsh
-mkdir -p $HOME/.config/nvim
-mkdir -p $HOME/.config/kitty
-
-Set enviroments variables:
-oh-my-zsh: export ZSH=~/.config/zsh/.oh-my-zsh 
-zplug: export ZPLUG_HOME=$HOME/.config/zsh/.zplug
-
 Set symblinks:
-ln -s $HOME/git/.dotfiles/.zshrc $HOME/.config/zsh
-ln -s $HOME/git/.dotfiles/.zsh_aliases $HOME/.config/zsh
-ln -s $HOME/git/.dotfiles/init.vim $HOME/.config/nvim
-ln -s $HOME/git/.dotfiles/kitty.conf $HOME/.config/kitty
 ln -s $HOME/git/.dotfiles/.tmux.conf $HOME
 
 1 - install kitty
@@ -22,8 +9,7 @@ ln -s $HOME/git/.dotfiles/.tmux.conf $HOME
 6 - source $HOME/.config/zsh/.zshrc
 7 - zplug install && zplug load
 8 - install nvim: sudo pacman -Sy neovim
-9 - install nvim plugin manager: curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+9 - install nvim plugin manager: curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs ; https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 10 - inside nvim run :PluginInstall
 11 - install fira-code via package manager
 12 - install tmux with the pakage manager
@@ -37,3 +23,26 @@ ESTUDAR "tee" URGENTEMENTE
 To change .zsh_history is just change the env var HISTFILE before the .zshrc is source
 The plugins need to be afeter the source of zplug on .zhsrc
 AAEEEOO POHA, maybe i found out, is just set on .zshenv o export ZDOTDIR
+
+
+1 - Kitty Terminal:
+  mkdir -p $HOME/.config/kitty
+  ln -sfv $HOME/git/.dotfiles/.config/kitty/kitty.conf $HOME/.config/kitty
+  install kitty via package manager
+
+2 - zsh
+  mkdir -p $HOME/.config/zsh
+  ln -sfv $HOME/git/.dotfiles/.config/zsh/.zshrc $HOME/.config/zsh
+  ln -sfv $HOME/git/.dotfiles/.config/zsh/.zsh_aliases $HOME/.config/zsh
+  oh-my-zsh: export ZSH=~/.config/zsh/.oh-my-zsh 
+  zplug: export ZPLUG_HOME=$HOME/.config/zsh/.zplug
+  install zsh via package manager
+  $zplug install 
+
+3 - Nvim:
+  mkdir -p $HOME/.config/nvim
+  ln -sfv $HOME/git/.dotfiles/.config/nvim/init.vim $HOME/.config/nvim
+  sudo <package-manager> install nvim
+  inside vim :PlugInstall
+
+4 - $ 
