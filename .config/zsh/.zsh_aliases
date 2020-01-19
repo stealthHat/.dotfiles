@@ -9,7 +9,7 @@ alias \
   zshaliases='nvim $HOME/.config/zsh/.zsh_aliases' \
   zshrc='nvim $HOME/.config/zsh/.zshrc' \
   l='ls -la --color=auto --group-directories-first' \
-  zshupdate='source ~/.zshrc' \
+  zshupdate='source $HOME/.config/zsh/.zshrc' \
   git s='git status' \
   k='kubectl' \
   vim='nvim' \
@@ -20,6 +20,7 @@ alias \
   t='terraform' \
   grep='grep --color=auto' \
   diff='diff --color=auto'
+  pacman='sudo pacman'
 
 #kitty ssh alias
 alias ssh='kitty +kitten ssh'
