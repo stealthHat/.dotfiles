@@ -19,7 +19,7 @@ alias \
   e='eksctl' \
   t='terraform' \
   grep='grep --color=auto' \
-  diff='diff --color=auto'
+  diff='diff --color=auto' \
   pacman='sudo pacman'
 
 #kitty ssh alias

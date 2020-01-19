@@ -26,9 +26,6 @@ bar {
 	modifier None
 }
 
-#wallpaper
-feh --bg-scale $HOME/git/linux-pictures/walls/solarized-dark/solarized-wallpaper-manjaro.png
-
 # #---Basic Bindings---# #
 bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
