@@ -69,11 +69,9 @@ bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 floating_modifier $mod
 
 # start a terminal
-#bindsym $mod+Return exec kitty
-# kill focused window
-#bindsym $mod+Shift+q kill
-# start rofi (a program launcher)
-bindsym $mod+d exec "rofi -show run"
+bindsym $mod+Return exec st
+# run dmenu
+bindsym $mod+d exec --no-startup-id dmenu_run
 
 # change focus
 bindsym $mod+h			focus left
