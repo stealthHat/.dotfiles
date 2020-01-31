@@ -29,7 +29,15 @@
   Inside tmux: leader + I 
 
 5 - i3
-    
+  Install i3 via package manager
+  $ mkdir -p $HOME/.config/i3
+  $ ln -sfv $HOME/git/.dotfileS/.config/i3/config $HOME/.config/i3/
+  reboot
+
+6 - dmenu
+  $ cd $HOME/git && git clone https://git.suckless.org/dmenu
+  $ ln -sfv $HOME/git/dmenu/file $HOME/git/dmenu
+
 
 
 
