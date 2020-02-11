@@ -1,0 +1,142 @@
+# #---Basic Definitions---# #
+for_window [class="^.*"] border pixel 2
+gaps inner 15
+gaps outer 15
+set $term --no-startup-id $TERMINAL
+set $mod Mod4
+
+
+# #---Dropdown Windows---# #
+# General dropdown window traits. The order can matter.
+for_window [instance="dropdown_*"] floating enable
+for_window [instance="dropdown_*"] move scratchpad
+for_window [instance="dropdown_*"] sticky enable
+for_window [instance="dropdown_*"] scratchpad show
+for_window [instance="dropdown_tmuxdd"] resize set 625 450
+for_window [instance="dropdown_dropdowncalc"] resize set 800 300
+for_window [instance="dropdown_tmuxdd"] border pixel 3
+for_window [instance="dropdown_dropdowncalc"] border pixel 2
+for_window [instance="dropdown_*"] move position center
+
+bar {
+	font pango:mono 10
+	status_command i3blocks
+	position top
+	mode dock
+	modifier None
+}
+
+# monitor config 
+exec --no-startup-id xrandr --output DP1 --left-of HDMI1
+
+# lockscreem (needs i3lock)
+bindsym $mod+b exec --no-startup-id i3lock -n -c "#000000"
+
+# wallpaper
+exec --no-startup-id feh --bg-fill $HOME/git/linux-pictures/walls/solarized-dark/solarized-wallpaper-manjaro.png
+
+# #---Basic Bindings---# #
+bindsym $mod+Shift+space 	floating toggle
+bindsym $mod+space		focus mode_toggle
+
+bindsym $mod+Escape		workspace prev
+
+# #---Letter Key Bindings---# #
+bindsym $mod+q			[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
+bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
+
+bindsym $mod+Shift+r		exec --no-startup-id winresize
+
+bindsym $mod+t			split toggle
+bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
+
+bindsym $mod+Shift+y		exec --no-startup-id i3resize left
+
+bindsym $mod+u			exec --no-startup-id ddspawn tmuxdd
+bindsym $mod+Shift+u		exec --no-startup-id i3resize down
+
+bindsym $mod+Shift+i		exec --no-startup-id i3resize up
+
+bindsym $mod+o			sticky toggle
+bindsym $mod+Shift+o		exec --no-startup-id i3resize right
+
+bindsym $mod+a			exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
+
+bindsym $mod+s			gaps inner current plus 5
+bindsym $mod+Shift+s		gaps inner current minus 5
+
+bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
+
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec st
+# run dmenu
+bindsym $mod+d exec --no-startup-id dmenu_run
+
+# change focus
+bindsym $mod+h			focus left
+bindsym $mod+Shift+h		move left 30
+bindsym $mod+Ctrl+h		move workspace to output left
+
+bindsym $mod+j			focus down
+bindsym $mod+Shift+j		move down 30
+bindsym $mod+Ctrl+j		move workspace to output down
+
+bindsym $mod+k			focus up
+bindsym $mod+Shift+k		move up 30
+bindsym $mod+Ctrl+k		move workspace to output up
+
+bindsym $mod+l			focus right
+bindsym $mod+Shift+l		move right 30
+bindsym $mod+Ctrl+l		move workspace to output right
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+g layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
