@@ -4,8 +4,8 @@
 alias \
   fucking='sudo' \
   please='sudo' \
-  sshconfig='vim ~/.ssh/config' \
-  sshkey='cat ~/.ssh/my_key.pub' \
+  sshconfig='vim $HOME/.ssh/config' \
+  sshkey='cat $HOME/.ssh/my_key.pub' \
   zshrc='nvim $HOME/git/.dotfiles/.config/zsh/.zshrc' \
   zshaliases='nvim $HOME/git/.dotfiles/.config/zsh/.zsh_aliases' \
   l='ls -lha' \
@@ -14,8 +14,11 @@ alias \
   k='kubectl' \
   vim='nvim' \
   kp='kubectl get pods' \
+  kg='kubectl -n gitlab-ci-interno' \
+  ks='kubectl -n kube-system' \ 
   r='rancher' \
   rk='rancher kubectl' \
   t='terraform' \
   diff='diff --color=auto' \
-  pacman='sudo pacman'
+  pacman='sudo pacman' \
+  kd='kubectl -n devops-apps' \
