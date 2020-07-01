@@ -1,2 +1,2 @@
 # Dotfiles
-salve all my dotfiles
+A simple repo to save my .files
