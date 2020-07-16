@@ -1,18 +1,16 @@
-1 - Kitty Terminal:
-  $ mkdir -p $HOME/.config/kitty
-  $ ln -sfv $HOME/git/.dotfiles/.config/kitty/kitty.conf $HOME/.config/kitty
-  install kitty via package manager
-
+1 - profile 
+  $ ln -sfv $HOME/git/.dotfiles/.profile $HOME/
+  $ source $HOME/.profile
+  
 2 - zsh
   $ mkdir -p $HOME/.config/zsh
+  $ ln -sfv $HOME/git/.dotfiles/.config/zsh/.zsh_plugins.txt $HOME/.config/zsh
   $ ln -sfv $HOME/git/.dotfiles/.config/zsh/.zshrc $HOME/.config/zsh
   $ ln -sfv $HOME/git/.dotfiles/.config/zsh/.zsh_aliases $HOME/.config/zsh
   $ export ZSH=$HOME/.config/zsh/.oh-my-zsh                                                                                 # Variavel de ambiente para que o oh-my-zsh seja installado em .config/zsh
-  $ export ZPLUG_HOME=$HOME/.config/zsh/.zplug                                                                              # Variavel de ambiente para que o zplug seja installado em .config/zsh
+  $ curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
   ? Install zsh via package manager
   $ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"                         # Install oh-my-zsh
-  $ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh          # Install zplug
-  $ zplug install && zplug load 
   $ chsh -s $(which zsh)                                                                                                    # Seta o zsh como shell padrao caso o oh-my-zsh não conseguir
  
 3 - Nvim:
@@ -51,8 +49,3 @@
 next steps: 
 install newsbeuter
 install neomutt
-ESTUDAR "tee" URGENTEMENTE
-
-To change .zsh_history is just change the env var HISTFILE before the .zshrc is source
-The plugins need to be afeter the source of zplug on .zhsrc
-AAEEEOO POHA, maybe i found out, is just set on .zshenv o export ZDOTDIR
