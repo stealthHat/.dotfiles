@@ -1,6 +1,8 @@
-1 - profile 
+1 - profile | zprofile
   $ ln -sfv $HOME/git/.dotfiles/.profile $HOME/
+  $ ln -sfv $HOME/git/.dotfiles/.zprofile $HOME/
   $ source $HOME/.profile
+  $ source $HOME/.zprofile
   
 2 - zsh
   $ mkdir -p $HOME/.config/zsh
