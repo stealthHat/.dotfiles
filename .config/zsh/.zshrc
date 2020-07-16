@@ -2,15 +2,12 @@ export ZSH="$HOME/.config/zsh/.oh-my-zsh"
 export HISTFILE=$HOME/.config/zsh
 
 #source shit if exists 
-[ -f "$HOME/.config/zsh/.zplug/init.zsh" ] && source "$HOME/.config/zsh/.zplug/init.zsh"
 [ -f "$HOME/.config/zsh/.zsh_aliases" ] && source "$HOME/.config/zsh/.zsh_aliases"
 [ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
-zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
-zplug "zdharma/fast-syntax-highlighting"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
 
-zplug load
+source <(antibody init)
+
+antibody bundle < $HOME/.config/zsh/.zsh_plugins.txt
 
 SPACESHIP_PROMPT_ORDER=(
   user          # Username section
