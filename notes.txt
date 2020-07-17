@@ -16,18 +16,3 @@
   ? Install tmux via package manager 
   $ git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm # Install tmux plugin manager 
   ? Inside tmux: leader + I 
-
-
-
-
-
-
-
-
-
-
-
-
-next steps: 
-install newsbeuter
-install neomutt
