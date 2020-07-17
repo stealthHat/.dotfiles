@@ -2,6 +2,7 @@
 
 #my alias
 alias \
+  pacman='sudo pacman' \
   fucking='sudo' \
   please='sudo' \
   sshconfig='vim $HOME/.ssh/config' \
