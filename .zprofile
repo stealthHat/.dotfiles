@@ -1,10 +1,11 @@
-# To make .oh-my-zsh go to .config
-export ZDOTDIR=$HOME/.config/zsh
-# To make .zplug go to .config 
-export ZPLUG_HOME=$HOME/.config/zsh/.zplug
+#!/bin/zsh
 
-
-
-# i3wm variables
+# Default programs:
 export BROWSER="brave"
 export EDITOR="nvim"
+export TERMINAL="kitty"
+
+# Clean up $HOME 
+export ZDOTDIR=$HOME/.config/zsh
+export WGETRC=$HOME/.config/wget/wgetrc
+
