@@ -2,6 +2,7 @@
 mkdir -pv $HOME/.config/zsh ; \
 mkdir -pv $HOME/.config/nvim ; \
 mkdir -pv $HOME/.config/wget ; \
+mkdir -pv $HOME/.local/bin ; \
 mkdir -pv $HOME/.config/kitty ; \
 
 # Symbolic links

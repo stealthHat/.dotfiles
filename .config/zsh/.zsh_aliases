@@ -13,16 +13,14 @@ alias \
   vim='nvim' \
   t='terraform' \
   diff='diff --color=auto' \
-  # ssh
   sshconfig='vim $HOME/.ssh/config' \
   sshkey='cat $HOME/.ssh/my_key.pub' \
-  # Kubernets
+  sshad='ssh-copy-id -i $HOME/.ssh/id_rsa.pub' \
   k='kubectl' \
   kd='kubectl -n devops-apps' \
   kg='kubectl -n gitlab-ci-interno' \
   kn='kubectl -n nginx-ingress' \
   km='kubectl -n metallb-system' \
-  # Helm
   h='helm' \
   hd='helm -n devops-apps' \
   hn='helm -n nginx-ingress' \
