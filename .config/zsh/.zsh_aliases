@@ -3,31 +3,34 @@
 #my alias
 alias \
   pacman='sudo pacman' \
-  fucking='sudo' \
-  please='sudo' \
-  sshconfig='vim $HOME/.ssh/config' \
-  sshkey='cat $HOME/.ssh/my_key.pub' \
   zshrc='nvim $HOME/git/.dotfiles/.config/zsh/.zshrc' \
-  zshaliases='nvim $HOME/git/.dotfiles/.config/zsh/.zsh_aliases' \
+  zshalias='nvim $HOME/git/.dotfiles/.config/zsh/.zsh_aliases' \
+  tmuxconf='nvim $HOME/git/.dotfiles/.tmux.conf' \
   l='ls -lha --color=always' \
   ls='ls --color=always' \
   zshupdate='source $HOME/.config/zsh/.zshrc' \
   s='git status' \
+  vim='nvim' \
+  t='terraform' \
+  diff='diff --color=auto' \
+  # ssh
+  sshconfig='vim $HOME/.ssh/config' \
+  sshkey='cat $HOME/.ssh/my_key.pub' \
+  # Kubernets
   k='kubectl' \
   kd='kubectl -n devops-apps' \
+  kg='kubectl -n gitlab-ci-interno' \
   kn='kubectl -n nginx-ingress' \
   km='kubectl -n metallb-system' \
+  # Helm
   h='helm' \
   hd='helm -n devops-apps' \
   hn='helm -n nginx-ingress' \
   hm='helm -n metallb-system' \
-  vim='nvim' \
-  kp='kubectl get pods' \
-  kg='kubectl -n gitlab-ci-interno' \
-  ks='kubectl -n kube-system' \ 
-  r='rancher' \
-  rk='rancher kubectl' \
-  t='terraform' \
-  diff='diff --color=auto' \
-  pacman='sudo pacman' \
-  kd='kubectl -n devops-apps' \
+
+# Autocomplete for alias
+complete -F __start_kubectl k
+complete -F __start_kubectl kd
+complete -F __start_kubectl kg
+complete -F __start_kubectl kn
+complete -F __start_kubectl km
