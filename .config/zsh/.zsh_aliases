@@ -9,10 +9,18 @@ alias \
   sshkey='cat $HOME/.ssh/my_key.pub' \
   zshrc='nvim $HOME/git/.dotfiles/.config/zsh/.zshrc' \
   zshaliases='nvim $HOME/git/.dotfiles/.config/zsh/.zsh_aliases' \
-  l='ls -lha' \
+  l='ls -lha --color=always' \
+  ls='ls --color=always' \
   zshupdate='source $HOME/.config/zsh/.zshrc' \
   s='git status' \
   k='kubectl' \
+  kd='kubectl -n devops-apps' \
+  kn='kubectl -n nginx-ingress' \
+  km='kubectl -n metallb-system' \
+  h='helm' \
+  hd='helm -n devops-apps' \
+  hn='helm -n nginx-ingress' \
+  hm='helm -n metallb-system' \
   vim='nvim' \
   kp='kubectl get pods' \
   kg='kubectl -n gitlab-ci-interno' \

@@ -1,13 +1,26 @@
+autoload -U colors && colors
+setopt autocd		# Automatically cd into typed directory.
+
+# History in cache directory:
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.cache/zsh/history
+
 export ZSH="$HOME/.config/zsh/.oh-my-zsh"
-export HISTFILE=$HOME/.config/zsh
 
 #source shit if exists 
 [ -f "$HOME/.config/zsh/.zsh_aliases" ] && source "$HOME/.config/zsh/.zsh_aliases"
 [ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 
 source <(antibody init)
-
 antibody bundle < $HOME/.config/zsh/.zsh_plugins.txt
+
+# Basic auto/tab complete:
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)		# Include hidden files.
 
 SPACESHIP_PROMPT_ORDER=(
   user          # Username section
@@ -27,16 +40,18 @@ SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SYMBOL="❯"
 SPACESHIP_CHAR_SUFFIX=" "
 
+
 # Vim on command line
 # Better searching in command mode
+export KEYTIMEOUT=1
 bindkey -v
 bindkey -M vicmd '?' history-incremental-search-backward
 bindkey -M vicmd '/' history-incremental-search-forward
+bindkey "^[OA" up-line-or-history
+bindkey "^[OB" down-line-or-history
 # Beginning search with arrow keys
-bindkey "^[OA" up-line-or-beginning-search
-bindkey "^[OB" down-line-or-beginning-search
-bindkey -M vicmd "k" up-line-or-beginning-search
-bindkey -M vicmd "j" down-line-or-beginning-search
+bindkey -M vicmd "k" up-line-or-history
+bindkey -M vicmd "j" down-line-or-history
 # Updates editor information when the keymap changes.
 function zle-keymap-select() {
   zle reset-prompt
@@ -48,4 +63,6 @@ function vi_mode_prompt_info() {
 }
 RPS1='$(vi_mode_prompt_info)'
 RPS2=$RPS1
-export KEYTIMEOUT=1
+
+# last line aways 
+source /home/bmo/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zdharma-SLASH-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
