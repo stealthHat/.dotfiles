@@ -24,9 +24,11 @@ alias \
 alias \
   k='kubectl' \
   kd='kubectl -n devops-apps' \
+  ks='kubectl -n kube-system' \
   kg='kubectl -n gitlab-ci-interno' \
   kn='kubectl -n nginx-ingress' \
   km='kubectl -n metallb-system' \
+  kc='kubectl -n cert-manager' \
   kl='kubectl -n leaf' 
 
 # Helm
@@ -34,6 +36,7 @@ alias \
   h='helm' \
   hd='helm -n devops-apps' \
   hn='helm -n nginx-ingress' \
+  hc='helm -n cert-manager' \
   hm='helm -n metallb-system'
 
 # Autocomplete for alias
@@ -43,3 +46,4 @@ complete -F __start_kubectl kg
 complete -F __start_kubectl kn
 complete -F __start_kubectl km
 complete -F __start_kubectl kl
+complete -F __start_kubectl ks

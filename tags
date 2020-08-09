@@ -14,8 +14,6 @@
 <leader>o	.config/nvim/init.vim	/^nmap <leader>o :NERDTreeFind<CR>$/;"	m
 <tab>	.config/nvim/init.vim	/^inoremap <expr><tab> pumvisible() ? "\\<c-n>" : "\\<tab>"$/;"	m
 Dotfiles	README.md	/^# Dotfiles$/;"	c
-MODKEY	st/config.h	/^#define MODKEY /;"	d
-TERMMOD	st/config.h	/^#define TERMMOD /;"	d
 X	.config/ranger/rifle.conf	/^ext s[wmf]c, has snes9x-gtk,X = snes9x-gtk "$1"$/;"	k
 \x20            terminal	.config/ranger/rifle.conf	/^ext x?html?, has w3m,             terminal = w3m "$@"$/;"	k
 \x20           terminal	.config/ranger/rifle.conf	/^ext x?html?, has lynx,            terminal = lynx -- "$@"$/;"	k
@@ -156,29 +154,8 @@ X	.config/ranger/rifle.conf	/^ext s[wmf]c, has snes9x-gtk,X = snes9x-gtk "$1"$/;
 \x20position	.config/ranger/rc.conf	/^map Tn eval fm.open_console('shell eyeD3 -n "" ' + fm.thisfile.relative_path, position=16)$/;"	k
 \x20position	.config/ranger/rc.conf	/^map Tt eval fm.open_console('shell eyeD3 -t "" ' + fm.thisfile.relative_path, position=16)$/;"	k
 \x20tag_toggle tag	.config/ranger/rc.conf	/^map "<any>  tag_toggle tag=%any$/;"	k
-actionfps	st/config.h	/^static unsigned int actionfps = 30;$/;"	v	typeref:typename:unsigned int
-allowaltscreen	st/config.h	/^int allowaltscreen = 1;$/;"	v	typeref:typename:int
-alpha	st/config.h	/^float alpha = 0.92;$/;"	v	typeref:typename:float
-ascii_printable	st/config.h	/^static char ascii_printable[] =$/;"	v	typeref:typename:char[]
 backward	.config/ranger/rc.conf	/^cmap <A-d>        eval fm.ui.console.delete_word(backward=False)$/;"	k
-bellvolume	st/config.h	/^static int bellvolume = 0;$/;"	v	typeref:typename:int
-blinktimeout	st/config.h	/^static unsigned int blinktimeout = 800;$/;"	v	typeref:typename:unsigned int
-borderpx	st/config.h	/^static int borderpx = 2;$/;"	v	typeref:typename:int
-chscale	st/config.h	/^static float chscale = 1.0;$/;"	v	typeref:typename:float
-colorname	st/config.h	/^static const char *colorname[] = {$/;"	v	typeref:typename:const char * []
-colors	dmenu/config.h	/^static const char *colors[SchemeLast][2] = {$/;"	v	typeref:typename:const char * [][2]
-cols	st/config.h	/^static unsigned int cols = 80;$/;"	v	typeref:typename:unsigned int
 compress	.config/ranger/commands.py	/^class compress(Command):$/;"	c
-copyoutput	st/config.h	/^static char *copyoutput[] = { "\/bin\/sh", "-c", "st-copyout", "externalpipe", NULL };$/;"	v	typeref:typename:char * []
-copyurlcmd	st/config.h	/^static char *copyurlcmd[] = { "\/bin\/sh", "-c",$/;"	v	typeref:typename:char * []
-cursorshape	st/config.h	/^static unsigned int cursorshape = 2;$/;"	v	typeref:typename:unsigned int
-cursorthickness	st/config.h	/^static unsigned int cursorthickness = 2;$/;"	v	typeref:typename:unsigned int
-cwscale	st/config.h	/^static float cwscale = 1.0;$/;"	v	typeref:typename:float
-defaultattr	st/config.h	/^static unsigned int defaultattr = 11;$/;"	v	typeref:typename:unsigned int
-defaultbg	st/config.h	/^unsigned int defaultbg = 256;$/;"	v	typeref:typename:unsigned int
-defaultcs	st/config.h	/^static unsigned int defaultcs = 257;$/;"	v	typeref:typename:unsigned int
-defaultfg	st/config.h	/^unsigned int defaultfg = 257;$/;"	v	typeref:typename:unsigned int
-defaultrcs	st/config.h	/^static unsigned int defaultrcs = 257;$/;"	v	typeref:typename:unsigned int
 dirarg	.config/ranger/rc.conf	/^map dG  eval fm.cut(dirarg=dict(to=-1), narg=quantifier)$/;"	k
 dirarg	.config/ranger/rc.conf	/^map dgg eval fm.cut(dirarg=dict(to=0), narg=quantifier)$/;"	k
 dirarg	.config/ranger/rc.conf	/^map dj  eval fm.cut(dirarg=dict(down=1), narg=quantifier)$/;"	k
@@ -187,7 +164,6 @@ dirarg	.config/ranger/rc.conf	/^map yG  eval fm.copy(dirarg=dict(to=-1), narg=qu
 dirarg	.config/ranger/rc.conf	/^map ygg eval fm.copy(dirarg=dict(to=0), narg=quantifier)$/;"	k
 dirarg	.config/ranger/rc.conf	/^map yj  eval fm.copy(dirarg=dict(down=1), narg=quantifier)$/;"	k
 dirarg	.config/ranger/rc.conf	/^map yk  eval fm.copy(dirarg=dict(up=1), narg=quantifier)$/;"	k
-doubleclicktimeout	st/config.h	/^static unsigned int doubleclicktimeout = 300;$/;"	v	typeref:typename:unsigned int
 dump	.config/ranger/scope.sh	/^dump() { \/bin\/echo "$output"; }$/;"	f
 execute	.config/ranger/commands.py	/^    def execute(self):$/;"	m	class:compress
 execute	.config/ranger/commands.py	/^    def execute(self):$/;"	m	class:extracthere
@@ -207,10 +183,6 @@ ext rb	.config/ranger/rifle.conf	/^ext rb  = ruby -- "$1"$/;"	k
 ext sh	.config/ranger/rifle.conf	/^ext sh  = sh -- "$1"$/;"	k
 extracthere	.config/ranger/commands.py	/^class extracthere(Command):$/;"	c
 filter	.local/bin/statusbar/music	/^filter() {$/;"	f
-font	st/config.h	/^static char *font = "mono:pixelsize=16:antialias=true:autohint=true";$/;"	v	typeref:typename:char *
-font2	st/config.h	/^static char *font2[] = { "Inconsolata for Powerline:pixelsize=16:antialias=true:autohint=true" }/;"	v	typeref:typename:char * []
-fonts	dmenu/config.h	/^static const char *fonts[] = {$/;"	v	typeref:typename:const char * []
-forceselmod	st/config.h	/^static uint forceselmod = ShiftMask;$/;"	v	typeref:typename:uint
 fzf_bring	.config/ranger/commands.py	/^class fzf_bring(Command):$/;"	c
 fzf_locate	.config/ranger/commands.py	/^class fzf_locate(Command):$/;"	c
 fzf_select	.config/ranger/commands.py	/^class fzf_select(Command):$/;"	c
@@ -220,10 +192,7 @@ g:python3_host_prog	.config/nvim/init.vim	/^let g:python3_host_prog = '\/usr\/bi
 g:python_host_prog	.config/nvim/init.vim	/^let g:python_host_prog = '\/usr\/bin\/python2'$/;"	v
 g:user_emmet_settings	.config/nvim/init.vim	/^let g:user_emmet_settings = {$/;"	v
 getforecast	.local/bin/statusbar/weather	/^getforecast() { ping -q -c 1 1.1.1.1 >\/dev\/null || exit 1$/;"	f
-ignoremod	st/config.h	/^static uint ignoremod = Mod2Mask|XK_SWITCH_MOD;$/;"	v	typeref:typename:uint
-key	st/config.h	/^static Key key[] = {$/;"	v	typeref:typename:Key[]
 left	.config/ranger/rc.conf	/^cmap <left>  eval fm.ui.console.move(left=1)$/;"	k
-lines	dmenu/config.h	/^static unsigned int lines      = 0;$/;"	v	typeref:typename:unsigned int
 map	.config/ranger/rc.conf	/^map :  console$/;"	k
 map	.config/ranger/rc.conf	/^map =  chmod$/;"	k
 map J  move down	.config/ranger/rc.conf	/^map J  move down=0.5  pages=True$/;"	k
@@ -265,45 +234,22 @@ map va       mark_files all	.config/ranger/rc.conf	/^map va       mark_files all
 map ya copy mode	.config/ranger/rc.conf	/^map ya copy mode=add$/;"	k
 map yr copy mode	.config/ranger/rc.conf	/^map yr copy mode=remove$/;"	k
 mapleader	.config/nvim/init.vim	/^let mapleader="\\<SPACE>"$/;"	v
-mappedkeys	st/config.h	/^static KeySym mappedkeys[] = { -1 };$/;"	v	typeref:typename:KeySym[]
-mkeys	st/config.h	/^MouseKey mkeys[] = {$/;"	v	typeref:typename:MouseKey[]
-mousebg	st/config.h	/^static unsigned int mousebg = 0;$/;"	v	typeref:typename:unsigned int
-mousefg	st/config.h	/^static unsigned int mousefg = 7;$/;"	v	typeref:typename:unsigned int
-mouseshape	st/config.h	/^static unsigned int mouseshape = XC_xterm;$/;"	v	typeref:typename:unsigned int
 ms	.config/ranger/rifle.conf	/^label editor, !mime ^text, !ext xml|json|csv|tex|py|pl|rb|js|sh|php|ms  = $EDITOR -- "$@"$/;"	k
 ms	.config/ranger/rifle.conf	/^label pager,  !mime ^text, !ext xml|json|csv|tex|py|pl|rb|js|sh|php|ms  = "$PAGER" -- "$@"$/;"	k
-mshortcuts	st/config.h	/^static MouseShortcut mshortcuts[] = {$/;"	v	typeref:typename:MouseShortcut[]
 my_edit	.config/ranger/commands.py	/^class my_edit(Command):$/;"	c
 numbertoggle	.config/nvim/init.vim	/^augroup numbertoggle$/;"	a
 o sides	.config/ranger/rc.conf	/^map p1s shell lpr -o sides=one-sided %f$/;"	k
 o sides	.config/ranger/rc.conf	/^map p2s shell lpr -o sides=two-sided-long-edge %f$/;"	k
-openurlcmd	st/config.h	/^static char *openurlcmd[] = { "\/bin\/sh", "-c",$/;"	v	typeref:typename:char * []
 php	.config/ranger/rifle.conf	/^!mime ^text, label editor, ext xml|json|csv|tex|py|pl|rb|js|sh|php = $EDITOR -- "$@"$/;"	k
 php	.config/ranger/rifle.conf	/^!mime ^text, label pager,  ext xml|json|csv|tex|py|pl|rb|js|sh|php = "$PAGER" -- "$@"$/;"	k
-prompt	dmenu/config.h	/^static const char *prompt      = NULL;      \/* -p  option; prompt to the left of input field *\/$/;"	v	typeref:typename:const char *
 refresh	.config/ranger/commands.py	/^        def refresh(_):$/;"	f	member:compress.execute	file:
 refresh	.config/ranger/commands.py	/^        def refresh(_):$/;"	f	member:extracthere.execute	file:
-resources	st/config.h	/^ResourcePref resources[] = {$/;"	v	typeref:typename:ResourcePref[]
 right	.config/ranger/rc.conf	/^cmap <end>   eval fm.ui.console.move(right=-1, absolute=True)$/;"	k
 right	.config/ranger/rc.conf	/^cmap <home>  eval fm.ui.console.move(right=0, absolute=True)$/;"	k
 right	.config/ranger/rc.conf	/^cmap <right> eval fm.ui.console.move(right=1)$/;"	k
-rows	st/config.h	/^static unsigned int rows = 24;$/;"	v	typeref:typename:unsigned int
 safepipe	.config/ranger/scope.sh	/^safepipe() { "$@"; test $? = 0 -o $? = 141; }$/;"	f
-selmasks	st/config.h	/^static uint selmasks[] = {$/;"	v	typeref:typename:uint[]
-shell	st/config.h	/^static char *shell = "\/bin\/sh";$/;"	v	typeref:typename:char *
-shortcuts	st/config.h	/^static Shortcut shortcuts[] = {$/;"	v	typeref:typename:Shortcut[]
 showweather	.local/bin/statusbar/weather	/^showweather() { printf "%s" "$(sed '16q;d' "$HOME\/.local\/share\/weatherreport" | grep -wo "[0-/;"	f
-stty_args	st/config.h	/^char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";$/;"	v	typeref:typename:char *
 tab	.config/ranger/commands.py	/^    def tab(self):$/;"	m	class:compress
 tab	.config/ranger/commands.py	/^    def tab(self):$/;"	m	class:my_edit
-tabspaces	st/config.h	/^unsigned int tabspaces = 8;$/;"	v	typeref:typename:unsigned int
-termname	st/config.h	/^char *termname = "st-256color";$/;"	v	typeref:typename:char *
-topbar	dmenu/config.h	/^static int topbar = 1;                      \/* -b  option; if 0, dmenu appears at bottom     *\/$/;"	v	typeref:typename:int
 trim	.config/ranger/scope.sh	/^trim() { head -n "$maxln"; }$/;"	f
-tripleclicktimeout	st/config.h	/^static unsigned int tripleclicktimeout = 600;$/;"	v	typeref:typename:unsigned int
 try	.config/ranger/scope.sh	/^try() { output=$(eval '"$@"'); }$/;"	f
-utmp	st/config.h	/^char *utmp = NULL;$/;"	v	typeref:typename:char *
-vtiden	st/config.h	/^char *vtiden = "\\033[?6c";$/;"	v	typeref:typename:char *
-worddelimiters	dmenu/config.h	/^static const char worddelimiters[] = " ";$/;"	v	typeref:typename:const char[]
-worddelimiters	st/config.h	/^wchar_t *worddelimiters = L" ";$/;"	v	typeref:typename:wchar_t *
-xfps	st/config.h	/^static unsigned int xfps = 120;$/;"	v	typeref:typename:unsigned int
