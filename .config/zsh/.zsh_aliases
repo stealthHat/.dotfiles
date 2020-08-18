@@ -6,6 +6,7 @@ alias \
   zshrc='nvim $HOME/git/.dotfiles/.config/zsh/.zshrc' \
   zshalias='nvim $HOME/git/.dotfiles/.config/zsh/.zsh_aliases' \
   tmuxconf='nvim $HOME/git/.dotfiles/.tmux.conf' \
+  .='cd $HOME/git/.dotfiles' \
   l='ls -lha --color=always' \
   ls='ls --color=always' \
   zshupdate='source $HOME/.config/zsh/.zshrc' \
