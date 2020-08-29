@@ -13,12 +13,14 @@ alias \
   s='git status' \
   vim='nvim' \
   t='terraform' \
+  d='sudo docker' \
+  sc='sudo systemctl' \
   diff='diff --color=auto' 
 
 # ssh 
 alias \
   sshconfig='vim $HOME/.ssh/config' \
-  sshkey='cat $HOME/.ssh/my_key.pub' \
+  sshkey='cat $HOME/.ssh/id_rsa.pub' \
   sshad='ssh-copy-id -i $HOME/.ssh/id_rsa.pub'
 
 # Kubernetes
