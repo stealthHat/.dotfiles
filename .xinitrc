@@ -54,5 +54,8 @@ setxkbmap -layout br -variant abnt2 -model thinkpad &
 # Compositor 
 picom -f &
 
+# wallpaper
+feh --bg-scale $HOME/git/.dotfiles/wallpapers/Other_27.jpg
+
 exec dwm
 
