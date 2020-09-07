@@ -6,6 +6,7 @@ mkdir -pv $HOME/.local/bin ; \
 ln -sfv $HOME/git/.dotfiles/.profile $HOME/ ; \
 ln -sfv $HOME/git/.dotfiles/.zprofile $HOME/ ; \
 ln -sfv $HOME/git/.dotfiles/.tmux.conf $HOME/ ; \
+ln -sfv $HOME/git/.dotfiles/.xinitrc $HOME/ ; \
 ln -sfv $HOME/git/.dotfiles/.config/* $HOME/.config/ ; \
 ln -sfv $HOME/git/.dotfiles/.local/* $HOME/.local/
 
