@@ -15,7 +15,9 @@ alias \
   t='terraform' \
   d='sudo docker' \
   sc='sudo systemctl' \
-  diff='diff --color=auto' 
+  diff='diff --color=auto' \
+  wget='wget --hsts-file ~/.config/wget/wget-hsts'
+
 
 # ssh 
 alias \

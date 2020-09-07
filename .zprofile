@@ -11,3 +11,4 @@ export TERMINAL="kitty"
 # Clean up $HOME 
 export ZDOTDIR=$HOME/.config/zsh
 export WGETRC=$HOME/.config/wget/wgetrc
+export GNUPGHOME=$HOME/.config
