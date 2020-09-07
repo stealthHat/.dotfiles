@@ -1,24 +1,13 @@
 # Directories 
-mkdir -pv $HOME/.config/zsh ; \
-mkdir -pv $HOME/.config/nvim ; \
-mkdir -pv $HOME/.config/wget ; \
 mkdir -pv $HOME/.local/bin ; \
-mkdir -pv $HOME/.config/kitty ; \
-mkdir -pv $HOME/.config/git
 
 
 # Symbolic links
 ln -sfv $HOME/git/.dotfiles/.profile $HOME/ ; \
 ln -sfv $HOME/git/.dotfiles/.zprofile $HOME/ ; \
-ln -sfv $HOME/git/.dotfiles/.config/zsh/.zsh_plugins.txt $HOME/.config/zsh ; \
-ln -sfv $HOME/git/.dotfiles/.config/zsh/.zshrc $HOME/.config/zsh ; \
-ln -sfv $HOME/git/.dotfiles/.config/zsh/.zsh_aliases $HOME/.config/zsh ; \
-ln -sfv $HOME/git/.dotfiles/.config/nvim/init.vim $HOME/.config/nvim ; \
 ln -sfv $HOME/git/.dotfiles/.tmux.conf $HOME/ ; \
-ln -sfv $HOME/git/.dotfiles/.config/wget/wgetrc $HOME/.config/wget ; \
-ln -sfv $HOME/git/.dotfiles/.config/kitty/kitty.conf $HOME/.config/kitty ; \
-ln -sfv $HOME/git/.dotfiles/.config/git/config $HOME/.config/git ; \
-
+ln -sfv $HOME/git/.dotfiles/.config/* $HOME/.config/ ; \
+ln -sfv $HOME/git/.dotfiles/.local/* $HOME/.local/
 
 # Exports 
 export ZSH=$HOME/.config/zsh/.oh-my-zsh ; \
