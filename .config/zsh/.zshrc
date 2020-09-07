@@ -8,7 +8,7 @@ HISTFILE=~/.cache/zsh/history
 
 # Basic auto/tab complete:
 autoload -Uz compinit
-zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*' menu select
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.

@@ -7,8 +7,7 @@ alias \
   zshalias='nvim $HOME/git/.dotfiles/.config/zsh/.zsh_aliases' \
   tmuxconf='nvim $HOME/git/.dotfiles/.tmux.conf' \
   .='cd $HOME/git/.dotfiles' \
-  l='ls -lha --color=always' \
-  ls='ls --color=always' \
+  l='ls -lha \
   zshupdate='source $HOME/.config/zsh/.zshrc' \
   s='git status' \
   vim='nvim' \

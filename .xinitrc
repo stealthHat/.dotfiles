@@ -57,5 +57,7 @@ picom -f &
 # wallpaper
 feh --bg-scale --no-fehbg $HOME/git/.dotfiles/wallpapers/Other_27.jpg
 
-exec dwm
+# Speed xrate up
+xset r rate 300 50
 
+exec dwm

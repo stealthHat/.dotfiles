@@ -1,4 +1,6 @@
-1 - Run setup.sh
+This will only work if you are using a arch based distro and this repository is locate on $HOME/git/
+
+1 - Run setup
   
 2 - zsh
   $ curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
