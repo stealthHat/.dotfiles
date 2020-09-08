@@ -92,3 +92,4 @@ set title
 let g:airline_theme='dracula'
 
 set noshowmode
+set tags+=$HOME/.config/nvim

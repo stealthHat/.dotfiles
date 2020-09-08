@@ -2,3 +2,4 @@
 .config/nvim/.netrwhist
 .config/zsh/.zcompdump
 .config/wget/wget-hsts
+.config/nvim/tags

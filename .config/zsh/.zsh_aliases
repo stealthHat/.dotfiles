@@ -7,7 +7,10 @@ alias \
   zshalias='nvim $HOME/git/.dotfiles/.config/zsh/.zsh_aliases' \
   tmuxconf='nvim $HOME/git/.dotfiles/.tmux.conf' \
   .='cd $HOME/git/.dotfiles' \
-  l='ls -lha \
+  l='ls -lha --color=auto' \
+  ls='ls --color=auto' \
+  grep='grep --color=auto' \
+	diff='diff --color=auto' \
   zshupdate='source $HOME/.config/zsh/.zshrc' \
   s='git status' \
   vim='nvim' \
@@ -23,31 +26,3 @@ alias \
   sshconfig='vim $HOME/.ssh/config' \
   sshkey='cat $HOME/.ssh/id_rsa.pub' \
   sshad='ssh-copy-id -i $HOME/.ssh/id_rsa.pub'
-
-# Kubernetes
-alias \
-  k='kubectl' \
-  kd='kubectl -n devops-apps' \
-  ks='kubectl -n kube-system' \
-  kg='kubectl -n gitlab-ci-interno' \
-  kn='kubectl -n nginx-ingress' \
-  km='kubectl -n metallb-system' \
-  kc='kubectl -n cert-manager' \
-  kl='kubectl -n leaf' 
-
-# Helm
-alias \
-  h='helm' \
-  hd='helm -n devops-apps' \
-  hn='helm -n nginx-ingress' \
-  hc='helm -n cert-manager' \
-  hm='helm -n metallb-system'
-
-# Autocomplete for alias
-complete -F __start_kubectl k
-complete -F __start_kubectl kd
-complete -F __start_kubectl kg
-complete -F __start_kubectl kn
-complete -F __start_kubectl km
-complete -F __start_kubectl kl
-complete -F __start_kubectl ks
