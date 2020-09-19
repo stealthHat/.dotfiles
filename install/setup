@@ -3,7 +3,6 @@ mkdir -pv $HOME/.local/bin ; \
 
 # Symbolic links
 ln -sfv $HOME/git/.dotfiles/home/.zprofile $HOME/ ; \
-ln -sfv $HOME/git/.dotfiles/home/.zprofile $HOME/.profile ; \
 ln -sfv $HOME/git/.dotfiles/home/.tmux.conf $HOME/ ; \
 ln -sfv $HOME/git/.dotfiles/home/.xinitrc $HOME/ ; \
 ln -sfv $HOME/git/.dotfiles/home/.config/* $HOME/.config/ ; \
