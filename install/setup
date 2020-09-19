@@ -1,0 +1,17 @@
+# Directories 
+mkdir -pv $HOME/.local/bin ; \
+
+# Symbolic links
+ln -sfv $HOME/git/.dotfiles/home/.zprofile $HOME/ ; \
+ln -sfv $HOME/git/.dotfiles/home/.zprofile $HOME/.profile ; \
+ln -sfv $HOME/git/.dotfiles/home/.tmux.conf $HOME/ ; \
+ln -sfv $HOME/git/.dotfiles/home/.xinitrc $HOME/ ; \
+ln -sfv $HOME/git/.dotfiles/home/.config/* $HOME/.config/ ; \
+ln -sfv $HOME/git/.dotfiles/home/.local/bin/* $HOME/.local/bin/
+
+# Exports 
+export ZSH=$HOME/.config/zsh/.oh-my-zsh ; \
+
+# Sourcers
+source $HOME/.zprofile ; \
+source $HOME/.profile ; \
