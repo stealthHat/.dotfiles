@@ -1,25 +1,64 @@
 #!/bin/bash
 
-mkdir -p $HOME/git
+mkdir $HOME/git
 
-git clone https://git.suckless.org/dwm $HOME/git/
-git clone https://git.suckless.org/dmenu $HOME/git/
+# Set the best mirros for my country
+mirrorSettings () {
+  pacman -S reflector --noconfirm 
+  reflector -c Brazil -a 6 --sort rate --save /etc/pacman.d/mirrolist 
+  pacman -Syuu --noconfirm
+}
 
-pacman -S reflector --noconfirm 
-
-reflector -c Brazil -a 6 --sort rate --save /etc/pacman.d/mirrolist 
-
-pacman -Syuu tmux neovim ranger --noconfirm
+creteDots () {
+  mkdir -pv $HOME/.local/bin 
+  
+  # Symbolic links
+  ln -sfv $HOME/git/.dotfiles/home/.zprofile $HOME/  
+  ln -sfv $HOME/git/.dotfiles/home/.tmux.conf $HOME/ 
+  ln -sfv $HOME/git/.dotfiles/home/.xinitrc $HOME/
+  ln -sfv $HOME/git/.dotfiles/home/.config/* $HOME/.config/ 
+  ln -sfv $HOME/git/.dotfiles/home/.local/bin/* $HOME/.local/bin/
+  
+  # Exports 
+  export ZSH=$HOME/.config/zsh/.oh-my-zsh 
+  
+  # Sourcers
+  source $HOME/.zprofile 
+  source $HOME/.profile 
+}
 
 # Changin the defalt shell
-chsh -s $(which zsh)
-
 # Install Oh-my-zsh 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+zsh () {
+  chsh -s $(which zsh)
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+}
 
-# Nvim plugin manager
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dir\
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+nvim () {
+  sudo pacman -S neovim --noconfirm
+  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dir\
+         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+}
 
-# Tmux plugin manager 
-git clone https://github.com/tmux-plugins/tpm $HOME/.config/tmux/plugins/tpm
+tmux () {
+  sudo pacman -S tmux --noconfirm
+  git clone https://github.com/tmux-plugins/tpm $HOME/.config/tmux/plugins/tpm
+}
+
+yay () {
+  cd $HOME/git/ && git clone https://aur.archlinux.org/yay.git
+  cd $HOME/git/yay && makepkg -si PKGBUILD --noconfirm
+}
+
+dwmTools () {
+  cd $HOME/git
+  git clone https://git.suckless.org/dwm 
+  git clone https://git.suckless.org/dmenu 
+}
+
+cleanUp () {
+  cd $HOME
+  rm -f .bash*
+  rm -f .zshrc 
+}
+
