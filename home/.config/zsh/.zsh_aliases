@@ -3,9 +3,9 @@
 #my alias
 alias \
   pacman='sudo pacman' \
-  zshrc='nvim $HOME/git/.dotfiles/.config/zsh/.zshrc' \
-  zshalias='nvim $HOME/git/.dotfiles/.config/zsh/.zsh_aliases' \
-  tmuxconf='nvim $HOME/git/.dotfiles/.tmux.conf' \
+  zshrc='nvim $HOME/git/.dotfiles/home/.config/zsh/.zshrc' \
+  zshalias='nvim $HOME/git/.dotfiles/home/.config/zsh/.zsh_aliases' \
+  tmuxconf='nvim $HOME/git/.dotfiles/home/.tmux.conf' \
   .='cd $HOME/git/.dotfiles' \
   l='ls -lha --color=auto' \
   ls='ls --color=auto' \
@@ -18,7 +18,7 @@ alias \
   d='sudo docker' \
   sc='sudo systemctl' \
   diff='diff --color=auto' \
-  wget='wget --hsts-file ~/.config/wget/wget-hsts'
+  wget='wget --hsts-file $HOME/.config/wget/wget-hsts'
 
 
 # ssh 

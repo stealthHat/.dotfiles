@@ -1,12 +1,10 @@
 #!/bin/bash
 
-mkdir $HOME/git
-
 # Set the best mirros for my country
 mirrorSettings () {
-  pacman -S reflector --noconfirm 
+  sudo pacman -S reflector --noconfirm 
   reflector -c Brazil -a 6 --sort rate --save /etc/pacman.d/mirrolist 
-  pacman -Syuu --noconfirm
+  sudo pacman -Syuu --noconfirm
 }
 
 creteDots () {
@@ -54,11 +52,13 @@ dwmTools () {
   cd $HOME/git
   git clone https://git.suckless.org/dwm 
   git clone https://git.suckless.org/dmenu 
+  pushd dwm && sudo make install 
+  popd 
+  pushd dmenu && sudo make install 
 }
 
 cleanUp () {
   cd $HOME
-  rm -f .bash*
-  rm -f .zshrc 
+  rm -rf .bash*
+  rm -rf .zshrc 
 }
-

@@ -18,3 +18,5 @@ export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export GNUPGHOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export $XDG_CONFIG_HOME/tmux/tmux.conf
+

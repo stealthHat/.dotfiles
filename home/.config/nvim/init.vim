@@ -73,6 +73,8 @@ set lbr
 
 set number relativenumber
 
+set clipboard=unnamedplus
+
 augroup numbertoggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
