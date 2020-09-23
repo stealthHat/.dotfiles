@@ -7,27 +7,20 @@ mirrorSettings () {
   sudo pacman -Syuu --noconfirm
 }
 
-creteDots () {
+creteLinks () {
   mkdir -pv $HOME/.local/bin 
   
-  # Symbolic links
   ln -sfv $HOME/git/.dotfiles/home/.zprofile $HOME/  
   ln -sfv $HOME/git/.dotfiles/home/.tmux.conf $HOME/ 
   ln -sfv $HOME/git/.dotfiles/home/.xinitrc $HOME/
   ln -sfv $HOME/git/.dotfiles/home/.config/* $HOME/.config/ 
   ln -sfv $HOME/git/.dotfiles/home/.local/bin/* $HOME/.local/bin/
-  
-  # Exports 
-  export ZSH=$HOME/.config/zsh/.oh-my-zsh 
-  
-  # Sourcers
-  source $HOME/.zprofile 
-  source $HOME/.profile 
 }
 
 # Changin the defalt shell
 # Install Oh-my-zsh 
 zsh () {
+  export ZSH=$HOME/.config/zsh/.oh-my-zsh 
   chsh -s $(which zsh)
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
