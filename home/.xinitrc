@@ -55,7 +55,7 @@ setxkbmap -layout br -variant abnt2 -model thinkpad &
 picom -f &
 
 # wallpaper
-feh --bg-scale --no-fehbg $HOME/git/.dotfiles/wallpapers/Other_27.jpg
+xwallpaper --zoom $HOME/git/.dotfiles/wallpapers/Other_27.jpg
 
 # Speed xrate up
 xset r rate 300 50
