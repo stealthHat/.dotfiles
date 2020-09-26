@@ -34,4 +34,5 @@
 ,fzf,"is a fuzzy finder tool."
 ,highlight,"can highlight code output."
 ,xorg-xbacklight,"enables changing screen brightness levels."
+,tmux,"terminal window"
 A,brave-bin,"is an elegant browser with built-in adblocking, tor and other features."
