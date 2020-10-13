@@ -1,6 +1,7 @@
 #!/bin/bash
 
 installpkg(){ pacman --noconfirm --needed -S "$1" >/dev/null 2>&1 ;}
+yayinstall(){ yay 
 
 # Set the best mirros for my country
 mirrorSettings () {
@@ -29,12 +30,14 @@ creteLinks () {
 installLoop () {
   while IFS=, read -r tag program comment; do 
     [[ "$tag" =~ ^#.*$ ]] && continue
+    case "$tag" in
+			"A") aurinstall "$program" ;;
+			*) installpkg "$program" ;;
+		esac
     installpkg "$program" 
   done < $HOME/git/.dotfiles/install/progs.csv 
 }
 
-# Changin the defalt shell
-# Install Oh-my-zsh 
 zsh () {
   export ZSH=$HOME/.config/zsh/.oh-my-zsh 
   chsh -s $(which zsh) >/dev/null 2>&1
@@ -44,6 +47,10 @@ zsh () {
 nvim () {
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dir\
          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+  curl -sSL https://get.rvm.io | bash -s -- --path $HOME/.local/rvm
+  rvm install stable
+  gem install neovim 
 }
 
 tmuxplug () {
@@ -71,18 +78,17 @@ pacmanconfig () {
 
 cleanUp () {
   cd $HOME
-  rm -rf .bash*
-  rm -rf .zshrc 
+  rm -rf .bash* & .zshrc & .mkshrc & .profile
 }
 
 mirrorSettings
 basepkgs
+yay 
+pacmanconfig
 creteLinks
 installLoop
 zsh
 nvim
 tmuxplug
-yay 
 dwmTools 
-pacmanconfig
 cleanUp
