@@ -2,6 +2,7 @@
 
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
+export PATH="$PATH:$HOME/.local/rvm/bin"
 
 # Default programs:
 export BROWSER="brave"
@@ -18,6 +19,8 @@ export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export GNUPGHOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export GEM_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/gem"
+export GEM_PATH="${XDG_CONFIG_HOME:-$HOME/.config}/gem"
 export LESSHISTFILE="-"
 
 
