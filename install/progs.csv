@@ -35,4 +35,8 @@
 ,highlight,"can highlight code output."
 ,xorg-xbacklight,"enables changing screen brightness levels."
 ,tmux,"terminal window"
+,python,"neovim dependencie"
+,python2,"neovim dependencie"
+,python-pynvim,"neovim dependencie"
+A,python2-pynvim,"neovim dependencie"
 A,brave-bin,"is an elegant browser with built-in adblocking, tor and other features."
