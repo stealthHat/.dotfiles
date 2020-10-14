@@ -72,11 +72,15 @@ tmuxplug () {
 
 dwmTools () {
   cd $HOME/git
-  git clone https://git.suckless.org/dwm 
+  git clone https://github.com/LukeSmithxyz/dwm.git
   git clone https://git.suckless.org/dmenu 
+  git clone https://github.com/LukeSmithxyz/dwmblocks.git
   pushd dwm && sudo make install 
   popd 
   pushd dmenu && sudo make install 
+  popd 
+  pushd dwmblocks && make install
+  popd
 }
 
 
