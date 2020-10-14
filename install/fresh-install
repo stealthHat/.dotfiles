@@ -10,6 +10,16 @@ mirrorSettings () {
   sudo pacman -Syuu --noconfirm
 }
 
+pacmanconfig () { 
+  grep -q "^Color" /etc/pacman.conf || sed -i "s/^#Color$/Color/" /etc/pacman.conf
+  grep -q "ILoveCandy" /etc/pacman.conf || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
+}
+
+yay () {
+  cd $HOME/git && git clone https://aur.archlinux.org/yay.git
+  cd $HOME/git/yay && makepkg -si PKGBUILD --noconfirm
+}
+
 basepkgs () {
   for x in curl base-devel git; do
   	installpkg "$x"
@@ -42,7 +52,6 @@ installLoop () {
 
 zsh () {
   export ZSH=$HOME/.config/zsh/.oh-my-zsh 
-  installpkg zsh
   chsh -s $(which zsh) 
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
 }
@@ -60,10 +69,6 @@ tmuxplug () {
   git clone https://github.com/tmux-plugins/tpm $HOME/.config/tmux/plugins/tpm
 }
 
-yay () {
-  cd $HOME/git && git clone https://aur.archlinux.org/yay.git
-  cd $HOME/git/yay && makepkg -si PKGBUILD --noconfirm
-}
 
 dwmTools () {
   cd $HOME/git
@@ -74,14 +79,21 @@ dwmTools () {
   pushd dmenu && sudo make install 
 }
 
-pacmanconfig () { 
-  grep -q "^Color" /etc/pacman.conf || sed -i "s/^#Color$/Color/" /etc/pacman.conf
-  grep -q "ILoveCandy" /etc/pacman.conf || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
-}
 
 cleanUp () {
   cd $HOME
   rm -rf .bash* & .zshrc & .mkshrc & .profile
 }
-dwmTools 
+
+
+mirrorSettings 
+pacmanconfig 
+yay
+basepkgs 
+creteLinks
+installLoop
+zsh
+nvim
+tmuxplug
+dwmTools
 cleanUp
