@@ -35,6 +35,7 @@
 ,highlight,"can highlight code output."
 ,xorg-xbacklight,"enables changing screen brightness levels."
 ,tmux,"terminal window"
+,kitty,"featurefull terminal"
 ,python,"neovim dependencie"
 ,python2,"neovim dependencie"
 ,python-pynvim,"neovim dependencie"
