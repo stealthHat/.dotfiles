@@ -39,6 +39,35 @@ Plug 'prettier/vim-prettier', {
       \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html', 'php'] }
 call plug#end()
 
+" Leader binds
+let mapleader="\<SPACE>"
+
+map <leader>W :wq!<cr>
+map <leader>w :w!<cr>
+map <leader>q :q!<cr>
+map <C-o> :NERDTreeToggle<cr>
+nmap <leader>o :NERDTreeFind<CR>
+" /l>
+
+" Terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+" Syntastic Config
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:deoplete#omni_patterns = {}
+" /t>
+
+" Theme
+let g:airline_theme='dracula'
+" /t>
+
 let g:python_host_prog = '/bin/python2'
 let g:python3_host_prog = '/bin/python3'
 
@@ -51,15 +80,6 @@ map <esc> :noh<cr>
 
 set ignorecase
 set smartcase
-
-
-" Leader binds
-let mapleader="\<SPACE>"
-
-map <leader>w :wq!<cr>
-map <C-o> :NERDTreeToggle<cr>
-nmap <leader>o :NERDTreeFind<CR>
-" /l>
 
 set breakindent
 set formatoptions=l
@@ -84,24 +104,6 @@ set shiftwidth=2
 set encoding=utf-8
 set cursorline
 set title
-
-" Terraform
-let g:terraform_align=1
-let g:terraform_fold_sections=1
-let g:terraform_fmt_on_save=1
-" Syntastic Config
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:deoplete#omni_patterns = {}
-" /t>
-
-let g:airline_theme='dracula'
 
 set noshowmode
 set tags+=$HOME/.config/nvim
