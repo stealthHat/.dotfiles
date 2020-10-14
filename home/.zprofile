@@ -19,8 +19,9 @@ export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export GNUPGHOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-export GEM_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/gem"
-export GEM_PATH="${XDG_CONFIG_HOME:-$HOME/.config}/gem"
+export GEM_HOME="${XDG_DATA_HOME:-$HOME/.local}/rvm/.gem"
+export GEM_PATH="${XDG_DATA_HOME:-$HOME/.local}/rvm/.gem"
+export rvm_path="$HOME/.local/rvm"
 export LESSHISTFILE="-"
 
 

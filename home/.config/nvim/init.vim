@@ -25,29 +25,22 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary' 
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'w0rp/ale'
+" Terraform
+Plug 'hashivim/vim-terraform'
+Plug 'vim-syntastic/syntastic'
+Plug 'juliosueiras/vim-terraform-completion'
+" /t>
 Plug 'jiangmiao/auto-pairs'
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-let g:deoplete#enable_at_startup=1
+let g:deoplete#enable_at_startup = 1
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
 Plug 'prettier/vim-prettier', {
       \ 'do': 'yarn install',
       \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html', 'php'] }
-
 call plug#end()
 
-let g:user_emmet_settings = {
-\  'javascript' : {
-\      'extends' : 'jsx',
-\  },
-\  'typescript' : {
-\      'extends' : 'tsx',
-\  },
-\}
-
-let g:python_host_prog = '/usr/bin/python2'
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python_host_prog = '/bin/python2'
+let g:python3_host_prog = '/bin/python3'
 
 set termguicolors
 set background=dark
@@ -59,13 +52,14 @@ map <esc> :noh<cr>
 set ignorecase
 set smartcase
 
+
+" Leader binds
 let mapleader="\<SPACE>"
 
-map <leader>f :FZF<cr>
-map <leader>F :FZF~<cr>
-map <leader><C-f> :Rg<cr>
+map <leader>w :wq!<cr>
 map <C-o> :NERDTreeToggle<cr>
 nmap <leader>o :NERDTreeFind<CR>
+" /l>
 
 set breakindent
 set formatoptions=l
@@ -90,6 +84,22 @@ set shiftwidth=2
 set encoding=utf-8
 set cursorline
 set title
+
+" Terraform
+let g:terraform_align=1
+let g:terraform_fold_sections=1
+let g:terraform_fmt_on_save=1
+" Syntastic Config
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:deoplete#omni_patterns = {}
+" /t>
 
 let g:airline_theme='dracula'
 
