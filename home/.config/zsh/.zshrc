@@ -75,6 +75,3 @@ RPS2=$RPS1
 
 # last line aways 
 source $HOME/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zdharma-SLASH-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.config/rvm/bin"
