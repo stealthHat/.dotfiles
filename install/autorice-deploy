@@ -58,16 +58,20 @@ setup_zsh () {
 }
 
 setup_vim() {
+  # Install  neovim plugin mannager 
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dir\
          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  #install RVM
   gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
   curl -sSL https://get.rvm.io | bash -s -- --path $XDG_CONFIG_HOME/rvm
   refresh
   rvm install ruby
   rvm use ruby --default
   gem install neovim 
+  # Install NVM
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash
   refresh
+  npm config set cache $XDG_CACHE_HOME --global 
   nvm install node
   npm i -g neovim
 }

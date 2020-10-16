@@ -13,11 +13,14 @@ export XDG_CACHE_HOME="$HOME/.cache"
 
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
-export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
+
 export GEM_PATH="${XDG_CONFIG_HOME:-$HOME/.config}/rvm"
 export GEM_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/rvm"
 export NVM_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/nvm"
+export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
+export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
 export rvm_path="${XDG_CONFIG_HOME:-$HOME/.config}/rvm"
+export XAUTHORITY="${XDG_CONFIG_HOME:-$HOME/.config}/Xauthority"
 export LESSHISTFILE="-"
 
 # Adds `~/.local/bin` to $PATH
