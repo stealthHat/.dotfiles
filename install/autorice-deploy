@@ -1,23 +1,19 @@
 #!/bin/bash
 
+path=pwd
+
 installpkg(){ sudo pacman --noconfirm --needed -S "$1" ;}
-aurinstall(){ yay --noconfirm -S "$1" ;}
+aurinstall(){ yay --noconfirm --needed  -S "$1" ;}
+refresh () { source $HOME/.zprofile && source $HOME/.config/zsh/.zshrc }
 
 # Set the best mirros for my country
-mirrorSettings () {
-  sudo pacman -S reflector --noconfirm 
-  reflector -c Brazil -a 6 --sort rate --save /etc/pacman.d/mirrolist 
-  sudo pacman -Syuu --noconfirm
+mirror_settings () {
+  sudo reflector -c Brazil -a 6 --sort rate --save /etc/pacman.d/mirrolist 
 }
 
-pacmanconfig () { 
-  grep -q "^Color" /etc/pacman.conf || sed -i "s/^#Color$/Color/" /etc/pacman.conf
-  grep -q "ILoveCandy" /etc/pacman.conf || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
-}
-
-yay () {
-  cd $HOME/git && git clone https://aur.archlinux.org/yay.git
-  cd $HOME/git/yay && makepkg -si PKGBUILD --noconfirm
+pacman_config () { 
+  grep -q "^Color" /etc/pacman.conf || sudo sed -i "s/^#Color$/Color/" /etc/pacman.conf
+  grep -q "ILoveCandy" /etc/pacman.conf || sudo sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
 }
 
 basepkgs () {
@@ -26,7 +22,13 @@ basepkgs () {
   done
 }
 
-creteLinks () {
+setup_yay () {
+  cd $HOME/git && git clone https://aur.archlinux.org/yay.git
+  cd $HOME/git/yay && makepkg -si PKGBUILD --noconfirm
+  cd $path
+}
+
+setup_links () {
   mkdir -pv $HOME/.local/bin 
   mkdir -pv $HOME/.config/tmux
 
@@ -36,11 +38,10 @@ creteLinks () {
   ln -sfv $HOME/git/.dotfiles/home/.config/* $HOME/.config/ 
   ln -sfv $HOME/git/.dotfiles/home/.local/bin/* $HOME/.local/bin/
 
-  source $HOME/.zprofile
-  source $HOME/.config/zsh/.zshrc
+  refresh
 }
 
-installLoop () {
+install_loop () {
   while IFS=, read -r tag program comment; do 
     [[ "$tag" =~ ^#.*$ ]] && continue
     case "$tag" in
@@ -50,27 +51,33 @@ installLoop () {
   done < $HOME/git/.dotfiles/install/progs.csv 
 }
 
-zsh () {
-  export ZSH=$HOME/.config/zsh/.oh-my-zsh 
+setup_zsh () {
+  export ZSH=$XDG_CONFIG_HOME/zsh/.oh-my-zsh 
   chsh -s $(which zsh) 
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
 }
 
-nvim () {
+setup_vim() {
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dir\
          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-  curl -sSL https://get.rvm.io | bash -s -- --path $HOME/.local/rvm
-  rvm install stable
+  curl -sSL https://get.rvm.io | bash -s -- --path $XDG_CONFIG_HOME/rvm
+  refresh
+  rvm install ruby
+  rvm use ruby --default
   gem install neovim 
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash
+  refresh
+  nvm install node
+  npm i -g neovim
 }
 
-tmuxplug () {
-  git clone https://github.com/tmux-plugins/tpm $HOME/.config/tmux/plugins/tpm
+tmux_plug () {
+  git clone https://github.com/tmux-plugins/tpm $XDG_CONFIG_HOME/tmux/plugins/tpm
 }
 
 
-dwmTools () {
+dwm_tools () {
   cd $HOME/git
   git clone https://github.com/LukeSmithxyz/dwm.git
   git clone https://git.suckless.org/dmenu 
@@ -83,21 +90,8 @@ dwmTools () {
   popd
 }
 
-
-cleanUp () {
+clean_up () {
   cd $HOME
-  rm -rf .bash* & .zshrc & .mkshrc & .profile
+  rm -rf .bash* .mkshrc .profile .shell.pre-oh-my-zsh .zcompdump* .zlogin .zshrc .zsh_history &> /dev/null
+  rm -rf $HOME/git/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
 }
-
-
-mirrorSettings 
-pacmanconfig 
-yay
-basepkgs 
-creteLinks
-installLoop
-zsh
-nvim
-tmuxplug
-dwmTools
-cleanUp
