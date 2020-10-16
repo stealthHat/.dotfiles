@@ -7,6 +7,8 @@ alias \
   zshalias='nvim $HOME/git/.dotfiles/home/.config/zsh/.zsh_aliases' \
   tmuxconf='nvim $HOME/git/.dotfiles/home/.tmux.conf' \
   .='cd $HOME/git/.dotfiles' \
+  .i='cd $HOME/git/.dotfiles/install' \
+  .h='cd $HOME/git/.dotfiles/home' \
   l='ls -lha --color=auto' \
   ls='ls --color=auto' \
   grep='grep --color=auto' \

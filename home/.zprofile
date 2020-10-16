@@ -14,9 +14,10 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
-export GNUPGHOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-export GEM_PATH="$HOME/.local/rvm/gems/ruby-2.7.0/bin"
-export GEM_HOME="$HOME/.local/rvm"
+export GEM_PATH="${XDG_CONFIG_HOME:-$HOME/.config}/rvm/gems/ruby-2.7.2/bin"
+export GEM_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/rvm/gems/ruby-2.7.2/bin"
+export NVM_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/nvm"
+export rvm_path="${XDG_CONFIG_HOME:-$HOME/.config}/rvm"
 export LESSHISTFILE="-"
 
 # Adds `~/.local/bin` to $PATH

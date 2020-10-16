@@ -25,8 +25,12 @@ export ZSH="$HOME/.config/zsh/.oh-my-zsh"
 # source oh my zsh and alias 
 [ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 [ -f "$HOME/.config/zsh/.zsh_aliases" ] && source "$HOME/.config/zsh/.zsh_aliases"
-[ -f "$HOME/.local/rvm/scripts/rvm" ] && source "$HOME/.local/rvm/scripts/rvm"
 # /o>
+
+# Rvm and Nvm for neovim
+[ -f "$HOME/.config/rvm/scripts/rvm" ] && source "$HOME/.config/rvm/scripts/rvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# /r> 
 
 # Theme config
 SPACESHIP_PROMPT_ORDER=(
@@ -71,3 +75,6 @@ RPS2=$RPS1
 
 # last line aways 
 source $HOME/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zdharma-SLASH-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.config/rvm/bin"
