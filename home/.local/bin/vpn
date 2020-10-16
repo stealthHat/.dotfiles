@@ -1,4 +1,0 @@
-docker run -ti --rm --privileged --net=host openconnect ./openconnect --protocol=gp vpn.senior.com.br && \
-sed -i -e 's/^/#/;$a nameserver 10.0.0.18' /etc/resolv.conf && clear || \
-echo 404
-

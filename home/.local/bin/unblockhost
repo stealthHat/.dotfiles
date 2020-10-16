@@ -1,2 +1,0 @@
-sed -n '/*twitter*/d;/youtube/d' /etc/hosts
-

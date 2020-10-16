@@ -1,4 +1,0 @@
-cat >> /etc/hosts << EOF 
-0.0.0.0 twitter.com
-0.0.0.0 www.youtube.com
-EOF
