@@ -34,6 +34,8 @@
 ,fzf,"is a fuzzy finder tool."
 ,highlight,"can highlight code output."
 ,ttf-joypixels,"emoji font"
+,picom,"dwm dependencie"
+,thefuck,"sintax corrector for zsh"
 ,kitty,"featurefull terminal"
 ,zsh,"shell"
 ,neovim,"a tidier vim with some useful features"

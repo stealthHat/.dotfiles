@@ -4,7 +4,7 @@ path=pwd
 
 installpkg(){ sudo pacman --noconfirm --needed -S "$1" ;}
 aurinstall(){ yay --noconfirm --needed  -S "$1" ;}
-refresh () { source $HOME/.zprofile && source $HOME/.config/zsh/.zshrc }
+refresh () { source $HOME/.zprofile && source $HOME/.config/zsh/.zshrc ; }
 
 # Set the best mirros for my country
 mirror_settings () {
@@ -96,6 +96,10 @@ dwm_tools () {
 
 clean_up () {
   cd $HOME
-  rm -rf .bash* .mkshrc .profile .shell.pre-oh-my-zsh .zcompdump* .zlogin .zshrc .zsh_history &> /dev/null
+  rm -rf .bash* .mkshrc .profile .shell.pre-oh-my-zsh .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &> /dev/null
   rm -rf $HOME/git/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
+
 }
+
+setup_links
+
