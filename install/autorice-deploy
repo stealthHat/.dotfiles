@@ -51,6 +51,10 @@ install_loop () {
   done < $HOME/git/.dotfiles/install/progs.csv 
 }
 
+setup_ssh () {
+  grep -q "\.config" /etc/ssh/sshd_config || sudo sed -i "s/\.ssh/.config\/ssh/" /etc/ssh/sshd_config
+}
+
 setup_zsh () {
   export ZSH=$XDG_CONFIG_HOME/zsh/.oh-my-zsh 
   chsh -s $(which zsh) 
@@ -101,5 +105,4 @@ clean_up () {
 
 }
 
-setup_links
-
+setup_ssh
