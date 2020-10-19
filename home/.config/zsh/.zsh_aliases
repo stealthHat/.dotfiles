@@ -5,6 +5,7 @@ alias \
   pacman='sudo pacman' \
   zshrc='nvim $HOME/git/.dotfiles/home/.config/zsh/.zshrc' \
   zshalias='nvim $HOME/git/.dotfiles/home/.config/zsh/.zsh_aliases' \
+	tmux='tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf' \
   tmuxconf='nvim $HOME/git/.dotfiles/home/.tmux.conf' \
   .='cd $HOME/git/.dotfiles' \
   .i='cd $HOME/git/.dotfiles/install' \
