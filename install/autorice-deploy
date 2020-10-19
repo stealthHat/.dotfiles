@@ -52,7 +52,7 @@ install_loop () {
 }
 
 setup_ssh () {
-  grep -q "\.config" /etc/ssh/sshd_config || sudo sed -i "s/\.ssh/.config\/ssh/" /etc/ssh/sshd_config
+  grep -q "\.config" /etc/ssh/sshd_config || sudo sed -i "s/\~\/\.ssh/\~\/\.config\/ssh/" /etc/ssh/sshd_config
 }
 
 setup_zsh () {
