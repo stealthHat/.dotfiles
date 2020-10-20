@@ -23,6 +23,11 @@ pacman_config () {
   grep -q "ILoveCandy" /etc/pacman.conf || sudo sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
 }
 
+pacman_keys () {
+  pacman -Q artix-keyring >/dev/null 2>&1 && pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
+	pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
+}
+
 
 setup_yay () {
   cd $HOME/git && git clone https://aur.archlinux.org/yay.git
@@ -31,19 +36,24 @@ setup_yay () {
 }
 
 setup_links () {
-  mkdir -pv $HOME/.local/bin 
-  mkdir -pv $HOME/.config/tmux
+  find $HOME/git/.dotfiles/home/ -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
 
   ln -sfv $HOME/git/.dotfiles/home/.zprofile $HOME/  
-  ln -sfv $HOME/git/.dotfiles/home/.tmux.conf $HOME/ 
   ln -sfv $HOME/git/.dotfiles/home/.xinitrc $HOME/
-  ln -sfv $HOME/git/.dotfiles/home/.config/* $HOME/.config/ 
-  ln -sfv $HOME/git/.dotfiles/home/.local/bin/* $HOME/.local/bin/
+  ln -sfv $HOME/git/.dotfiles/home/.config/zsh/.z* $HOME/.config/zsh/
+  ln -sfv $HOME/git/.dotfiles/home/.config/wget/* $HOME/.config/wget/
+  ln -sfv $HOME/git/.dotfiles/home/.config/ranger/* $HOME/.config/ranger/
+  ln -sfv $HOME/git/.dotfiles/home/.config/nvim/* $HOME/.config/nvim/
+  ln -sfv $HOME/git/.dotfiles/home/.config/kitty/* $HOME/.config/kitty/
+  ln -sfv $HOME/git/.dotfiles/home/.config/git/* $HOME/.config/git/
+  ln -sfv $HOME/git/.dotfiles/home/.config/fontconfig/* $HOME/.config/fontconfig/
+  ln -sfv $HOME/git/.dotfiles/home/.config/tmux/* $HOME/.config/tmux/
 
   refresh
 }
 
 install_loop () {
+  export NVM_DIR="$XDG_DATA_HOME"/nvm
   while IFS=, read -r tag program comment; do 
     [[ "$tag" =~ ^#.*$ ]] && continue
     case "$tag" in
@@ -71,8 +81,6 @@ setup_vim() {
   rvm use ruby --default
   gem install neovim 
   # Install NVM
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash
-  refresh
   npm config set cache $XDG_CACHE_HOME --global 
   nvm install node
   npm i -g neovim
@@ -103,4 +111,7 @@ clean_up () {
 
 }
 
-mirror_settings && basepkgs && pacman_config && setup_yay && setup_links && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && clean_up && reboot || echo "404"
+setup_links
+
+
+#mirror_settings && pacman_config && pacman_keys && basepkgs && setup_yay && setup_links && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && clean_up && reboot || echo "404"

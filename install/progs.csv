@@ -46,5 +46,6 @@
 ,python-pynvim,"neovim dependencie"
 ,ctags,"neovim dependencie"
 A,antibody,"plugin manager for zsh"
+A,nvm,"node version manager"
 A,python2-pynvim,"neovim dependencie"
 A,brave-bin,"is an elegant browser with built-in adblocking, tor and other features."
