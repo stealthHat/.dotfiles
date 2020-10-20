@@ -15,7 +15,7 @@ export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 
 export GEM_PATH="${XDG_CONFIG_HOME:-$HOME/.config}/rvm"
-export GEM_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/rvm"
+export GEM_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/gem"
 export NVM_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/nvm"
 export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
 export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
