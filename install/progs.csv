@@ -32,6 +32,7 @@
 ,zathura-pdf-mupdf,"allows mupdf pdf compatibility in zathura."
 ,atool,"manages and gives information about archives."
 ,fzf,"is a fuzzy finder tool."
+,openssh,"security shell"
 ,highlight,"can highlight code output."
 ,ttf-joypixels,"emoji font"
 ,picom,"dwm dependencie"

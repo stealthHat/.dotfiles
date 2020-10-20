@@ -8,12 +8,8 @@ refresh () { source $HOME/.zprofile && source $HOME/.config/zsh/.zshrc ; }
 
 # Set the best mirros for my country
 mirror_settings () {
+  installpkg reflector
   sudo reflector -c Brazil -a 6 --sort rate --save /etc/pacman.d/mirrolist 
-}
-
-pacman_config () { 
-  grep -q "^Color" /etc/pacman.conf || sudo sed -i "s/^#Color$/Color/" /etc/pacman.conf
-  grep -q "ILoveCandy" /etc/pacman.conf || sudo sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
 }
 
 basepkgs () {
@@ -21,6 +17,12 @@ basepkgs () {
   	installpkg "$x"
   done
 }
+
+pacman_config () { 
+  grep -q "^Color" /etc/pacman.conf || sudo sed -i "s/^#Color$/Color/" /etc/pacman.conf
+  grep -q "ILoveCandy" /etc/pacman.conf || sudo sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
+}
+
 
 setup_yay () {
   cd $HOME/git && git clone https://aur.archlinux.org/yay.git
@@ -49,10 +51,6 @@ install_loop () {
 			*) installpkg "$program" ;;
 		esac
   done < $HOME/git/.dotfiles/install/progs.csv 
-}
-
-setup_ssh () {
-  grep -q "\.config" /etc/ssh/sshd_config || sudo sed -i "s/\~\/\.ssh/\~\/\.config\/ssh/" /etc/ssh/sshd_config
 }
 
 setup_zsh () {
@@ -105,4 +103,4 @@ clean_up () {
 
 }
 
-setup_ssh
+mirror_settings && basepkgs && pacman_config && setup_yay && setup_links && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && clean_up && reboot || echo "404"
