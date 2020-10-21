@@ -1,6 +1,13 @@
 call plug#begin()
+Plug 'christoomey/vim-tmux-navigator' " Vim tmux
+" Terraform
+Plug 'hashivim/vim-terraform'
+Plug 'vim-syntastic/syntastic'
+Plug 'juliosueiras/vim-terraform-completion'
+" /t>
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'arcticicestudio/nord-vim'
 Plug 'StanAngeloff/php.vim', {'for': 'php'}
 Plug 'chrisbra/NrrwRgn'
 Plug 'sbdchd/neoformat'
@@ -25,11 +32,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary' 
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'w0rp/ale'
-" Terraform
-Plug 'hashivim/vim-terraform'
-Plug 'vim-syntastic/syntastic'
-Plug 'juliosueiras/vim-terraform-completion'
-" /t>
 Plug 'jiangmiao/auto-pairs'
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 let g:deoplete#enable_at_startup = 1
@@ -39,14 +41,15 @@ Plug 'prettier/vim-prettier', {
       \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html', 'php'] }
 call plug#end()
 
-" Leader binds
+" Leader and binds
 let mapleader="\<SPACE>"
 
 map <leader>W :wq!<cr>
 map <leader>w :w!<cr>
 map <leader>q :q!<cr>
+map <leader>o :NERDTreeFind<CR>
 map <C-o> :NERDTreeToggle<cr>
-nmap <leader>o :NERDTreeFind<CR>
+map <esc> :noh<cr>
 " /l>
 
 " Terraform
@@ -64,19 +67,18 @@ let g:syntastic_check_on_wq = 0
 let g:deoplete#omni_patterns = {}
 " /t>
 
-" Theme
+" airline dracula suport
 let g:airline_theme='dracula'
 " /t>
 
 let g:python_host_prog = '/bin/python2'
 let g:python3_host_prog = '/bin/python3'
 
-set termguicolors
+"set termguicolors
 set background=dark
-syntax on
+syntax enable
 colorscheme dracula
 
-map <esc> :noh<cr>
 
 set ignorecase
 set smartcase
