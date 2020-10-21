@@ -21,16 +21,15 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 # Keyboard Layout
-setxkbmap -layout br -variant abnt2 -model thinkpad &
-setxkbmap -layout br -option ctrl:nocaps
+keymap &
 
 # Compositor 
 picom -f &
 
 # wallpaper
-xwallpaper --zoom $HOME/git/.dotfiles/wallpapers/Other_27.jpg
+xwallpaper --zoom $HOME/git/.dotfiles/wallpapers/Other_27.jpg &
 
 # Speed xrate up
-xset r rate 300 50
+xset r rate 300 50 &
 
 exec dwm
