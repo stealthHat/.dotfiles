@@ -1,5 +1,6 @@
 call plug#begin()
 Plug 'christoomey/vim-tmux-navigator' " Vim tmux
+Plug 'pearofducks/ansible-vim' " Ansible
 " Terraform
 Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'

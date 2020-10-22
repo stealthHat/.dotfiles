@@ -7,6 +7,7 @@ alias \
   zshalias='nvim $HOME/git/.dotfiles/home/.config/zsh/.zsh_aliases' \
 	tmux='tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf' \
   tmuxconf='nvim $HOME/git/.dotfiles/home/.config/tmux/tmux.conf' \
+  ufw='sudo ufw' \
   .='cd $HOME/git/.dotfiles' \
   .i='cd $HOME/git/.dotfiles/install' \
   .h='cd $HOME/git/.dotfiles/home' \
