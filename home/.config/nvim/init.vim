@@ -1,6 +1,7 @@
 call plug#begin()
 Plug 'christoomey/vim-tmux-navigator' " Vim tmux
 Plug 'pearofducks/ansible-vim' " Ansible
+Plug 'ryanoasis/vim-devicons' " Nerd tree icon
 " Terraform
 Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'
@@ -48,7 +49,6 @@ let mapleader="\<SPACE>"
 map <leader>W :wq!<cr>
 map <leader>w :w!<cr>
 map <leader>q :q!<cr>
-map <leader>o :NERDTreeFind<CR>
 map <C-o> :NERDTreeToggle<cr>
 map <esc> :noh<cr>
 " /l>
