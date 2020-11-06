@@ -9,7 +9,7 @@ refresh () { source $HOME/.zprofile && source $HOME/.config/zsh/.zshrc ; }
 # Set the best mirros for my country
 mirror_settings () {
   installpkg reflector
-  sudo reflector -c Brazil -a 6 --sort rate --save /etc/pacman.d/mirrolist 
+  sudo reflector -c Brazil -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 }
 
 basepkgs () {
