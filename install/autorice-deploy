@@ -48,6 +48,7 @@ setup_links () {
   ln -sfv $HOME/git/.dotfiles/home/.config/git/* $HOME/.config/git/
   ln -sfv $HOME/git/.dotfiles/home/.config/fontconfig/* $HOME/.config/fontconfig/
   ln -sfv $HOME/git/.dotfiles/home/.config/tmux/* $HOME/.config/tmux/
+  ln -sfv $HOME/git/.dotfiles/home/.local/bin/* $HOME/.local/bin/
 
   refresh
 }
@@ -111,7 +112,4 @@ clean_up () {
 
 }
 
-setup_links
-
-
-#mirror_settings && pacman_config && pacman_keys && basepkgs && setup_yay && setup_links && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && clean_up && reboot || echo "404"
+mirror_settings && pacman_config && pacman_keys && basepkgs && setup_yay && setup_links && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && clean_up && reboot || echo "404"
