@@ -105,6 +105,10 @@ dwm_tools () {
   popd
 }
 
+setup_mouse () {
+  echo "options psmouse synaptics_intertouch=1" >> /etc/modprobe.d/psmouse.conf
+}
+
 clean_up () {
   cd $HOME
   rm -rf .bash* .mkshrc .profile .shell.pre-oh-my-zsh .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &> /dev/null
@@ -112,4 +116,4 @@ clean_up () {
 
 }
 
-mirror_settings && pacman_config && pacman_keys && basepkgs && setup_yay && setup_links && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && clean_up && reboot || echo "404"
+mirror_settings && pacman_config && pacman_keys && basepkgs && setup_yay && setup_links && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && setup_mouse && clean_up && reboot || echo "404"
