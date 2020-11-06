@@ -1,6 +1,9 @@
 autoload -U colors && colors # add color 
 setopt autocd		# Automatically cd into typed directory.
 
+# remove the fucking beeb
+unsetopt BEEP 
+
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
