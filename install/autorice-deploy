@@ -65,7 +65,7 @@ install_loop () {
 }
 
 setup_zsh () {
-  export ZSH=$XDG_CONFIG_HOME/zsh/.oh-my-zsh 
+  export ZSH=$HOME/.config/zsh/.oh-my-zsh 
   chsh -s $(which zsh) 
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
 }
