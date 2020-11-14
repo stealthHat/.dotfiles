@@ -26,8 +26,3 @@ export LESSHISTFILE="-"
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
 export PATH="$PATH:$GEM_PATH"
-
-# Starts X when login 
-if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
-  exec startx
-fi

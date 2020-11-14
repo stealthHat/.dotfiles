@@ -32,3 +32,4 @@ xwallpaper --zoom $HOME/git/.dotfiles/wallpapers/Other_27.jpg &
 # Speed xrate up
 xset r rate 300 50 &
 
+exec dwm
