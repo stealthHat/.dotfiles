@@ -36,38 +36,11 @@ setup_yay () {
 }
 
 setup_links () {
-  find $HOME/git/.dotfiles/home/ -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
+  find $dot_home -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
 
-  ln -sfv $HOME/git/.dotfiles/home/.zprofile $HOME/  
-  ln -sfv $HOME/git/.dotfiles/home/.xinitrc $HOME/
-  ln -sfv $HOME/git/.dotfiles/home/.config/zsh/.z* $HOME/.config/zsh/
-  ln -sfv $HOME/git/.dotfiles/home/.config/wget/* $HOME/.config/wget/
-  ln -sfv $HOME/git/.dotfiles/home/.config/ranger/* $HOME/.config/ranger/
-  ln -sfv $HOME/git/.dotfiles/home/.config/nvim/* $HOME/.config/nvim/
-  ln -sfv $HOME/git/.dotfiles/home/.config/kitty/* $HOME/.config/kitty/
-  ln -sfv $HOME/git/.dotfiles/home/.config/git/* $HOME/.config/git/
-  ln -sfv $HOME/git/.dotfiles/home/.config/fontconfig/* $HOME/.config/fontconfig/
-  ln -sfv $HOME/git/.dotfiles/home/.config/tmux/* $HOME/.config/tmux/
-  ln -sfv $HOME/git/.dotfiles/home/.local/bin/* $HOME/.local/bin/
+  cd $dot_home && find $pwd -type f -exec ln -fs `pwd`/{} $HOME/{} \; 
 
   refresh
-}
-
-install_loop () {
-  export NVM_DIR="$XDG_DATA_HOME"/nvm
-  while IFS=, read -r tag program comment; do 
-    [[ "$tag" =~ ^#.*$ ]] && continue
-    case "$tag" in
-			"A") aurinstall "$program" ;;
-			*) installpkg "$program" ;;
-		esac
-  done < $HOME/git/.dotfiles/install/progs.csv 
-}
-
-setup_zsh () {
-  export ZSH=$HOME/.config/zsh/.oh-my-zsh 
-  chsh -s $(which zsh) 
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
 }
 
 setup_vim() {
