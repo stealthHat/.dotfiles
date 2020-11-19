@@ -19,6 +19,8 @@ alias \
   s='git status' \
   vim='nvim' \
   t='terraform' \
+  t='terraform' \
+  ap='ansible-playbook' \
   d='sudo docker' \
   sc='sudo systemctl' \
   diff='diff --color=auto' \
@@ -27,6 +29,7 @@ alias \
 
 # ssh 
 alias \
+  ssh='kitty +kitten ssh' \
   sshconfig='vim $HOME/.ssh/config' \
   sshkey='cat $HOME/.ssh/id_rsa.pub' \
   sshad='ssh-copy-id -i $HOME/.ssh/id_rsa.pub'

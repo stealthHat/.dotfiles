@@ -1,3 +1,8 @@
+unsetopt MENU_COMPLETE   # do not autoselect the first completion entry
+unsetopt FLOWCONTROL
+setopt AUTO_MENU         # show completion menu on succesive tab press
+setopt COMPLETE_IN_WORD
+setopt ALWAYS_TO_END
 autoload -U colors && colors # add color 
 setopt autocd		# Automatically cd into typed directory.
 
@@ -11,11 +16,18 @@ HISTFILE=~/.cache/zsh/history
 # /h>
 
 # Basic auto/tab complete:
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*' menu select
+#WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
+#zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*' menu select
+#zmodload zsh/complist
+#autoload -Uz compinit
+#compinit
+#_comp_options+=(globdots)		# Include hidden files.
+
+autoload -U compinit
+zstyle ':completion:*' menu select
 zmodload zsh/complist
-autoload -Uz compinit
 compinit
-_comp_options+=(globdots)		# Include hidden files.
+_comp_options+=(globdots)
 # /b>
 
 # Antibody
