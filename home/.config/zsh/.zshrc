@@ -42,6 +42,10 @@ export ZSH="$HOME/.config/zsh/.oh-my-zsh"
 [ -f "$HOME/.config/zsh/.zsh_aliases" ] && source "$HOME/.config/zsh/.zsh_aliases"
 # /o>
 
+# K8s autocomplete
+[ -f /bin/kubectl ] && source <(kubectl completion zsh)
+# /k>
+
 # Rvm and Nvm for neovim
 [ -f "$HOME/.config/rvm/scripts/rvm" ] && source "$HOME/.config/rvm/scripts/rvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

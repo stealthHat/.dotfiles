@@ -19,7 +19,7 @@ alias \
   s='git status' \
   vim='nvim' \
   t='terraform' \
-  t='terraform' \
+  k='kubectl' \
   ap='ansible-playbook' \
   d='sudo docker' \
   sc='sudo systemctl' \
