@@ -53,6 +53,12 @@ install_loop () {
   done < $HOME/git/.dotfiles/install/progs.csv 
 }
 
+setup_zsh () {
+  export ZSH=$HOME/.config/zsh/.oh-my-zsh 
+  chsh -s $(which zsh) 
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
+}
+
 setup_vim() {
   # Install  neovim plugin mannager 
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dir\
