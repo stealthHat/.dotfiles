@@ -37,8 +37,18 @@ setup_yay () {
 setup_links () {
   find $dot_home -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
 
-  cd $dot_home && find $pwd -type f -exec ln -fs `pwd`/{} $HOME/{} \; 
-
+  ln -sfv $HOME/git/.dotfiles/home/.zprofile $HOME/  
+  ln -sfv $HOME/git/.dotfiles/home/.xinitrc $HOME/
+  ln -sfv $HOME/git/.dotfiles/home/.config/zsh/.z* $HOME/.config/zsh/
+  ln -sfv $HOME/git/.dotfiles/home/.config/wget/* $HOME/.config/wget/
+  ln -sfv $HOME/git/.dotfiles/home/.config/ranger/* $HOME/.config/ranger/
+  ln -sfv $HOME/git/.dotfiles/home/.config/nvim/* $HOME/.config/nvim/
+  ln -sfv $HOME/git/.dotfiles/home/.config/kitty/* $HOME/.config/kitty/
+  ln -sfv $HOME/git/.dotfiles/home/.config/git/* $HOME/.config/git/
+  ln -sfv $HOME/git/.dotfiles/home/.config/fontconfig/* $HOME/.config/fontconfig/
+  ln -sfv $HOME/git/.dotfiles/home/.config/tmux/* $HOME/.config/tmux/
+  ln -sfv $HOME/git/.dotfiles/home/.local/bin/* $HOME/.local/bin/
+  
   refresh
 }
 
