@@ -21,6 +21,8 @@ export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
 export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
 export rvm_path="${XDG_CONFIG_HOME:-$HOME/.config}/rvm"
 export XAUTHORITY="${XDG_CONFIG_HOME:-$HOME/.config}/Xauthority"
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
 export LESSHISTFILE="-"
 
 # Adds `~/.local/bin` to $PATH
