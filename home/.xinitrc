@@ -34,6 +34,7 @@ xset r rate 300 50 &
 
 # Disable sleep
 setterm -blank 0 -powersave off -powerdown 0 &
-xset s off &
+
+xset -dpms &
 
 exec dwm
