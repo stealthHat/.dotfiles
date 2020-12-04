@@ -27,11 +27,12 @@ pacman_config () {
 setup_links () {
   local dot_home=$HOME/git/.dotfiles/home/
 
-  find $dot_home -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/b/%"
+  pushd $dot_home
+  find $dot_home -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
+  find . -type f -exec ln -sfv `pwd`/{} $HOME/{} \;
+  popd
 
-  cd $dot_home && find $pwd -type f -exec ln -sfv `pwd`/{} `$HOME/b/`{} \;
-
-  #source $HOME/.zprofile
+  source $HOME/.zprofile
 }
 
 pacman_keys () {
