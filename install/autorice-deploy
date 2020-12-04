@@ -1,10 +1,9 @@
 #!/bin/bash
 
-VIM_PLUG="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+export VIM_PLUG="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
 installpkg(){ sudo pacman --noconfirm --needed -S "$1" ;}
 aurinstall(){ yay --noconfirm --needed  -S "$1" ;}
-refresh () { source $HOME/.zprofile && source $HOME/.config/zsh/.zshrc ; }
 
 # Set the best mirros for my country
 mirror_settings () {
@@ -13,14 +12,26 @@ mirror_settings () {
 }
 
 basepkgs () {
-  for x in curl base-devel git; do
+  for x in curl base-devel git xdg-user-dir; do
   	installpkg "$x"
   done
+  xdg-user-dir-update
 }
 
 pacman_config () { 
   grep -q "^Color" /etc/pacman.conf || sudo sed -i "s/^#Color$/Color/" /etc/pacman.conf
   grep -q "ILoveCandy" /etc/pacman.conf || sudo sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
+}
+
+
+setup_links () {
+  local dot_home=$HOME/git/.dotfiles/home/
+
+  find $dot_home -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/b/%"
+
+  cd $dot_home && find $pwd -type f -exec ln -sfv `pwd`/{} `$HOME/b/`{} \;
+
+  #source $HOME/.zprofile
 }
 
 pacman_keys () {
@@ -32,24 +43,6 @@ setup_yay () {
   cd $HOME/git && git clone https://aur.archlinux.org/yay.git
   cd $HOME/git/yay && makepkg -si PKGBUILD --noconfirm
   cd $path
-}
-
-setup_links () {
-  find $dot_home -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
-
-  ln -sfv $HOME/git/.dotfiles/home/.zprofile $HOME/  
-  ln -sfv $HOME/git/.dotfiles/home/.xinitrc $HOME/
-  ln -sfv $HOME/git/.dotfiles/home/.config/zsh/.z* $HOME/.config/zsh/
-  ln -sfv $HOME/git/.dotfiles/home/.config/wget/* $HOME/.config/wget/
-  ln -sfv $HOME/git/.dotfiles/home/.config/ranger/* $HOME/.config/ranger/
-  ln -sfv $HOME/git/.dotfiles/home/.config/nvim/* $HOME/.config/nvim/
-  ln -sfv $HOME/git/.dotfiles/home/.config/kitty/* $HOME/.config/kitty/
-  ln -sfv $HOME/git/.dotfiles/home/.config/git/* $HOME/.config/git/
-  ln -sfv $HOME/git/.dotfiles/home/.config/fontconfig/* $HOME/.config/fontconfig/
-  ln -sfv $HOME/git/.dotfiles/home/.config/tmux/* $HOME/.config/tmux/
-  ln -sfv $HOME/git/.dotfiles/home/.local/bin/* $HOME/.local/bin/
-  
-  refresh
 }
 
 install_loop () {
@@ -115,4 +108,4 @@ clean_up () {
 
 }
 
-mirror_settings && pacman_config && pacman_keys && basepkgs && setup_yay && setup_links && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && setup_mouse && clean_up && reboot || echo "404"
+setup_links
