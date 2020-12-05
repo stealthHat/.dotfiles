@@ -43,13 +43,13 @@ setup_links () {
 
 pacman_keys () {
   echostep "PACMAN KEYS BEING ADDED"
-  pacman -Q artix-keyring >/dev/null 2>&1 && pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
+  pacman -Q arch-keyring >/dev/null 2>&1 && pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
 	pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
 }
 
 setup_yay () {
   echostep "INSTALLING YAY"
-  [ -d $HOME/git/yay ] || git clone https://aur.archlinux.org/yay.git $FGIT
+  [ -d $HOME/git/yay ] || git clone https://aur.archlinux.org/yay.git $FGIT/yay
   pushd $HOME/git/yay && makepkg -si PKGBUILD --noconfirm
   popd
 }
@@ -99,9 +99,9 @@ tmux_plug () {
 dwm_tools () {
   echostep "INSTALLING DWM TOOLS"
   local mk="sudo make clean install"
-  [ -d $HOME/git/dwm ] || git clone https://github.com/LukeSmithxyz/dwm.git $FGIT
-  [ -d $HOME/git/dmenu ] || git clone https://git.suckless.org/dmenu $FGIT
-  [ -d $HOME/git/dmenu ] || git clone https://github.com/LukeSmithxyz/dwmblocks.git $FGIT
+  [ -d $HOME/git/dwm ] || git clone https://github.com/LukeSmithxyz/dwm.git $FGIT/dwm
+  [ -d $HOME/git/dmenu ] || git clone https://git.suckless.org/dmenu $FGIT/dmenu
+  [ -d $HOME/git/dwmblocks ] || git clone https://github.com/LukeSmithxyz/dwmblocks.git $FGIT/dwmblocks
   pushd dwm && $mk
   popd 
   pushd dmenu && $mk
