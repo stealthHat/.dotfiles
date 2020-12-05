@@ -11,7 +11,8 @@ echostep () { echo "############################################################
 mirror_settings () {
   echostep "SETTING MIRROR LIST"
   installpkg reflector
-  sudo reflector -c Brazil -a 6 --sort rate --save /etc/pacman.d/mirrorlist
+  grep -q "reflector -c brazil" || sudo reflector -c brazil -a 6 --sort rate --save /etc/pacman.d/mirrorlist
+  sudo pacman -Syu
 }
 
 basepkgs () {
