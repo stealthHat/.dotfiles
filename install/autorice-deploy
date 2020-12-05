@@ -5,27 +5,32 @@ export FGIT="$HOME/git"
 
 installpkg(){ sudo pacman --noconfirm --needed -S "$1" ;}
 aurinstall(){ yay --noconfirm --needed  -S "$1" ;}
+echostep () { echo "############################################################  $1   ################################################################" ;}
 
 # Set the best mirros for my country
 mirror_settings () {
+  echostep "SETTING MIRROR LIST"
   installpkg reflector
   sudo reflector -c Brazil -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 }
 
 basepkgs () {
-  for x in curl base-devel git xdg-user-dir; do
+  echostep "BASE PACKAGES INSTALL"
+  for x in curl base-devel git xdg-user-dirs; do
   	installpkg "$x"
   done
-  xdg-user-dir-update
+  xdg-user-dirs-update
 }
 
 pacman_config () { 
+  echostep "PACMAN CONFIG SETTINGS"
   grep -q "^Color" /etc/pacman.conf || sudo sed -i "s/^#Color$/Color/" /etc/pacman.conf
   grep -q "ILoveCandy" /etc/pacman.conf || sudo sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
 }
 
 
 setup_links () {
+  echostep "FOLDERS AND SYMBOLIC LINKS FOR DOTFILES"
   local dot_home=$HOME/git/.dotfiles/home/
 
   pushd $dot_home
@@ -37,17 +42,20 @@ setup_links () {
 }
 
 pacman_keys () {
+  echostep "PACMAN KEYS BEING ADDED"
   pacman -Q artix-keyring >/dev/null 2>&1 && pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
 	pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
 }
 
 setup_yay () {
+  echostep "INSTALLING YAY"
   [ -d $HOME/git/yay ] || git clone https://aur.archlinux.org/yay.git $FGIT
   pushd $HOME/git/yay && makepkg -si PKGBUILD --noconfirm
   popd
 }
 
 install_loop () {
+  echostep "INSTALLING PROGRAMS FROM progs.csv FILE"
   export NVM_DIR="$XDG_DATA_HOME"/nvm
   while IFS=, read -r tag program comment; do 
     [[ "$tag" =~ ^#.*$ ]] && continue
@@ -59,12 +67,14 @@ install_loop () {
 }
 
 setup_zsh () {
+  echostep "INSTALLING OH-MY-ZSH"
   export ZSH=$HOME/.config/zsh/.oh-my-zsh 
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
   chsh -s $(which zsh) 
 }
 
 setup_vim() {
+  echostep "INSTALLING VIM_PLUG AND VIM DEPENDENCIES"
   # Install  neovim plugin mannager 
   [ -d $HOME/.local/share/nvim ] || curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dir\
   $VIM_PLUG
@@ -81,11 +91,13 @@ setup_vim() {
 }
 
 tmux_plug () {
+  echostep "INSTALLING TMUX_PLUG"
   git clone https://github.com/tmux-plugins/tpm $XDG_CONFIG_HOME/tmux/plugins/tpm
 }
 
 
 dwm_tools () {
+  echostep "INSTALLING DWM TOOLS"
   local mk="sudo make clean install"
   [ -d $HOME/git/dwm ] || git clone https://github.com/LukeSmithxyz/dwm.git $FGIT
   [ -d $HOME/git/dmenu ] || git clone https://git.suckless.org/dmenu $FGIT
@@ -99,14 +111,15 @@ dwm_tools () {
 }
 
 setup_mouse () {
+  echostep "MOUSE CONFIGS"
   echo "options psmouse synaptics_intertouch=1" >> /etc/modprobe.d/psmouse.conf
 }
 
 clean_up () {
+  echostep "CLEANING UP"
   cd $HOME
   rm -rf .bash* .mkshrc .profile .shell.pre-oh-my-zsh .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &> /dev/null
   rm -rf $HOME/git/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
-
 }
 
-mirrorlist && basepkgs && pacman_config && setup_links && pacman_keys && setup_yay && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && setup_mouse && clean_up
+mirror_settings && basepkgs && pacman_config && setup_links && pacman_keys && setup_yay && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && setup_mouse && clean_up 
