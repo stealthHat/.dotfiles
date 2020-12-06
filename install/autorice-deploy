@@ -80,7 +80,7 @@ setup_vim() {
   $VIM_PLUG
   #install RVM
   gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-  [ -d $HOME/.local/share/nvim ] ||curl -sSL https://get.rvm.io | bash -s -- --path $XDG_CONFIG_HOME/rvm
+  [ -d $XDG_CONFIG_HOME/rvm ] || curl -sSL https://get.rvm.io | bash -s -- --path $XDG_CONFIG_HOME/rvm
   source $XDG_CONFIG_HOME/rvm/scripts/rvm
   rvm install ruby
   rvm use ruby --default
@@ -93,7 +93,7 @@ setup_vim() {
 
 tmux_plug () {
   echostep "INSTALLING TMUX_PLUG"
-  git clone https://github.com/tmux-plugins/tpm $XDG_CONFIG_HOME/tmux/plugins/tpm
+  [ -d $XDG_CONFIG_HOME/tmux/plugins ] || git clone https://github.com/tmux-plugins/tpm $XDG_CONFIG_HOME/tmux/plugins/tpm
 }
 
 
