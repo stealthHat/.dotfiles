@@ -9,6 +9,8 @@ export FGIT="$HOME/git"
 
 installpkg(){ sudo pacman --noconfirm --needed -S "$1" ;}
 aurinstall(){ yay --noconfirm --needed  -S "$1" ;}
+rvm_install () { curl -sSL https://get.rvm.io | bash -s stable --with-gems="neovim" --path $XDG_CONFIG_HOME/rvm ;}
+vimplug_install () { sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs  ; https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' ;}
 echostep () { echo "############################################################  $1   ################################################################" ;}
 
 # Set the best mirros for my country
@@ -80,15 +82,11 @@ setup_zsh () {
 setup_vim() {
   echostep "INSTALLING VIM_PLUG AND VIM DEPENDENCIES"
   # Install  neovim plugin mannager 
-  [ -d $HOME/.local/share/nvim ] || curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dir\
-  $VIM_PLUG
+  [ -d $HOME/.local/share/nvim ] || vimplug_install 
   #install RVM
   gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-  [ -d $XDG_CONFIG_HOME/rvm ] || curl -sSL https://get.rvm.io | bash -s -- --path $XDG_CONFIG_HOME/rvm
+  [ -d $XDG_CONFIG_HOME/rvm ] || rvm_install
   source $XDG_CONFIG_HOME/rvm/scripts/rvm
-  rvm install ruby
-  rvm use ruby --default
-  gem install neovim 
   # configure NVM
   source /usr/share/nvm/init-nvm.sh
   npm config set cache $XDG_CACHE_HOME --global 
