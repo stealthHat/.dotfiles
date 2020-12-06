@@ -11,7 +11,7 @@ echostep () { echo "############################################################
 mirror_settings () {
   echostep "SETTING MIRROR LIST"
   installpkg reflector
-  grep -q "reflector -c brazil" || sudo reflector -c brazil -a 6 --sort rate --save /etc/pacman.d/mirrorlist
+  grep -q "reflector -c brazil" /etc/pacman.d/mirrorlist || sudo reflector -c brazil -a 6 --sort rate --save /etc/pacman.d/mirrorlist
   sudo pacman -Syu
 }
 
@@ -57,7 +57,7 @@ setup_yay () {
 
 install_loop () {
   echostep "INSTALLING PROGRAMS FROM progs.csv FILE"
-  export NVM_DIR="$XDG_DATA_HOME"/nvm
+  export NVM_DIR="$XDG_CONFIG_HOME"/nvm
   while IFS=, read -r tag program comment; do 
     [[ "$tag" =~ ^#.*$ ]] && continue
     case "$tag" in
@@ -71,7 +71,6 @@ setup_zsh () {
   echostep "INSTALLING OH-MY-ZSH"
   export ZSH=$HOME/.config/zsh/.oh-my-zsh 
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
-  chsh -s $(which zsh) 
 }
 
 setup_vim() {
@@ -81,7 +80,8 @@ setup_vim() {
   $VIM_PLUG
   #install RVM
   gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-  curl -sSL https://get.rvm.io | bash -s -- --path $XDG_CONFIG_HOME/rvm
+  [ -d $HOME/.local/share/nvim ] ||curl -sSL https://get.rvm.io | bash -s -- --path $XDG_CONFIG_HOME/rvm
+  source $XDG_CONFIG_HOME/rvm/scripts/rvm
   rvm install ruby
   rvm use ruby --default
   gem install neovim 
