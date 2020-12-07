@@ -47,7 +47,7 @@ export ZSH="$HOME/.config/zsh/.oh-my-zsh"
 # /k>
 
 # Rvm and Nvm for neovim
-[ -f "$HOME/.config/rvm/scripts/rvm" ] && source "$HOME/.config/rvm/scripts/rvm"
+[ -f "$HOME/.local/share/rvm/scripts/rvm" ] && source "$HOME/.local/share/rvm/scripts/rvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # /r> 
 
