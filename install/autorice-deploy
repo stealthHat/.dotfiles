@@ -78,14 +78,14 @@ setup_zsh () {
 }
 
 vimplug_install () {
-  [ -f $HOME/.local/share/nvim/rplugin.vim ] ||  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+  [ -f $XDG_DATA_HOME/nvim/site/autoload/plug.vim ] ||  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' 
 }
 
 rvm_install () { 
   unset GEM_HOME
   gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-  [ -d $XDG_CONFIG_HOME/rvm ] || curl -sSL https://get.rvm.io | bash -s stable --ruby --with-gems="neovim" --ignore-dotfiles --path $XDG_CONFIG_HOME/rvm 
+  [ -f $XDG_CONFIG_HOME/rvm/bin/rvm ] || curl -sSL https://get.rvm.io | bash -s stable --ruby --with-gems="neovim" --ignore-dotfiles --path $XDG_CONFIG_HOME/rvm 
 }
 
 setup_vim () {
