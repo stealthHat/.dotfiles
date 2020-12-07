@@ -61,7 +61,6 @@ setup_yay () {
 
 install_loop () {
   echostep "INSTALLING PROGRAMS FROM progs.csv FILE"
-  export NVM_DIR=$XDG_DATA_HOME/nvm
   while IFS=, read -r tag program comment; do 
     [[ "$tag" =~ ^#.*$ ]] && continue
     case "$tag" in
@@ -93,7 +92,7 @@ setup_vim () {
   vimplug_install
   rvm_install
   # configure NVM
-  source $NVM_DIR/init-nvm.sh
+  source /usr/share/nvm/init-nvm.sh
   npm config set cache $XDG_CACHE_HOME --global 
   nvm install node
   npm i -g neovim
@@ -126,7 +125,7 @@ setup_mouse () {
 clean_up () {
   echostep "CLEANING UP"
   cd $HOME
-  rm -rf .bash* .mkshrc .profile .shell.pre-oh-my-zsh .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &> /dev/null
+  rm -rf .bash* .rvmrc .mkshrc .profile .shell.pre-oh-my-zsh .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &> /dev/null
   rm -rf $HOME/git/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
 }
 
