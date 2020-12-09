@@ -20,6 +20,7 @@ alias \
   vim='nvim' \
   t='terraform' \
   k='kubectl' \
+  h='helm' \
   ap='ansible-playbook' \
   d='sudo docker' \
   sc='sudo systemctl' \
