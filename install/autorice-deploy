@@ -41,10 +41,10 @@ setup_links () {
   echostep "FOLDERS AND SYMBOLIC LINKS FOR DOTFILES"
   local dot_home=$HOME/git/.dotfiles/home/
 
-  pushd $dot_home
-  find $dot_home -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
-  find . -type f -exec ln -sfv `pwd`/{} $HOME/{} \;
-  popd
+  pushd "$dot_home" || exit
+  find "$dot_home" -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
+  find . -type f -exec ln -sfv pwd/{} "$HOME"/{} \;
+  popd || exit
 
   source $HOME/.zprofile
 }
@@ -52,9 +52,9 @@ setup_links () {
 # Install yay
 setup_yay () {
   echostep "INSTALLING YAY"
-  [ -d $HOME/git/yay ] || git clone https://aur.archlinux.org/yay.git $FGIT/yay
-  pushd $HOME/git/yay && makepkg -si PKGBUILD --noconfirm
-  popd
+  [ -d "$HOME"/git/yay ] || git clone https://aur.archlinux.org/yay.git "$GIT_DIR"
+  pushd "$HOME"/git/yay && makepkg -si PKGBUILD --noconfirm
+  popd || exit
   #TODO add the yay user to wheel group to stop passwd asing
 }
 
@@ -74,7 +74,7 @@ install_loop () {
 			"A") aurinstall "$program" ;;
 			*) installpkg "$program" ;;
 		esac
-  done < $HOME/git/.dotfiles/install/progs.csv 
+  done < "$HOME"/git/.dotfiles/install/progs.csv 
 }
 
 # Install Oh-my-zsh
@@ -86,7 +86,7 @@ setup_zsh () {
 
 # Install vim plugin manager  
 vimplug_install () {
-  [ -f $XDG_DATA_HOME/nvim/site/autoload/plug.vim ] ||  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+  [ -f "$XDG_DATA_HOME"/nvim/site/autoload/plug.vim ] ||  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs ,
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' 
 }
 
@@ -94,7 +94,7 @@ vimplug_install () {
 rvm_install () { 
   unset GEM_HOME
   gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-  [ -f $XDG_DATA_HOME/rvm/bin/rvm ] || curl -sSL https://get.rvm.io | bash -s stable --ruby --with-gems="neovim" --ignore-dotfiles --path $XDG_DATA_HOME/rvm 
+  [ -f "$XDG_DATA_HOME"/rvm/bin/rvm ] || curl -sSL https://get.rvm.io | bash -s stable --ruby --with-gems="neovim" --ignore-dotfiles --path "$XDG_DATA_HOME"/rvm 
 }
 
 # Set up neovim dependencies 
@@ -104,7 +104,7 @@ setup_vim () {
   rvm_install
   # configure NVM
   source /usr/share/nvm/init-nvm.sh
-  npm config set cache $XDG_CACHE_HOME --global 
+  npm config set cache "$XDG_CACHE_HOME" --global 
   nvm install node
   npm i -g neovim
 }
@@ -112,21 +112,21 @@ setup_vim () {
 # Install tmux plugin manager
 tmux_plug () {
   echostep "INSTALLING TMUX_PLUG"
-  [ -d $XDG_CONFIG_HOME/tmux/plugins ] || git clone https://github.com/tmux-plugins/tpm $XDG_CONFIG_HOME/tmux/plugins/tpm
+  [ -d "$XDG_CONFIG_HOME"/tmux/plugins ] || git clone https://github.com/tmux-plugins/tpm "$XDG_CONFIG_HOME"/tmux/plugins/tpm
 }
 
 # Install DWM, DWM Bocks and menu 
 dwm_tools () {
   echostep "INSTALLING DWM TOOLS"
   local mk="sudo make clean install"
-  pushd $GIT_DIR
-  [ -d $HOME/git/dwm ] || git clone https://github.com/LukeSmithxyz/dwm.git 
-  [ -d $HOME/git/dmenu ] || git clone https://git.suckless.org/dmenu.git
-  [ -d $HOME/git/dwmblocks ] || git clone https://github.com/LukeSmithxyz/dwmblocks.git 
-  pushd dwm && $mk ; popd 
-  pushd dmenu && $mk ; popd 
-  pushd dwmblocks && $mk ; popd
-  popd
+  pushd "$GIT_DIR" || exit
+  [ -d "$HOME"/git/dwm ] || git clone https://github.com/LukeSmithxyz/dwm.git 
+  [ -d "$HOME"/git/dmenu ] || git clone https://git.suckless.org/dmenu.git
+  [ -d "$HOME"/git/dwmblocks ] || git clone https://github.com/LukeSmithxyz/dwmblocks.git 
+  pushd dwm && $mk && popd  || exit
+  pushd dmenu && $mk && popd  || exit
+  pushd dwmblocks && $mk && popd || exit 
+  popd || exit
 }
 
 # Set up mouse config
@@ -138,9 +138,9 @@ setup_mouse () {
 # Clean up home after install
 clean_up () {
   echostep "CLEANING UP"
-  cd $HOME
+  cd "$HOME" || exit 
   rm -rf .bash* .rvmrc .mkshrc .profile .shell.pre-oh-my-zsh .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &> /dev/null
-  rm -rf $HOME/git/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
+  rm -rf "$HOME"/git/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
 }
 
 # Call all the functions 
