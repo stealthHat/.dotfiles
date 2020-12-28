@@ -8,7 +8,7 @@ export VIM_PLUG="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug
 export GIT_DIR="$HOME/git"
 
 installpkg(){ sudo pacman --noconfirm --needed -S "$1" ;}
-aurinstall(){ yay --noconfirm --needed  -S "$1" ;}
+aurinstall(){ yay --noconfirm --needed -S "$1" ;}
 echostep(){ echo "############################################################  $1   ################################################################" ;}
 
 # Set the best mirrors for my country
@@ -52,10 +52,10 @@ setup_links () {
 # Install yay
 setup_yay () {
   echostep "INSTALLING YAY"
-  [ -d "$HOME"/git/yay ] || git clone https://aur.archlinux.org/yay.git "$GIT_DIR"
+  [ -d "$HOME"/git/yay ] || git clone https://aur.archlinux.org/yay.git "$GIT_DIR"/yay
   pushd "$HOME"/git/yay && makepkg -si PKGBUILD --noconfirm
   popd || exit
-  #TODO add the yay user to wheel group to stop passwd asing
+  #TODO add the yay user to wheel group to stop passwd asking
 }
 
 # Add the pacman and yay keys 
@@ -82,6 +82,7 @@ setup_zsh () {
   echostep "INSTALLING OH-MY-ZSH"
   export ZSH=$HOME/.config/zsh/.oh-my-zsh 
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
+  antibody init && antibody update || exit
 }
 
 # Install vim plugin manager  
@@ -121,18 +122,12 @@ dwm_tools () {
   local mk="sudo make clean install"
   pushd "$GIT_DIR" || exit
   [ -d "$HOME"/git/dwm ] || git clone https://github.com/LukeSmithxyz/dwm.git 
-  [ -d "$HOME"/git/dmenu ] || git clone https://git.suckless.org/dmenu.git
+  [ -d "$HOME"/git/dmenu ] || git clone https://git.suckless.org/dmenu
   [ -d "$HOME"/git/dwmblocks ] || git clone https://github.com/LukeSmithxyz/dwmblocks.git 
   pushd dwm && $mk && popd  || exit
   pushd dmenu && $mk && popd  || exit
   pushd dwmblocks && $mk && popd || exit 
   popd || exit
-}
-
-# Set up mouse config
-setup_mouse () {
-  echostep "MOUSE CONFIGS"
-  echo "options psmouse synaptics_intertouch=1" >> /etc/modprobe.d/psmouse.conf
 }
 
 # Clean up home after install
@@ -144,4 +139,4 @@ clean_up () {
 }
 
 # Call all the functions 
-mirror_settings && basepkgs && pacman_config && setup_links && pacman_keys && setup_yay && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && setup_mouse && clean_up 
+mirror_settings && basepkgs && pacman_config && setup_links && pacman_keys && setup_yay && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && clean_up || exit 
