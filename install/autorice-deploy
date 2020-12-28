@@ -14,9 +14,9 @@ echostep(){ echo "############################################################  
 # Set the best mirrors for my country
 mirror_settings () {
   echostep "SETTING MIRROR LIST"
+  sudo pacman -Syu --noconfirm
   installpkg reflector
   grep -q "reflector -c brazil" /etc/pacman.d/mirrorlist || sudo reflector -c brazil -a 6 --sort rate --save /etc/pacman.d/mirrorlist
-  sudo pacman -Syu
 }
 
 # Install the base packages and create the user folders
@@ -43,7 +43,7 @@ setup_links () {
 
   pushd "$dot_home" || exit
   find "$dot_home" -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
-  find . -type f -exec ln -sfv pwd/{} "$HOME"/{} \;
+  find . -type f -exec ln -sfv "$(pwd)"/{} "$HOME"/{} \;
   popd || exit
 
   source $HOME/.zprofile
