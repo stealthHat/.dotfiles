@@ -54,9 +54,7 @@ setup_yay () {
   echostep "INSTALLING YAY"
   [ -d "$HOME"/git/yay ] || git clone https://aur.archlinux.org/yay.git "$GIT_DIR"/yay
   pushd "$GIT_DIR"/yay && makepkg -si PKGBUILD --noconfirm
-  yay -syu --noconfirm
   popd || exit
-  #fix yay
 }
 
 # Add the pacman and yay keys 
@@ -121,9 +119,9 @@ dwm_tools () {
   echostep "INSTALLING DWM TOOLS"
   local mk="sudo make clean install"
   pushd "$GIT_DIR" || exit
-  [ -d "$HOME"/git/dwm ] || git clone https://github.com/LukeSmithxyz/dwm.git 
-  [ -d "$HOME"/git/dmenu ] || git clone https://git.suckless.org/dmenu
-  [ -d "$HOME"/git/dwmblocks ] || git clone https://github.com/LukeSmithxyz/dwmblocks.git 
+  [ -d "$GIT_DIR"/dwm ] || git clone https://github.com/LukeSmithxyz/dwm.git 
+  [ -d "$GIT_DIR"/dmenu ] || git clone https://git.suckless.org/dmenu
+  [ -d "$GIT_DIR"/dwmblocks ] || git clone https://github.com/LukeSmithxyz/dwmblocks.git 
   pushd dwm && $mk && popd  || exit
   pushd dmenu && $mk && popd  || exit
   pushd dwmblocks && $mk && popd || exit 
@@ -135,7 +133,7 @@ clean_up () {
   echostep "CLEANING UP"
   cd "$HOME" || exit 
   rm -rf .bash* .rvmrc .mkshrc .profile .shell.pre-oh-my-zsh .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &> /dev/null
-  rm -rf "$HOME"/git/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
+  rm -rf "$GIT_DIR"/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
   sudo reboot now
 }
 
