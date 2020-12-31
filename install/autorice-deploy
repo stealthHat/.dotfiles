@@ -3,11 +3,10 @@
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
-
 export GDIR="$HOME/git"
 
 installpkg(){ sudo pacman --noconfirm --needed -S "$1" ;}
-aurinstall(){ yay --noconfirm --needed  -S "$1" ;}
+aurinstall(){ yay --noconfirm --needed -S "$1" ;}
 echostep(){ echo "############################################################  $1   ################################################################" ;}
 
 # Set the best mirrors for my country
@@ -51,8 +50,8 @@ setup_links () {
 # Install yay
 setup_yay () {
   echostep "INSTALLING YAY"
-  [ -d "$HOME"/git/yay ] || git clone https://aur.archlinux.org/yay.git "$GIT_DIR"/yay
-  pushd "$GIT_DIR"/yay && makepkg -si PKGBUILD --noconfirm
+  [ -d "$HOME"/git/yay ] || git clone https://aur.archlinux.org/yay.git "$GDIR"/yay
+  pushd "$GDIR"/yay && makepkg -si PKGBUILD --noconfirm
   popd || exit
 }
 
@@ -118,10 +117,10 @@ tmux_plug () {
 dwm_tools () {
   echostep "INSTALLING DWM TOOLS"
   local mk="sudo make clean install"
-  pushd "$GIT_DIR" || exit
-  [ -d "$GIT_DIR"/dwm ] || git clone https://github.com/LukeSmithxyz/dwm.git 
-  [ -d "$GIT_DIR"/dmenu ] || git clone https://git.suckless.org/dmenu
-  [ -d "$GIT_DIR"/dwmblocks ] || git clone https://github.com/LukeSmithxyz/dwmblocks.git 
+  pushd "$GDIR" || exit
+  [ -d "$GDIR"/dwm ] || git clone https://github.com/LukeSmithxyz/dwm.git 
+  [ -d "$GDIR"/dmenu ] || git clone https://git.suckless.org/dmenu
+  [ -d "$GDIR"/dwmblocks ] || git clone https://github.com/LukeSmithxyz/dwmblocks.git 
   pushd dwm && $mk && popd  || exit
   pushd dmenu && $mk && popd  || exit
   pushd dwmblocks && $mk && popd || exit 
@@ -133,9 +132,9 @@ clean_up () {
   echostep "CLEANING UP"
   cd "$HOME" || exit 
   rm -rf .bash* .rvmrc .mkshrc .profile .shell.pre-oh-my-zsh .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &> /dev/null
-  rm -rf "$GIT_DIR"/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
+  rm -rf "$GDIR"/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
   sudo reboot now
 }
 
-install_loop
 # Call all the functions 
+mirror_settings && basepkgs && pacman_config && setup_links && pacman_keys && setup_yay && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && clean_up || exit 
