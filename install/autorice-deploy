@@ -7,7 +7,7 @@ export GDIR="$HOME/git"
 
 installpkg(){ sudo pacman --noconfirm --needed -S "$1" ;}
 aurinstall(){ yay --noconfirm --needed -S "$1" ;}
-echostep(){ echo "############################################################  $1   ################################################################" ;}
+echostep(){ echo "############################################################  $1  ################################################################" ;}
 
 # Set the best mirrors for my country
 mirror_settings () {
@@ -32,7 +32,6 @@ pacman_config () {
   grep -q "^Color" /etc/pacman.conf || sudo sed -i "s/^#Color$/Color/" /etc/pacman.conf
   grep -q "ILoveCandy" /etc/pacman.conf || sudo sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
 }
-
 
 # Create all the folder structure of my .dotfiles/home and make symbolic links of all files of it to my $HOME directory
 setup_links () {
@@ -77,8 +76,9 @@ install_loop () {
 # Install Oh-my-zsh
 setup_zsh () {
   echostep "INSTALLING OH-MY-ZSH"
-  export ZSH=$HOME/.config/zsh/.oh-my-zsh 
+  export ZSH="$HOME"/.config/zsh/.oh-my-zsh 
   [ -d "$HOME"/.config/zsh/.oh-my-zsh ] || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  chsh -s "$(which zsh)"
   antibody init && antibody update || exit
 }
 
