@@ -21,7 +21,7 @@ export XAUTHORITY="${XDG_CONFIG_HOME:-$HOME/.config}/Xauthority"
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
 export LESSHISTFILE="-"
-#export NVM_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/nvm"
+export NVM_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/nvm"
 #export GEM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/gem"
 
 # Adds `~/.local/bin` to $PATH
