@@ -64,12 +64,13 @@ pacman_keys () {
 # Install all the programs listed on .dotfiles/install/progs.csv
 install_loop () {
   echostep "INSTALLING PROGRAMS FROM progs.csv FILE"
+  export NVM_DIR="$XDG_DATA_HOME"/nvm
   while IFS=, read -r tag program comment; do 
     [[ "$tag" =~ ^#.*$ ]] && continue
     case "$tag" in
-			"A") aurinstall "$program" ;;
-			*) installpkg "$program" ;;
-		esac
+      "A") aurinstall "$program" ;;
+      *) installpkg "$program" ;;
+    esac
   done < "$HOME"/git/.dotfiles/install/progs.csv
 }
 
