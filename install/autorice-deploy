@@ -101,10 +101,8 @@ setup_vim () {
   vimplug_install
   rvm_install
   # configure NVM
-  source /usr/share/nvm/init-nvm.sh
-  npm config set cache "$XDG_CACHE_HOME" --global 
-  nvm install node
-  npm i -g neovim
+  source "$XDG_DATA_HOME"/nvm/init-nvm.sh
+  nvm install node && npm i -g neovim || exit
 }
 
 # Install tmux plugin manager
