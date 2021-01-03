@@ -42,8 +42,6 @@ setup_links () {
   find "$dot_home" -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
   find . -type f -exec ln -sfv "$(pwd)"/{} "$HOME"/{} \;
   popd || exit
-
-  source $HOME/.zprofile
 }
 
 # Install yay
@@ -58,7 +56,7 @@ setup_yay () {
 pacman_keys () {
   echostep "PACMAN KEYS BEING ADDED"
   pacman -Q arch-keyring >/dev/null 2>&1 && pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
-	pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
+  pacman --noconfirm -S archlinux-keyring >/dev/null 2>&1
 }
 
 # Install all the programs listed on .dotfiles/install/progs.csv
@@ -90,7 +88,6 @@ vimplug_install () {
 
 # Install rvm
 rvm_install () { 
-  unset GEM_HOME
   gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
   [ -f "$XDG_DATA_HOME"/rvm/bin/rvm ] || curl -sSL https://get.rvm.io | bash -s stable --ruby --with-gems="neovim" --ignore-dotfiles --path "$XDG_DATA_HOME"/rvm 
 }
@@ -101,7 +98,7 @@ setup_vim () {
   vimplug_install
   rvm_install
   # configure NVM
-  source "$XDG_DATA_HOME"/nvm/init-nvm.sh
+  source /usr/share/nvm/init-nvm.sh
   nvm install node && npm i -g neovim || exit
 }
 
