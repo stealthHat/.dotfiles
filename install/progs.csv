@@ -46,6 +46,7 @@
 ,python2,"neovim dependencie"
 ,python-pynvim,"neovim dependencie"
 ,ctags,"neovim dependencie"
+,ttf-fira-code,"font with lots of icons"
 A,antibody,"plugin manager for zsh"
 A,nvm,"node version manager"
 A,python2-pynvim,"neovim dependencie"
