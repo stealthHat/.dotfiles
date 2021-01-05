@@ -98,8 +98,8 @@ nvm_install () {
 setup_vim () {
   echostep "INSTALLING VIM_PLUG AND VIM DEPENDENCIES"
   vimplug_install
-  rvm_install
   nvm_install
+  rvm_install
 }
 
 # Install tmux plugin manager
@@ -132,4 +132,4 @@ clean_up () {
 }
 
 # Call all the functions 
-mirror_settings && basepkgs && pacman_config && setup_links && pacman_keys && setup_yay && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && clean_up || exit 
+mirror_settings && basepkgs && pacman_config && setup_links && setup_yay && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && clean_up || exit 
