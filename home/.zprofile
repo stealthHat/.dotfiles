@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+# Adds `~/.local/bin` to $PATH
+export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
+export PATH="$PATH:$XDG_DATA_HOME/rvm/bin"
+
 # Default programs:
 export BROWSER="brave"
 export EDITOR="nvim"
@@ -24,7 +28,3 @@ export LESSHISTFILE="-"
 export NVM_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/nvm"
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 #export GEM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/gem"
-
-# Adds `~/.local/bin` to $PATH
-export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
-export PATH="$PATH:$XDG_DATA_HOME/rvm/bin"
