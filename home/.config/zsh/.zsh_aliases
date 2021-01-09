@@ -5,7 +5,7 @@ alias \
   pacman='sudo pacman' \
   zshrc='nvim $HOME/git/.dotfiles/home/.config/zsh/.zshrc' \
   zshalias='nvim $HOME/git/.dotfiles/home/.config/zsh/.zsh_aliases' \
-  kittyconfig='nvim $HOME/git/.dotfiles/home/.config/kitty/kitty.conf' \
+  kittyconf='nvim $HOME/git/.dotfiles/home/.config/kitty/kitty.conf' \
 	tmux='tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf' \
   tmuxconf='nvim $HOME/git/.dotfiles/home/.config/tmux/tmux.conf' \
   ufw='sudo ufw' \
@@ -37,4 +37,4 @@ alias \
   sshad='ssh-copy-id -i $HOME/.ssh/id_rsa.pub'
 
 # fuck 
-eval $(thefuck --alias)
+eval "$(thefuck --alias)"
