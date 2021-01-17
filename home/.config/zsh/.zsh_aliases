@@ -26,6 +26,7 @@ alias \
   d='sudo docker' \
   sc='sudo systemctl' \
   diff='diff --color=auto' \
+  gpush='gtoken && git push' \
   wget='wget --hsts-file $HOME/.config/wget/wget-hsts'
 
 
