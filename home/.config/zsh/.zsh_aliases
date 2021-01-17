@@ -28,6 +28,7 @@ alias \
   sc='sudo systemctl' \
   diff='diff --color=auto' \
   dw='cd $HOME/git/dwm-tools/dwm' \
+  gpush='gtoken && git push' \
   wget='wget --hsts-file $HOME/.config/wget/wget-hsts'
 
 
