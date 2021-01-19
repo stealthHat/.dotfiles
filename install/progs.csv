@@ -46,6 +46,7 @@
 ,python2,"neovim dependencie"
 ,python-pynvim,"neovim dependencie"
 ,ctags,"neovim dependencie"
+,xcape,"keybind map tool"
 ,ttf-fira-code,"font with lots of icons"
 ,archlinux-keyring,"keys for gpg"
 A,antibody,"plugin manager for zsh"
