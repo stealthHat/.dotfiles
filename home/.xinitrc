@@ -32,9 +32,8 @@ xwallpaper --zoom $HOME/git/.dotfiles/wallpapers/Other_27.jpg &
 # Speed xrate up
 xset r rate 300 50 &
 
-# Disable sleep
-setterm -blank 0 -powersave off -powerdown 0 &
-
 xset -dpms &
+
+slstatus &
 
 exec dwm
