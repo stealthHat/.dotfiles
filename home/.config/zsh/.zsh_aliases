@@ -2,14 +2,14 @@
 
 #my alias
 alias \
-  pacman='sudo pacman' \
+  pacman='doas pacman' \
   zshrc='nvim $HOME/git/.dotfiles/home/.config/zsh/.zshrc' \
   zshalias='nvim $HOME/git/.dotfiles/home/.config/zsh/.zsh_aliases' \
   kittyconf='nvim $HOME/git/.dotfiles/home/.config/kitty/kitty.conf' \
   vimconf='nvim $HOME/git/.dotfiles/home/.config/nvim/init.vim' \
   tmuxconf='nvim $HOME/git/.dotfiles/home/.config/tmux/tmux.conf' \
 	tmux='tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf' \
-  ufw='sudo ufw' \
+  ufw='doas ufw' \
   .='cd $HOME/git/.dotfiles' \
   .i='cd $HOME/git/.dotfiles/install' \
   .h='cd $HOME/git/.dotfiles/home' \
@@ -24,8 +24,8 @@ alias \
   k='kubectl' \
   h='helm' \
   ap='ansible-playbook' \
-  d='sudo docker' \
-  sc='sudo systemctl' \
+  d='doas docker' \
+  sc='doas systemctl' \
   diff='diff --color=auto' \
   dw='cd $HOME/git/dwm-tools' \
   gpush='gtoken && git push' \
