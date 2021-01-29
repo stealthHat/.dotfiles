@@ -47,7 +47,7 @@
 ,ctags,"neovim dependencie"
 ,xcape,"keybind map tool"
 ,ttf-fira-code,"font with lots of icons"
-,font-awesome,"font with lots of icons"
+,ttf-font-awesome,"font with lots of icons"
 ,archlinux-keyring,"keys for gpg"
 A,antibody,"plugin manager for zsh"
 A,python2-pynvim,"neovim dependencie"

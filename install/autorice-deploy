@@ -1,12 +1,19 @@
 #!/bin/bash
+set -euo pipefail
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export GDIR="$HOME/git"
 
-installpkg(){ sudo pacman --noconfirm --needed -S "$1" ;}
+pkginstall(){ sudo pacman --noconfirm --needed -S "$1" ;}
 aurinstall(){ yay --noconfirm --needed -S "$1" ;}
+repinstall(){
+  local repname="$(basename "$1" .git)"
+  if ! [[ -d "$GDIR"/"$repname" ]]; then
+    git clone "$1" "$GDIR"/"$repname" && pushd "$GDIR"/"$repname" && sudo make clean install && popd || exit
+  fi
+}
 echostep(){ echo "############################################################  $1  ################################################################" ;}
 
 # Set the best mirrors for my country
@@ -59,7 +66,8 @@ install_loop () {
     [[ "$tag" =~ ^#.*$ ]] && continue
     case "$tag" in
       "A") aurinstall "$program" ;;
-      *) installpkg "$program" ;;
+      "G") repinstall "$program" ;;
+      *) pkginstall "$program" ;;
     esac
   done < "$HOME"/git/.dotfiles/install/progs.csv
 }
@@ -111,20 +119,6 @@ tmux_plug () {
   [ -d "$XDG_CONFIG_HOME"/tmux/plugins ] || git clone https://github.com/tmux-plugins/tpm "$XDG_CONFIG_HOME"/tmux/plugins/tpm
 }
 
-# Install DWM, DWM Bocks and menu 
-dwm_tools () {
-  echostep "INSTALLING DWM TOOLS"
-  local mk="sudo make clean install"
-  pushd "$GDIR" || exit
-  [ -d "$GDIR"/dwm ] || git clone https://github.com/LukeSmithxyz/dwm.git 
-  [ -d "$GDIR"/dmenu ] || git clone https://git.suckless.org/dmenu
-  [ -d "$GDIR"/dwmblocks ] || git clone https://github.com/LukeSmithxyz/dwmblocks.git 
-  pushd dwm && $mk && popd  || exit
-  pushd dmenu && $mk && popd  || exit
-  pushd dwmblocks && $mk && popd || exit 
-  popd || exit
-}
-
 # Clean up home after install
 clean_up () {
   echostep "CLEANING UP"
@@ -135,4 +129,4 @@ clean_up () {
 }
 
 # Call all the functions 
-mirror_settings && basepkgs && pacman_config && setup_links && setup_yay && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && clean_up || exit 
+mirror_settings && basepkgs && pacman_config && setup_links && setup_yay && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && clean_up || exit in
