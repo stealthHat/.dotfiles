@@ -20,7 +20,7 @@ echostep(){ echo "############################################################  
 mirror_settings () {
   echostep "SETTING MIRROR LIST"
   sudo pacman -Syu --noconfirm
-  installpkg reflector
+  pkginstall reflector
   grep -q "reflector -c brazil" /etc/pacman.d/mirrorlist || sudo reflector -c brazil -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 }
 
@@ -28,7 +28,7 @@ mirror_settings () {
 basepkgs () {
   echostep "BASE PACKAGES INSTALL"
   for x in curl base-devel git xdg-utils xdg-user-dirs; do
-  	installpkg "$x"
+  	pkginstall "$x"
   done
   xdg-user-dirs-update
 }
