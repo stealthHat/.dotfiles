@@ -9,7 +9,7 @@ export GDIR="$HOME/git"
 pkginstall(){ sudo pacman --noconfirm --needed -S "$1" ;}
 aurinstall(){ yay --noconfirm --needed -S "$1" ;}
 repinstall(){
-  local repname="$(basename "$1" .git)"
+  repname="$(basename "$1" .git)"
   if ! [[ -d "$GDIR"/"$repname" ]]; then
     git clone "$1" "$GDIR"/"$repname" && pushd "$GDIR"/"$repname" && sudo make clean install && popd || exit
   fi
@@ -100,7 +100,6 @@ nvm_install () {
   export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
   export NVM_DIR="$XDG_DATA_HOME"/nvm
   [ -f "$XDG_DATA_HOME"/nvm/nvm.sh ] || curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
-  # shellcheck source="$XDG_DATA_HOME"/nvm/nvm.sh
   source "$XDG_DATA_HOME"/nvm/nvm.sh
   nvm install node && npm i -g neovim || exit
 }
@@ -129,4 +128,4 @@ clean_up () {
 }
 
 # Call all the functions 
-mirror_settings && basepkgs && pacman_config && setup_links && setup_yay && install_loop && setup_zsh && setup_vim && tmux_plug && dwm_tools && clean_up || exit in
+mirror_settings && basepkgs && pacman_config && setup_links && setup_yay && install_loop && setup_zsh && setup_vim && tmux_plug && clean_up || exit
