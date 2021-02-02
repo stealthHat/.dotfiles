@@ -27,7 +27,6 @@ alias \
   d='doas docker' \
   sc='doas systemctl' \
   diff='diff --color=auto' \
-  dw='cd $HOME/git/dwm-tools' \
   gpush='gtoken && git push' \
   wget='wget --hsts-file $HOME/.config/wget/wget-hsts'
 
