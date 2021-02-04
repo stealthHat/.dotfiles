@@ -7,7 +7,7 @@ A simple repo to save my .files with a [autorice](https://github.com/stealthHat/
   * configure pacman to look pretty 
   * makes symbolic links of my dotfiles to $HOME (within their respective folders)
   * install yay
-  * install all the apps on progs.cvs (including my builds of [suckless ](https://suckless.org/) tools)
+  * install all the apps and repositories on [progs.cvs](https://github.com/stealthHat/.dotfiles/blob/master/install/progs.csv) (including my builds of [suckless ](https://suckless.org/) tools)
   * install oh-my-zsh 
   * setup vim plug 
   * setup tmux plug 
