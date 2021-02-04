@@ -8,18 +8,16 @@ export GDIR="$HOME/git"
 
 pkginstall(){ sudo pacman --noconfirm --needed -S "$1" ;}
 aurinstall(){ yay --noconfirm --needed -S "$1" ;}
+#make on for curl too :D 
 repinstall(){
   repname="$(basename "$1" .git)"
-  if ! [[ -d "$GDIR"/"$repname" ]]; then
-    git clone "$1" "$GDIR"/"$repname" && pushd "$GDIR"/"$repname" && sudo make clean install && popd || exit
-  fi
+  [ -d "$GDIR"/"$repname" ] || (git clone "$1" "$GDIR"/"$repname" && pushd "$GDIR"/"$repname" && sudo make clean install && popd)
 }
 echostep(){ echo "############################################################  $1  ################################################################" ;}
 
 # Set the best mirrors for my country
 mirror_settings () {
   echostep "SETTING MIRROR LIST"
-  sudo pacman -Syu --noconfirm
   pkginstall reflector
   grep -q "reflector -c brazil" /etc/pacman.d/mirrorlist || sudo reflector -c brazil -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 }
@@ -127,5 +125,7 @@ clean_up () {
   sudo reboot now
 }
 
+# Update system
+sudo pacman -Syu --noconfirm
 # Call all the functions 
 mirror_settings && basepkgs && pacman_config && setup_links && setup_yay && install_loop && setup_zsh && setup_vim && tmux_plug && clean_up || exit
