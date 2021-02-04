@@ -10,7 +10,6 @@
 ,xclip,"allows for copying and pasting from the command line."
 ,xwallpaper,"sets the wallpaper."
 ,opendoas,"the less bloated sudo"
-,calcurse,"is a lightweight terminal-based calendar."
 ,dosfstools,"allows your computer to access dos-like filesystems."
 ,libnotify,"allows desktop notifications."
 ,linux-headers,"just in case"

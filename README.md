@@ -3,11 +3,11 @@
 A simple repo to save my .files with a [autorice](https://github.com/stealthHat/.dotfiles/blob/master/install/autorice-deploy) script
 
 ### autorice will do:
-  * setup the best mirrors for my contry (brazil)
+  * setup the best mirrors for my country (brazil)
   * configure pacman to look pretty 
-  * makes symbolyc links of my dotfiles to $HOME (within their respective folders)
+  * makes symbolic links of my dotfiles to $HOME (within their respective folders)
   * install yay
-  * install all the apps on progs.cvs (including my builds of suckless tools)
+  * install all the apps on progs.cvs (including my builds of [suckless ](https://suckless.org/) tools)
   * install oh-my-zsh 
   * setup vim plug 
   * setup tmux plug 
