@@ -21,7 +21,6 @@ alias \
   s='git status' \
   vim='nvim' \
   t='terraform' \
-  k='kubectl' \
   h='helm' \
   ap='ansible-playbook' \
   d='doas docker' \
@@ -30,6 +29,9 @@ alias \
   gpush='gtoken && git push' \
   wget='wget --hsts-file $HOME/.config/wget/wget-hsts'
 
+alias \
+  k='kubectl' \
+  ks='kubectl -n kube-system' \
 
 # ssh 
 alias \
