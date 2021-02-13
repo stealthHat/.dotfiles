@@ -1,7 +1,6 @@
 #!/bin/bash 
 
-sudo mkfs.fat -F32 /dev/sdb
-sudo dd if=$HOME/Documents/2020-08-20-raspios-buster-arm64.img of=/dev/sdb status=progress
+sudo dd if=$HOME/Documents/raspios-buster-arm64.img of=/dev/sdb status=progress
 sudo mount /dev/sdb1 /media/sd/
 sudo touch /media/sd/ssh
 sudo umount /media/sd/
