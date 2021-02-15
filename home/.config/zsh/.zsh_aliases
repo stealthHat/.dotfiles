@@ -32,6 +32,7 @@ alias \
 alias \
   k='kubectl' \
   ks='kubectl -n kube-system' \
+  kn='kubectl -n metallb-system' \
 
 # ssh 
 alias \
