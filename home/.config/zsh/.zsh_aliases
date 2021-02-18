@@ -27,6 +27,7 @@ alias \
   sc='doas systemctl' \
   diff='diff --color=auto' \
   gpush='gtoken && git push' \
+  jarvis='bash $HOME/git/jarvis/jarvis.sh' \
   wget='wget --hsts-file $HOME/.config/wget/wget-hsts'
 
 alias \
