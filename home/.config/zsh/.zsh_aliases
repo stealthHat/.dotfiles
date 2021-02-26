@@ -21,7 +21,6 @@ alias \
   s='git status' \
   vim='nvim' \
   t='terraform' \
-  h='helm' \
   ap='ansible-playbook' \
   d='doas docker' \
   sc='doas systemctl' \
@@ -30,10 +29,14 @@ alias \
   jarvis='bash $HOME/git/jarvis/jarvis.sh' \
   wget='wget --hsts-file $HOME/.config/wget/wget-hsts'
 
+# k8s and helm
 alias \
+  h='helm' \
   k='kubectl' \
   ks='kubectl -n kube-system' \
-  kn='kubectl -n metallb-system' \
+  km='kubectl -n metallb-system' \
+  kn='kubectl -n ingress-nginx' \
+  hn='helm -n ingress-nginx' \
 
 # ssh 
 alias \
