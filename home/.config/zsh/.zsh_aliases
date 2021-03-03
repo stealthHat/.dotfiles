@@ -35,8 +35,11 @@ alias \
   k='kubectl' \
   ks='kubectl -n kube-system' \
   km='kubectl -n metallb-system' \
+  kp='kubectl -n pihole' \
   kn='kubectl -n ingress-nginx' \
+  ks='kubectl -n kube-system' \
   hn='helm -n ingress-nginx' \
+  hp='helm -n pihole' \
 
 # ssh 
 alias \
