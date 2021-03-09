@@ -37,8 +37,8 @@ alias \
   km='kubectl -n metallb-system' \
   kn='kubectl -n ingress-nginx' \
   hn='helm -n ingress-nginx' \
-  tw= 'terraform workspace'
-  tapply='terraform apply -auto-approve'
+  tw='terraform workspace' \
+  tapply='terraform apply -auto-approve' \
   tadestroy='terraform destroy -auto-approve'
 
 # ssh 
