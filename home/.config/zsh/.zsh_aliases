@@ -39,10 +39,10 @@ alias \
   kn='kubectl -n ingress-nginx' \
   ks='kubectl -n kube-system' \
   hn='helm -n ingress-nginx' \
+  hp='helm -n pihole' \
   tw='terraform workspace' \
   tapply='terraform apply -auto-approve' \
-  tadestroy='terraform destroy -auto-approve'
-  hp='helm -n pihole' \
+  tdestroy='terraform destroy -auto-approve' \
 
 # ssh 
 alias \
