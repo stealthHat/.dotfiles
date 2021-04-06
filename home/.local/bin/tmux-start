@@ -1,1 +1,1 @@
-tmux new -s blinkl \; rename-window -t 0 shit_show \; neww -n random_stuff
+tmux new -s blinkl \; rename-window -t 0 shit_show \; neww -n random_stuff \; neww -n notes

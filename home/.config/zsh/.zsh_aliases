@@ -38,8 +38,12 @@ alias \
   kp='kubectl -n pihole' \
   kn='kubectl -n ingress-nginx' \
   ks='kubectl -n kube-system' \
+  kc='kubectl -n consul' \
+  kv='kubectl -n vault' \
+  kw='kubectl -n vault-webhook' \
   hn='helm -n ingress-nginx' \
   hp='helm -n pihole' \
+  hw='helm -n vault-webhook' \
   tw='terraform workspace' \
   tapply='terraform apply -auto-approve' \
   tdestroy='terraform destroy -auto-approve' \
