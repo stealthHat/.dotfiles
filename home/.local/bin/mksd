@@ -1,8 +1,7 @@
 #!/bin/bash 
 
-sudo mkfs.fat -F32 /dev/sdb
-sudo dd if=$HOME/Documents/OS/2020-08-20-raspios-buster-armhf-lite.img of=/dev/sdb status=progress
-sudo mount /dev/sdb1 /media/sd/
-sudo touch /media/sd/ssh
-sudo umount /media/sd/
-sudo echo > $HOME/.ssh/known_hosts
+doas dd if=$HOME/Documents/ubuntu-20.04.2-preinstalled-server-arm64+raspi.img of=/dev/sdb status=progress
+doas mount /dev/sdb1 /media/sd/
+doas touch /media/sd/ssh
+doas umount /media/sd/
+doas echo > $HOME/.ssh/known_hosts

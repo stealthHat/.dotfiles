@@ -41,6 +41,7 @@ alias \
   kc='kubectl -n consul' \
   kv='kubectl -n vault' \
   kw='kubectl -n vault-webhook' \
+  ka='kubectl -n argo' \
   hn='helm -n ingress-nginx' \
   hp='helm -n pihole' \
   hw='helm -n vault-webhook' \

@@ -37,6 +37,7 @@ export ZSH="$HOME/.config/zsh/.oh-my-zsh"
 
 # K8s autocomplete
 [ -f /bin/kubectl ] && source <(kubectl completion zsh)
+[ -f /bin/argocd ] && source <(argocd completion zsh)
 # /k>
 
 # Rvm and Nvm for neovim
