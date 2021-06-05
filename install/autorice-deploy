@@ -60,6 +60,7 @@ setup_yay () {
 # Install all the programs listed on .dotfiles/install/progs.csv
 install_loop () {
   echostep "INSTALLING PROGRAMS FROM progs.csv FILE"
+  export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
   while IFS=, read -r tag program comment; do 
     [[ "$tag" =~ ^#.*$ ]] && continue
     case "$tag" in
