@@ -3,6 +3,7 @@
 #my alias
 alias \
   pacman='doas pacman' \
+  startx='startx $XINITRC' \
   zshrc='nvim $HOME/git/.dotfiles/home/.config/zsh/.zshrc' \
   zshalias='nvim $HOME/git/.dotfiles/home/.config/zsh/.zsh_aliases' \
   kittyconf='nvim $HOME/git/.dotfiles/home/.config/kitty/kitty.conf' \
