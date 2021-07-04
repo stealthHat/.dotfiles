@@ -8,7 +8,6 @@ export GDIR="$HOME/git"
 
 pkginstall(){ sudo pacman --noconfirm --needed -S "$1" ;}
 aurinstall(){ yay --noconfirm --needed -S "$1" ;}
-#make on for curl too :D 
 repinstall(){
   repname="$(basename "$1" .git)"
   [ -d "$GDIR"/"$repname" ] || (git clone "$1" "$GDIR"/"$repname" && pushd "$GDIR"/"$repname" && sudo make clean install && popd)
@@ -25,7 +24,7 @@ mirror_settings () {
 # Install the base packages and create the user folders
 basepkgs () {
   echostep "BASE PACKAGES INSTALL"
-  for x in curl base-devel git xdg-utils xdg-user-dirs; do
+  for x in curl base-devel git xdg-utils xdg-user-dirs doas; do
   	pkginstall "$x"
   done
   xdg-user-dirs-update
@@ -43,6 +42,7 @@ setup_links () {
   echostep "FOLDERS AND SYMBOLIC LINKS FOR DOTFILES"
   local dot_home=$HOME/git/.dotfiles/home/
 
+  sudo cp ./modprobe.d/* /etc/modprobe.d/
   pushd "$dot_home" || exit
   find "$dot_home" -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
   find . -type f -exec ln -sfv "$(pwd)"/{} "$HOME"/{} \;
@@ -126,7 +126,4 @@ clean_up () {
   sudo reboot now
 }
 
-# Update system
-sudo pacman -Syu --noconfirm
-# Call all the functions 
 mirror_settings && basepkgs && pacman_config && setup_links && setup_yay && install_loop && setup_zsh && setup_vim && tmux_plug && clean_up || exit
