@@ -36,6 +36,10 @@ Plug 'prettier/vim-prettier', {
       \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html', 'php'] }
 call plug#end()
 
+"Global
+set modifiable
+" /g>
+
 " Leader and binds
 let mapleader="\<SPACE>"
 
@@ -49,13 +53,6 @@ map <esc> :noh<cr>
 " Terraform
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 let g:deoplete#omni_patterns = {}
 " /t>
 
@@ -67,6 +64,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_quiet_messages = { 'regex': 'SC1091' }
 " /s>
 
 " airline dracula suport
