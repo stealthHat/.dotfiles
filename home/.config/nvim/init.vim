@@ -7,7 +7,7 @@ Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'
 Plug 'juliosueiras/vim-terraform-completion'
 " /t>
-Plug 'kien/rainbow_parentheses.vim' 
+Plug 'kien/rainbow_parentheses.vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'arcticicestudio/nord-vim'
@@ -22,7 +22,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-commentary' 
+Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'ludovicchabant/vim-gutentags'
@@ -38,6 +38,8 @@ call plug#end()
 
 "Global
 set modifiable
+" remove white spaces when save a file
+autocmd BufWritePre * :%s/\s\+$//e
 " /g>
 
 " Leader and binds
@@ -50,12 +52,6 @@ map <C-o> :NERDTreeToggle<cr>
 map <esc> :noh<cr>
 " /l>
 
-" Terraform
-let g:terraform_align=1
-let g:terraform_fmt_on_save=1
-let g:deoplete#omni_patterns = {}
-" /t>
-
 " Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -64,14 +60,26 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_quiet_messages = { 'regex': 'SC1091' }
+let g:syntastic_quiet_messages = { 'regex': 'SC1091\|SC2015' }
+" Terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+let g:deoplete#omni_patterns = {}
+" /t>
 " /s>
 
 " airline dracula suport
 let g:airline_theme='dracula'
 " /t>
 
-let g:python_host_prog = '/bin/python2'
+" numbertoggle
+set number relativenumber
+augroup numbertoggle
+  autocmd!
+  autocmd FileType nerdtree set norelativenumber
+augroup END
+" /n>
+
 let g:python3_host_prog = '/bin/python3'
 
 "set termguicolors
@@ -87,19 +95,11 @@ set breakindent
 set formatoptions=l
 set lbr
 
-set number relativenumber
-
-set clipboard=unnamedplus
-
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
 
 set tabstop=2
 set softtabstop=2
 
+set clipboard=unnamedplus
 set expandtab
 
 set shiftwidth=2
