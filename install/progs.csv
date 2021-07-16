@@ -1,4 +1,4 @@
-#TAG,NAME IN REPO ,PURPOSE 
+#TAG,NAME IN REPO ,PURPOSE
 ,xorg-xbacklight,"enables changing screen brightness levels."
 ,xorg-font-util,"xorg fonts"
 ,xorg-xwininfo,"allows querying information about windows."
@@ -43,10 +43,10 @@
 ,python-pynvim,"neovim dependencie"
 ,ctags,"neovim dependencie"
 ,xcape,"keybind map tool"
-,ttf-fira-code,"font with lots of icons"
-,ttf-font-awesome,"font with lots of icons"
 ,archlinux-keyring,"keys for gpg"
+,ttf-fira-code,"font with lots of icons"
 A,antibody,"plugin manager for zsh"
+A,nerd-fonts-fira-code,"Patched font Fira (Fura) Code from the nerd-fonts library"
 A,brave-bin,"is an elegant browser with built-in adblocking, tor and other features."
 G,https://github.com/stealthHat/dwm.git,"My build of DWM"
 G,https://github.com/stealthHat/slstatus.git,"My build of slStatus"

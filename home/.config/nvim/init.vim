@@ -38,6 +38,7 @@ call plug#end()
 
 "Global
 set modifiable
+set encoding=UTF-8
 " remove white spaces when save a file
 autocmd BufWritePre * :%s/\s\+$//e
 " /g>
@@ -80,6 +81,11 @@ augroup numbertoggle
 augroup END
 " /n>
 
+" devicons
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
+" /d>
+
 let g:python3_host_prog = '/bin/python3'
 
 "set termguicolors
@@ -103,7 +109,6 @@ set clipboard=unnamedplus
 set expandtab
 
 set shiftwidth=2
-set encoding=utf-8
 set cursorline
 set title
 
