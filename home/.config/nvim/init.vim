@@ -39,7 +39,6 @@ call plug#end()
 "Global
 set modifiable
 set encoding=UTF-8
-" remove white spaces when save a file
 autocmd BufWritePre * :%s/\s\+$//e
 " /g>
 
@@ -93,14 +92,12 @@ set background=dark
 syntax enable
 colorscheme dracula
 
-
 set ignorecase
 set smartcase
 
 set breakindent
 set formatoptions=l
 set lbr
-
 
 set tabstop=2
 set softtabstop=2

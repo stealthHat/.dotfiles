@@ -44,7 +44,6 @@
 ,ctags,"neovim dependencie"
 ,xcape,"keybind map tool"
 ,archlinux-keyring,"keys for gpg"
-,ttf-fira-code,"font with lots of icons"
 A,antibody,"plugin manager for zsh"
 A,nerd-fonts-fira-code,"Patched font Fira (Fura) Code from the nerd-fonts library"
 A,brave-bin,"is an elegant browser with built-in adblocking, tor and other features."
