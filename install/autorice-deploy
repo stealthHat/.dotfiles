@@ -34,7 +34,9 @@ basepkgs () {
 pacman_config () {
   echostep "PACMAN CONFIG SETTINGS"
   grep -q "^Color" /etc/pacman.conf || sudo sed -i "s/^#Color$/Color/" /etc/pacman.conf
-  grep -q "ILoveCandy" /etc/pacman.conf || sudo sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
+  grep -q "^VerbosePkgLists" /etc/pacman.conf || sudo sed -i "s/^#VerbosePkgLists$/VerbosePkgLists" /etc/pacman.conf
+  grep -q "^TotalDownload" /etc/pacman.conf || sudo sed -i "s/^#TotalDownload$/TotalDownload" /etc/pacman.conf
+  grep -q "^ILoveCandy" /etc/pacman.conf || sudo sed -i "37 i ILoveCandy" /etc/pacman.conf
 }
 
 # Create all the folder structure of my .dotfiles/home and make symbolic links of all files of it to my ${HOME} directory
