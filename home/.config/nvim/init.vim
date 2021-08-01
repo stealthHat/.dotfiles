@@ -60,7 +60,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_quiet_messages = { 'regex': 'SC1091\|SC2015' }
 " Terraform
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1

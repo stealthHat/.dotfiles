@@ -1,16 +1,16 @@
 #!/bin/bash
 set -euo pipefail
 
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
-export GDIR="$HOME/git"
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_CACHE_HOME="${HOME}/.cache"
+export GDIR="${HOME}/git"
 
 pkginstall(){ sudo pacman --noconfirm --needed -S "$1" ;}
 aurinstall(){ yay --noconfirm --needed -S "$1" ;}
 repinstall(){
   repname="$(basename "$1" .git)"
-  [ -d "$GDIR"/"$repname" ] || (git clone "$1" "$GDIR"/"$repname" && pushd "$GDIR"/"$repname" && sudo make clean install && popd)
+  [ -d "${GDIR}"/"${repname}" ] || (git clone "$1" "${GDIR}"/"${repname}" && pushd "${GDIR}"/"${repname}" && sudo make clean install && popd)
 }
 echostep(){ echo "############################################################  $1  ################################################################" ;}
 
@@ -37,30 +37,31 @@ pacman_config () {
   grep -q "ILoveCandy" /etc/pacman.conf || sudo sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
 }
 
-# Create all the folder structure of my .dotfiles/home and make symbolic links of all files of it to my $HOME directory
+# Create all the folder structure of my .dotfiles/home and make symbolic links of all files of it to my ${HOME} directory
 setup_links () {
   echostep "FOLDERS AND SYMBOLIC LINKS FOR DOTFILES"
-  local dot_home=$HOME/git/.dotfiles/home/
+  local dot_home=${HOME}/git/.dotfiles/home/
 
   sudo cp ./modprobe.d/* /etc/modprobe.d/
-  pushd "$dot_home" || exit
-  find "$dot_home" -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
-  find . -type f -exec ln -sfv "$(pwd)"/{} "$HOME"/{} \;
+  pushd "${dot_home}" || exit
+  find "${dot_home}" -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "${HOME}/%"
+  find . -type f -exec ln -sfv "$(pwd)"/{} "${HOME}"/{} \;
   popd || exit
 }
 
 # Install yay
 setup_yay () {
   echostep "INSTALLING YAY"
-  [ -d "$HOME"/git/yay ] || git clone https://aur.archlinux.org/yay.git "$GDIR"/yay
-  pushd "$GDIR"/yay && makepkg -si PKGBUILD --noconfirm
+  [ -d "${HOME}"/git/yay ] || git clone https://aur.archlinux.org/yay.git "${GDIR}"/yay
+  pushd "${GDIR}"/yay && makepkg -si PKGBUILD --noconfirm
   popd || exit
 }
 
 # Install all the programs listed on .dotfiles/install/progs.csv
+# shellcheck disable=SC2034
 install_loop () {
   echostep "INSTALLING PROGRAMS FROM progs.csv FILE"
-  export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
+  export GOPATH="${XDG_DATA_HOME:-${HOME}/.local/share}/go"
   while IFS=, read -r tag program comment; do
     [[ "$tag" =~ ^#.*$ ]] && continue
     case "$tag" in
@@ -68,38 +69,39 @@ install_loop () {
       "G") repinstall "$program" ;;
       *) pkginstall "$program" ;;
     esac
-  done < "$HOME"/git/.dotfiles/install/progs.csv
+  done < "${HOME}"/git/.dotfiles/install/progs.csv
 }
 
 # Install Oh-my-zsh
 setup_zsh () {
   echostep "INSTALLING OH-MY-ZSH"
-  export ZSH="$HOME"/.config/zsh/.oh-my-zsh
-  [ -d "$HOME"/.config/zsh/.oh-my-zsh ] || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  export ZSH="${HOME}"/.config/zsh/.oh-my-zsh
+  [ -d "${HOME}"/.config/zsh/.oh-my-zsh ] || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
   chsh -s "$(which zsh)"
 }
 
 # Install vim plugin manager
 vimplug_install () {
   export VIM_PLUG="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  [ -f "$XDG_DATA_HOME"/nvim/site/autoload/plug.vim ] ||  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs $VIM_PLUG'
+  [ -f "${XDG_DATA_HOME}"/nvim/site/autoload/plug.vim ] || sh -c 'curl -fLo "${XDG_DATA_HOME:-${HOME}/.local/share}"/nvim/site/autoload/plug.vim --create-dirs $VIM_PLUG'
 }
 
 # Install rvm
 rvm_install () {
-  export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/.cache/gem
-  export rvm_path="$XDG_DATA_HOME"/.local/share/rvm
+  export GEM_SPEC_CACHE="${XDG_CACHE_HOME}"/.cache/gem
+  export rvm_path="${XDG_DATA_HOME}"/.local/share/rvm
   gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-  [ -f "$XDG_DATA_HOME"/rvm/bin/rvm ] || curl -sSL https://get.rvm.io | bash -s stable --ruby --with-gems="neovim" --ignore-dotfiles --path "$XDG_DATA_HOME"/rvm
+  [ -f "${XDG_DATA_HOME}"/rvm/bin/rvm ] || curl -sSL https://get.rvm.io | bash -s stable --ruby --with-gems="neovim" --ignore-dotfiles --path "${XDG_DATA_HOME}"/rvm
 }
 
 # Install nvm
+# shellcheck disable=SC1091
 nvm_install () {
-  [ -d "$XDG_DATA_HOME"/nvm ] || mkdir "$XDG_DATA_HOME"/nvm
-  export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
-  export NVM_DIR="$XDG_DATA_HOME"/nvm
-  [ -f "$XDG_DATA_HOME"/nvm/nvm.sh ] || curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
-  source "$XDG_DATA_HOME"/nvm/nvm.sh
+  [ -d "${XDG_DATA_HOME}"/nvm ] || mkdir "${XDG_DATA_HOME}"/nvm
+  export NPM_CONFIG_USERCONFIG=${XDG_CONFIG_HOME}/npm/npmrc
+  export NVM_DIR="${XDG_DATA_HOME}"/nvm
+  [ -f "${XDG_DATA_HOME}"/nvm/nvm.sh ] || curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+  source "${XDG_DATA_HOME}"/nvm/nvm.sh
   nvm install node && npm i -g neovim || exit
 }
 
@@ -114,15 +116,15 @@ setup_vim () {
 # Install tmux plugin manager
 tmux_plug () {
   echostep "INSTALLING TMUX_PLUG"
-  [ -d "$XDG_CONFIG_HOME"/tmux/plugins ] || git clone https://github.com/tmux-plugins/tpm "$XDG_CONFIG_HOME"/tmux/plugins/tpm
+  [ -d "${XDG_CONFIG_HOME}"/tmux/plugins ] || git clone https://github.com/tmux-plugins/tpm "${XDG_CONFIG_HOME}"/tmux/plugins/tpm
 }
 
 # Clean up home after install
 clean_up () {
   echostep "CLEANING UP"
-  cd "$HOME" || exit
+  cd "${HOME}" || exit
   rm -rf .bash* .rvmrc .mkshrc .profile .shell.pre-oh-my-zsh .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &> /dev/null
-  rm -rf "$GDIR"/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
+  rm -rf "${GDIR}"/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
   sudo reboot now
 }
 

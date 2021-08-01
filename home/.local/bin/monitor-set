@@ -3,4 +3,4 @@
 intern=eDP1
 extern=$1
 
-xrandr --output "$extern" --mode 1280x1024_60.00 --right-of "$intern"
+xrandr --output "${extern}" --auto --right-of "${intern}"
