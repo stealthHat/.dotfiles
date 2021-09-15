@@ -3,7 +3,7 @@
 # Keyboard Layout
 keyconfig &
 
-# Compositor 
+# Compositor
 picom -f &
 
 # wallpaper
@@ -15,5 +15,7 @@ xset r rate 300 50 &
 xset -dpms &
 
 slstatus &
+
+dunst &
 
 exec dwm
