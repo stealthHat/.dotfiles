@@ -37,6 +37,7 @@ Plug 'prettier/vim-prettier', {
 call plug#end()
 
 "Global
+set hidden
 set modifiable
 set encoding=UTF-8
 autocmd BufWritePre * :%s/\s\+$//e
@@ -48,7 +49,7 @@ let mapleader="\<SPACE>"
 map <leader>W :wq!<cr>
 map <leader>w :w!<cr>
 map <leader>q :q!<cr>
-map <C-o> :NERDTreeToggle<cr>
+map <leader>o :NERDTreeToggle<cr>
 map <esc> :noh<cr>
 " /l>
 
@@ -70,6 +71,12 @@ let g:deoplete#omni_patterns = {}
 " airline dracula suport
 let g:airline_theme='dracula'
 " /t>
+
+" nerdtree
+let g:NERDTreeWinPos = "right"
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
+      \ && b:NERDTree.isTabTree()) | q | endif
+" /n>
 
 " numbertoggle
 set number relativenumber
@@ -109,4 +116,4 @@ set cursorline
 set title
 
 set noshowmode
-set tags+=$HOME/.config/nvim
+set tags=./$HOME/.config/nvim/tags;
