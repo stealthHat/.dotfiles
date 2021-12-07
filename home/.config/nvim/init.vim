@@ -1,33 +1,44 @@
 call plug#begin()
-Plug 'christoomey/vim-tmux-navigator' " Vim tmux
-Plug 'pearofducks/ansible-vim' " Ansible
-Plug 'ryanoasis/vim-devicons' " Nerd tree icon
+" General
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+
+" File tree
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind']} | Plug 'tiagofumo/vim-nerdtree-syntax-highlight' | Plug 'ryanoasis/vim-devicons'
+
+" Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'godoctor/godoctor.vim', {'for': 'go'}
+Plug 'sebdah/vim-delve', {'for': 'go'}
+
 " Terraform
 Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'
 Plug 'juliosueiras/vim-terraform-completion'
-" /t>
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'vim-syntastic/syntastic'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'arcticicestudio/nord-vim'
-Plug 'sbdchd/neoformat'
-Plug 'sheerun/vim-polyglot'
-Plug 'junegunn/fzf'
+Plug 'pearofducks/ansible-vim' " Ansible
+
+" fzf
 Plug 'junegunn/fzf.vim'
 Plug 'fszymanski/fzf-gitignore'
+
+" Tmux
+Plug 'christoomey/vim-tmux-navigator'
+
+" Theme
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+Plug 'vim-syntastic/syntastic'
+Plug 'sbdchd/neoformat'
+Plug 'sheerun/vim-polyglot'
 Plug 'Yggdroot/indentLine'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-commentary'
-Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'w0rp/ale'
-Plug 'jiangmiao/auto-pairs'
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 let g:deoplete#enable_at_startup = 1
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -37,6 +48,8 @@ Plug 'prettier/vim-prettier', {
 call plug#end()
 
 "Global
+syntax on
+syntax enable
 set hidden
 set modifiable
 set encoding=UTF-8
@@ -45,7 +58,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 " Leader and binds
 let mapleader="\<SPACE>"
-
 map <leader>W :wq!<cr>
 map <leader>w :w!<cr>
 map <leader>q :q!<cr>
@@ -68,6 +80,11 @@ let g:deoplete#omni_patterns = {}
 " /t>
 " /s>
 
+" Go
+"let g:go_fmt_autosave = 0
+let g:go_doc_popup_window = 1
+" /go>
+
 " airline dracula suport
 let g:airline_theme='dracula'
 " /t>
@@ -86,16 +103,10 @@ augroup numbertoggle
 augroup END
 " /n>
 
-" devicons
-let g:webdevicons_enable_nerdtree = 1
-let g:webdevicons_conceal_nerdtree_brackets = 1
-" /d>
-
 let g:python3_host_prog = '/bin/python3'
 
 "set termguicolors
 set background=dark
-syntax enable
 colorscheme dracula
 
 set ignorecase

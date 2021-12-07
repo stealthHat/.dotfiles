@@ -3,6 +3,8 @@
 #my alias
 alias \
   pacman='doas pacman' \
+  buildah='doas buildah' \
+  podman='doas podman' \
   startx='startx $XINITRC' \
   zshrc='nvim $HOME/git/.dotfiles/home/.config/zsh/.zshrc' \
   zshalias='nvim $HOME/git/.dotfiles/home/.config/zsh/.zsh_aliases' \
@@ -29,6 +31,7 @@ alias \
   gpush='gtoken && git push' \
   jarvis='bash $HOME/git/jarvis/jarvis.sh' \
   g='cd $HOME/git' \
+  devcluster="aws eks --region us-west-2  update-kubeconfig --name development-platform"
   wget='wget --hsts-file $HOME/.config/wget/wget-hsts'
 
 
@@ -37,19 +40,21 @@ alias \
   h='helm' \
   k='kubectl' \
   ks='kubectl -n kube-system' \
+  kd='kubectl -n dev' \
   km='kubectl -n metallb-system' \
   kp='kubectl -n pihole' \
   kn='kubectl -n ingress-nginx' \
   ks='kubectl -n kube-system' \
-  kc='kubectl -n consul' \
+  kc='kubectl -n cert-manager' \
   kv='kubectl -n vault' \
   kw='kubectl -n vault-webhook' \
   ka='kubectl -n argo' \
+  kac='kubectl -n actions-runner-system' \
   hn='helm -n ingress-nginx' \
   hp='helm -n pihole' \
   hw='helm -n vault-webhook' \
   tw='terraform workspace' \
-  tapply='terraform apply -auto-approve' \
+  tapply='terraform apply -auto-approve ; echo "\a"' \
   tdestroy='terraform destroy -auto-approve' \
 
 # ssh
