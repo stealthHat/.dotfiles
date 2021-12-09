@@ -6,23 +6,23 @@ export XDG_DATA_HOME="${HOME}/.local/share"
 export XDG_CACHE_HOME="${HOME}/.cache"
 export GDIR="${HOME}/git"
 
-pkginstall(){ sudo pacman --noconfirm --needed -S "$1" ;}
-aurinstall(){ yay --noconfirm --needed -S "$1" ;}
-repinstall(){
+function pkginstall(){ sudo pacman --noconfirm --needed -S "$1" ;}
+function aurinstall(){ yay --noconfirm --needed -S "$1" ;}
+function repinstall(){
   repname="$(basename "$1" .git)"
   [ -d "${GDIR}"/"${repname}" ] || (git clone "$1" "${GDIR}"/"${repname}" && pushd "${GDIR}"/"${repname}" && sudo make clean install && popd)
 }
-echostep(){ echo "############################################################  $1  ################################################################" ;}
+function echostep(){ echo "############################################################  $1  ################################################################" ;}
 
 # Set the best mirrors for my country
-mirror_settings () {
+function mirror_settings () {
   echostep "SETTING MIRROR LIST"
   pkginstall reflector
   grep -q "reflector -c brazil" /etc/pacman.d/mirrorlist || sudo reflector -c brazil -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 }
 
 # Install the base packages and create the user folders
-basepkgs () {
+function basepkgs () {
   echostep "BASE PACKAGES INSTALL"
   for x in curl base-devel git xdg-utils xdg-user-dirs doas; do
   	pkginstall "$x"
@@ -31,7 +31,7 @@ basepkgs () {
 }
 
 # Makes pacman pretty
-pacman_config () {
+function pacman_config () {
   echostep "PACMAN CONFIG SETTINGS"
   grep -q "^Color" /etc/pacman.conf || sudo sed -i "s/^#Color$/Color/" /etc/pacman.conf
   grep -q "^VerbosePkgLists" /etc/pacman.conf || sudo sed -i "s/^#VerbosePkgLists$/VerbosePkgLists" /etc/pacman.conf
@@ -40,7 +40,7 @@ pacman_config () {
 }
 
 # Create all the folder structure of my .dotfiles/home and make symbolic links of all files of it to my ${HOME} directory
-setup_links () {
+function setup_links () {
   echostep "FOLDERS AND SYMBOLIC LINKS FOR DOTFILES"
   local dot_home=${HOME}/git/.dotfiles/home/
 
@@ -52,7 +52,7 @@ setup_links () {
 }
 
 # Install yay
-setup_yay () {
+function setup_yay () {
   echostep "INSTALLING YAY"
   [ -d "${HOME}"/git/yay ] || git clone https://aur.archlinux.org/yay.git "${GDIR}"/yay
   pushd "${GDIR}"/yay && makepkg -si PKGBUILD --noconfirm
@@ -61,7 +61,7 @@ setup_yay () {
 
 # Install all the programs listed on .dotfiles/install/progs.csv
 # shellcheck disable=SC2034
-install_loop () {
+function install_loop () {
   echostep "INSTALLING PROGRAMS FROM progs.csv FILE"
   export GOPATH="${XDG_DATA_HOME:-${HOME}/.local/share}/go"
   while IFS=, read -r tag program comment; do
@@ -75,7 +75,7 @@ install_loop () {
 }
 
 # Install Oh-my-zsh
-setup_zsh () {
+function setup_zsh () {
   echostep "INSTALLING OH-MY-ZSH"
   export ZSH="${HOME}"/.config/zsh/.oh-my-zsh
   [ -d "${HOME}"/.config/zsh/.oh-my-zsh ] || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
@@ -83,7 +83,7 @@ setup_zsh () {
 }
 
 # Install vim plugin manager
-vimplug_install () {
+function vimplug_install () {
   export VIM_PLUG="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
   [ -f "${XDG_DATA_HOME}"/nvim/site/autoload/plug.vim ] || sh -c 'curl -fLo "${XDG_DATA_HOME:-${HOME}/.local/share}"/nvim/site/autoload/plug.vim --create-dirs $VIM_PLUG'
 }
@@ -108,21 +108,19 @@ nvm_install () {
 }
 
 # Set up neovim dependencies
-setup_vim () {
+function setup_vim () {
   echostep "INSTALLING VIM_PLUG AND VIM DEPENDENCIES"
   vimplug_install
-  nvm_install
-  rvm_install
 }
 
 # Install tmux plugin manager
-tmux_plug () {
+function tmux_plug () {
   echostep "INSTALLING TMUX_PLUG"
   [ -d "${XDG_CONFIG_HOME}"/tmux/plugins ] || git clone https://github.com/tmux-plugins/tpm "${XDG_CONFIG_HOME}"/tmux/plugins/tpm
 }
 
 # Clean up home after install
-clean_up () {
+function clean_up () {
   echostep "CLEANING UP"
   cd "${HOME}" || exit
   rm -rf .bash* .rvmrc .mkshrc .profile .shell.pre-oh-my-zsh .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &> /dev/null
