@@ -128,4 +128,5 @@ function clean_up () {
   sudo reboot now
 }
 
+sudo pacman -Syu --noconfirm
 mirror_settings && basepkgs && pacman_config && setup_links && setup_yay && install_loop && setup_zsh && setup_vim && tmux_plug && clean_up || exit
