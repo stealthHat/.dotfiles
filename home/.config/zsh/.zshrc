@@ -3,11 +3,11 @@ unsetopt FLOWCONTROL
 setopt AUTO_MENU         # show completion menu on succesive tab press
 setopt COMPLETE_IN_WORD
 setopt ALWAYS_TO_END
-autoload -U colors && colors # add color 
+autoload -U colors && colors # add color
 setopt autocd		# Automatically cd into typed directory.
 
 # remove the fucking beeb
-unsetopt BEEP 
+unsetopt BEEP
 
 # History in cache directory:
 HISTSIZE=10000
@@ -30,7 +30,7 @@ antibody bundle < $HOME/.config/zsh/.zsh_plugins.txt
 
 # Oh my zsh HOME
 export ZSH="$HOME/.config/zsh/.oh-my-zsh"
-# source oh my zsh and alias 
+# source oh my zsh and alias
 [ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 [ -f "$HOME/.config/zsh/.zsh_aliases" ] && source "$HOME/.config/zsh/.zsh_aliases"
 # /o>
@@ -43,7 +43,7 @@ export ZSH="$HOME/.config/zsh/.oh-my-zsh"
 # Rvm and Nvm for neovim
 [ -f "$HOME/.local/share/rvm/scripts/rvm" ] && source "$HOME/.local/share/rvm/scripts/rvm"
 [ -s "$HOME/.local/share/nvm/nvm.sh" ] && source "$HOME/.local/share/nvm/nvm.sh"
-# /r> 
+# /r>
 
 # Theme config
 SPACESHIP_PROMPT_ORDER=(
@@ -84,7 +84,7 @@ function vi_mode_prompt_info() {
 }
 RPS1='$(vi_mode_prompt_info)'
 RPS2=$RPS1
-# /v> 
+# /v>
 
-# last line aways 
-source $HOME/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zdharma-SLASH-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
+# last line aways
+source $HOME/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-zdharma-continuum-SLASH-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
