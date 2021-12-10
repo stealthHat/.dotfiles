@@ -22,12 +22,14 @@ function mirror_settings () {
 }
 
 # Install the base packages and create the user folders
-function basepkgs () {
+function base_config () {
   echostep "BASE PACKAGES INSTALL"
   for x in curl base-devel git xdg-utils xdg-user-dirs doas; do
   	pkginstall "$x"
   done
   xdg-user-dirs-update
+  echo "FONT=FiraCode Nerd Font" | sudo tee -a /etc/vconsole.conf
+  echo "permit :wheel" | sudo tee -a /etc/doas.conf
 }
 
 # Makes pacman pretty
@@ -129,4 +131,4 @@ function clean_up () {
 }
 
 sudo pacman -Syu --noconfirm
-mirror_settings && basepkgs && pacman_config && setup_links && setup_yay && install_loop && setup_zsh && setup_vim && tmux_plug && clean_up || exit
+mirror_settings && base_config && pacman_config && setup_links && setup_yay && install_loop && setup_zsh && setup_vim && tmux_plug && clean_up || exit
