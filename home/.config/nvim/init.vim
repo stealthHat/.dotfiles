@@ -43,14 +43,22 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'w0rp/ale'
 call plug#end()
 
-"Global
+" Global
 syntax on
-set hidden
-set nocompatible
+"set hidden
+"set nocomeatible
+set title
 set modifiable
+set smartcase
+set smartindent
+set expandtab
+set noshowmode
+set cursorline
+set shiftwidth=2
+set tabstop=2 softtabstop=2
 set encoding=UTF-8
+set clipboard=unnamedplus
 autocmd BufWritePre * :%s/\s\+$//e
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " /g>
 
 " Leader and binds
@@ -70,6 +78,7 @@ call deoplete#custom#option('omni_patterns', {
 \ 'terraform': '[^ *\t"{=$]\w*',
 \})
 call deoplete#initialize()
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " /d>
 
 " Syntastic
@@ -122,25 +131,4 @@ augroup numbertoggle
 augroup END
 " /n>
 
-"let g:python3_host_prog = '/bin/python3'
-"set termguicolors
-
-set ignorecase
-set smartcase
-
-set breakindent
-set formatoptions=l
-set lbr
-
-set tabstop=2
-set softtabstop=2
-
-set clipboard=unnamedplus
-set expandtab
-
-set shiftwidth=2
-set cursorline
-set title
-
-set noshowmode
 set tags=./$HOME/.config/nvim/tags;
