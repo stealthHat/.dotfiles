@@ -113,6 +113,8 @@ nvm_install () {
 function setup_vim () {
   echostep "INSTALLING VIM_PLUG AND VIM DEPENDENCIES"
   vimplug_install
+  nvm_install
+  rvm_install
 }
 
 # Install tmux plugin manager
