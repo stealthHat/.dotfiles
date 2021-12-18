@@ -10,7 +10,7 @@ function pkginstall(){ sudo pacman --noconfirm --needed -S "$1" ;}
 function aurinstall(){ yay --noconfirm --needed -S "$1" ;}
 function repinstall(){
   repname="$(basename "$1" .git)"
-  [ -d "${GDIR}"/"${repname}" ] || (git clone "$1" "${GDIR}"/"${repname}" && pushd "${GDIR}"/"${repname}" && sudo make clean install && popd)
+  [ -d "${GDIR}"/"${repname}" ] || (git -c http.sslVerify=false clone "$1" "${GDIR}"/"${repname}" && pushd "${GDIR}"/"${repname}" && sudo make clean install && popd)
 }
 function echostep(){ echo "############################################################  $1  ################################################################" ;}
 
