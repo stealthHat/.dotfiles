@@ -12,6 +12,7 @@ alias \
   vimconf='nvim $HOME/git/.dotfiles/home/.config/nvim/init.vim' \
   tmuxconf='nvim $HOME/git/.dotfiles/home/.config/tmux/tmux.conf' \
 	tmux='tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf' \
+	w='watch -n1 ' \
   ufw='doas ufw' \
   .='cd $HOME/git/.dotfiles' \
   .i='cd $HOME/git/.dotfiles/install' \
@@ -31,7 +32,8 @@ alias \
   gpush='gtoken && git push' \
   jarvis='bash $HOME/git/jarvis/jarvis.sh' \
   g='cd $HOME/git' \
-  devcluster="aws eks --region us-west-2  update-kubeconfig --name development-platform"
+  yarn='$HOME/.local/share/npm/bin/yarn' \
+  devcluster="aws eks --region us-west-2 update-kubeconfig --name development-platform" \
   wget='wget --hsts-file $HOME/.config/wget/wget-hsts'
 
 
@@ -40,18 +42,15 @@ alias \
   h='helm' \
   k='kubectl' \
   ks='kubectl -n kube-system' \
+  ks='kubectl -n platform' \
   kd='kubectl -n dev' \
-  km='kubectl -n metallb-system' \
-  kp='kubectl -n pihole' \
+  km='kubectl -n monitoring' \
   kn='kubectl -n ingress-nginx' \
-  ks='kubectl -n kube-system' \
-  kc='kubectl -n cert-manager' \
   kv='kubectl -n vault' \
-  kw='kubectl -n vault-webhook' \
   ka='kubectl -n argo' \
-  kac='kubectl -n actions-runner-system' \
+  ko='kubectl -n argo-rollouts' \
+  kl='kubectl -n lens-metrics' \
   hn='helm -n ingress-nginx' \
-  hp='helm -n pihole' \
   hw='helm -n vault-webhook' \
   tw='terraform workspace' \
   tapply='terraform apply -auto-approve ; echo "\a"' \

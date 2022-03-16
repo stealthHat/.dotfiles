@@ -38,7 +38,6 @@ Plug 'sbdchd/neoformat'
 Plug 'sheerun/vim-polyglot'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'w0rp/ale'
 call plug#end()
 
@@ -123,4 +122,4 @@ augroup numbertoggle
 augroup END
 " /n>
 
-set tags=./$HOME/.config/nvim/tags;
+set tags=tags;
