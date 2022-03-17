@@ -14,12 +14,6 @@ keymap("n", "<leader>f", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<leader>o", "<cmd>NvimTreeToggle<cr>", opts)
 keymap("n", "<esc>", "<cmd>:noh<cr>", opts)
 
--- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
-
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
