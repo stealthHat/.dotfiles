@@ -1,6 +1,7 @@
 local opts = { noremap = true, silent = true }
 
 local keymap = vim.api.nvim_set_keymap
+local autocmd = vim.api.nvim_command
 
 -- Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
@@ -12,6 +13,11 @@ keymap("n", "<leader>w", "<cmd>wa!<cr>", opts)
 keymap("n", "<leader>q", "<cmd>q!<cr>", opts)
 keymap("n", "<leader>f", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<leader>o", "<cmd>NvimTreeToggle<cr>", opts)
+
+-- Auto cmds
+autocmd([[autocmd BufWritePre * :%s/\s\+$//e]])
+
+-- remove word highlight when press esc
 keymap("n", "<esc>", "<cmd>:noh<cr>", opts)
 
 -- Resize with arrows

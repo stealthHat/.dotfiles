@@ -30,12 +30,17 @@ if not status_ok then
 end
 
 return packer.startup(function(use)
+  -- General
   use "wbthomason/packer.nvim" -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-  use "lunarvim/darkplus.nvim" -- Theme
 
-  -- cmp plugins
+  -- Theme
+  use 'folke/tokyonight.nvim'
+  use 'vim-airline/vim-airline'
+  use 'vim-airline/vim-airline-themes'
+
+  -- CMP plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
   use "hrsh7th/cmp-path" -- path completions
@@ -44,7 +49,7 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-nvim-lua"
 
-  -- snippets
+  -- Snippets
   use "L3MON4D3/LuaSnip" --snippet engine
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
