@@ -11,7 +11,8 @@ keymap("n", "<leader>W", "<cmd>wq!<cr>", opts)
 keymap("n", "<leader>w", "<cmd>wa!<cr>", opts)
 keymap("n", "<leader>q", "<cmd>q!<cr>", opts)
 keymap("n", "<leader>f", "<cmd>Telescope live_grep<cr>", opts)
-keymap("n", "<leader>o", "<cmd>NvimTreeOpen<cr>", opts)
+keymap("n", "<leader>o", "<cmd>NvimTreeToggle<cr>", opts)
+keymap("n", "<esc>", "<cmd>:noh<cr>", opts)
 
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
