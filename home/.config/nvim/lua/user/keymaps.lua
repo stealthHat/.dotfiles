@@ -1,17 +1,15 @@
 local opts = { noremap = true, silent = true }
 
-local term_opts = { silent = true }
-
 local keymap = vim.api.nvim_set_keymap
 
 -- Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 
--- Leader binds 
+-- Leader binds
 keymap("n", "<leader>W", ":wq!<cr>", opts)
 keymap("n", "<leader>w", ":wa!<cr>", opts)
-keymap("n", "<leader>q", ":q!<cr>", opts)
+keymap("n", "<leader>q", ":q<cr>", opts)
 
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
