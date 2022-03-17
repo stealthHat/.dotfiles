@@ -21,6 +21,10 @@ autocmd([[autocmd BufWritePre * :%s/\s\+$//e]])
 -- Remove word highlight when press esc
 keymap("n", "<esc>", "<cmd>:noh<cr>", opts)
 
+-- Navigate buffers
+keymap("n", "<S-l>", ":bnext<CR>", opts)
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
+
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
