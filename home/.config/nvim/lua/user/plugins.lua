@@ -36,10 +36,12 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use 'kyazdani42/nvim-web-devicons' -- Used by lualine and nvim-tree
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
+  use "lewis6991/gitsigns.nvim" -- Git changes
 
   -- Theme
   use 'folke/tokyonight.nvim'
   use 'nvim-lualine/lualine.nvim'
+  use "akinsho/bufferline.nvim"
 
   -- CMP plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
@@ -57,6 +59,7 @@ return packer.startup(function(use)
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+  use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
