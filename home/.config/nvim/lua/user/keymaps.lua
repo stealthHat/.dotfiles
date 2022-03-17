@@ -11,13 +11,14 @@ vim.g.mapleader = " "
 keymap("n", "<leader>W", "<cmd>wq!<cr>", opts)
 keymap("n", "<leader>w", "<cmd>wa!<cr>", opts)
 keymap("n", "<leader>q", "<cmd>q!<cr>", opts)
-keymap("n", "<leader>f", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<leader>o", "<cmd>NvimTreeToggle<cr>", opts)
+keymap("n", "<leader>F", "<cmd>Telescope live_grep<cr>", opts)
+keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
 
 -- Auto cmds
 autocmd([[autocmd BufWritePre * :%s/\s\+$//e]])
 
--- remove word highlight when press esc
+-- Remove word highlight when press esc
 keymap("n", "<esc>", "<cmd>:noh<cr>", opts)
 
 -- Resize with arrows
