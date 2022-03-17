@@ -7,11 +7,11 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 
 -- Leader binds
-keymap("n", "<leader>W", ":wq!<cr>", opts)
-keymap("n", "<leader>w", ":wa!<cr>", opts)
-keymap("n", "<leader>q", ":qa!<cr>", opts)
-keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
+keymap("n", "<leader>W", "<cmd>wq!<cr>", opts)
+keymap("n", "<leader>w", "<cmd>wa!<cr>", opts)
+keymap("n", "<leader>q", "<cmd>q<cr>", opts)
+keymap("n", "<leader>f", "<cmd>Telescope live_grep<cr>", opts)
+keymap("n", "<leader>o", "<cmd>NvimTreeOpen<cr>", opts)
 
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
