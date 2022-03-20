@@ -23,6 +23,8 @@ compinit
 _comp_options+=(globdots)
 # /b>
 
+source /opt/asdf-vm/asdf.sh
+
 # Antibody
 source <(antibody init)
 antibody bundle < $HOME/.config/zsh/.zsh_plugins.txt
@@ -40,10 +42,6 @@ export ZSH="$HOME/.config/zsh/.oh-my-zsh"
 [ -f /bin/argocd ] && source <(argocd completion zsh)
 # /k>
 
-# Rvm and Nvm for neovim
-[ -f "$HOME/.local/share/rvm/scripts/rvm" ] && source "$HOME/.local/share/rvm/scripts/rvm"
-[ -s "$HOME/.local/share/nvm/nvm.sh" ] && source $HOME/.local/share/nvm/nvm.sh
-# /r>
 
 # Theme config
 SPACESHIP_PROMPT_ORDER=(

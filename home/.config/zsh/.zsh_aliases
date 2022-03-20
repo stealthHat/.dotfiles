@@ -32,7 +32,7 @@ alias \
   gpush='gtoken && git push' \
   jarvis='bash $HOME/git/jarvis/jarvis.sh' \
   g='cd $HOME/git' \
-  yarn='$HOME/.local/share/npm/bin/yarn' \
+  yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"' \
   devcluster="aws eks --region us-west-2 update-kubeconfig --name development-platform" \
   wget='wget --hsts-file $HOME/.config/wget/wget-hsts'
 
