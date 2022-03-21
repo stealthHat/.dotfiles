@@ -22,11 +22,6 @@ function mirror_settings () {
 
 # Install the base packages and create the user folders
 function base_config () {
-  echo "BASE PACKAGES INSTALL"
-  for x in curl base-devel git xdg-utils xdg-user-dirs doas; do
-  	pkginstall "$x"
-  done
-  xdg-user-dirs-update
   echo "FONT=FiraCode Nerd Font" | sudo tee -a /etc/vconsole.conf
   echo "permit :wheel" | sudo tee -a /etc/doas.conf
 }
@@ -47,7 +42,7 @@ function setup_links () {
 
   sudo cp ./modprobe.d/* /etc/modprobe.d/
   (cd "${dot_home}"
-  find "${dot_home}" -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "${HOME}/%"
+  find . -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "${HOME}/%"
   find . -type f -exec ln -sfv "$(pwd)"/{} "${HOME}"/{} \;)
 }
 
