@@ -12,6 +12,10 @@ telescope.setup {
     selection_caret = " ",
     path_display = { "smart" },
 
+    file_ignore_patterns = {
+      "node_modules",
+      ".git/"
+    },
     mappings = {
       i = {
         ["<C-n>"] = actions.cycle_history_next,
@@ -43,7 +47,6 @@ telescope.setup {
         ["<C-l>"] = actions.complete_tag,
         ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
       },
-
       n = {
         ["<esc>"] = actions.close,
         ["<CR>"] = actions.select_default,
@@ -78,19 +81,8 @@ telescope.setup {
     },
   },
   pickers = {
-    -- Default configuration for builtin pickers goes here:
-    -- picker_name = {
-    --   picker_config_key = value,
-    --   ...
-    -- }
-    -- Now the picker_config_key will be applied every time you call this
-    -- builtin picker
-  },
-  extensions = {
-    -- Your extension configuration goes here:
-    -- extension_name = {
-    --   extension_config_key = value,
-    -- }
-    -- please take a look at the readme of the extension you want to configure
-  },
+    find_files = {
+      hidden = true
+    },
+  }
 }

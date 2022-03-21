@@ -29,9 +29,9 @@ local options = {
   numberwidth = 4,                         -- set number column width to 2 {default 4}
   signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time
   wrap = false,                            -- display lines as one long line
+  hidden = true,                           -- allow hidden buffers
   scrolloff = 8,                           -- is one of my fav
   sidescrolloff = 8,
-  modifiable = true
 }
 
 vim.opt.shortmess:append "c"
