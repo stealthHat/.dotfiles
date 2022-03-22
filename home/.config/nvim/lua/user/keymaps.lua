@@ -19,7 +19,7 @@ keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require
 keymap("n", "Q", "<Nop>", opts)
 
 -- Auto cmds
-autocmd([[autocmd BufWritePre * :%s/\s\+$//e]])
+autocmd [[autocmd BufWritePre * :%s/\s\+$//e]]
 
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
