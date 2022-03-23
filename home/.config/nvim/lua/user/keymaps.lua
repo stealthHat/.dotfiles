@@ -8,7 +8,7 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 
 -- Leader binds
-keymap("n", "<esc>", "<cmd>:noh<cr>", opts)
+keymap("n", "<esc>", "<cmd>noh<cr>", opts)
 keymap("n", "<leader>w", "<cmd>wa!<cr>", opts)
 keymap("n", "<leader>r", "<cmd>b#|bd#|<cr>", opts)
 keymap("n", "<leader>q", "<cmd>q!<cr>", opts)

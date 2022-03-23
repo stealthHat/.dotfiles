@@ -1,16 +1,16 @@
 #!/bin/bash
 set -euo pipefail
 
-export XDG_CONFIG_HOME="${HOME}/.config"
-export XDG_DATA_HOME="${HOME}/.local/share"
-export XDG_CACHE_HOME="${HOME}/.cache"
-export GDIR="${HOME}/git"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export GDIR="$HOME/git"
 
 function pkginstall(){ sudo pacman --noconfirm --needed -S "$1" ;}
 function aurinstall(){ yay --noconfirm --needed -S "$1" ;}
 function repinstall(){
   repname="$(basename "$1" .git)"
-  [ -d "${GDIR}"/"${repname}" ] || (git -c http.sslVerify=false clone "$1" "${GDIR}"/"${repname}" && cd "${GDIR}"/"${repname}" && sudo make clean install)
+  [ -d "$GDIR"/"$repname" ] || (git -c http.sslVerify=false clone "$1" "$GDIR"/"$repname" && cd "$GDIR"/"$repname" && sudo make clean install)
 }
 
 # Set the best mirrors for my country
@@ -20,10 +20,10 @@ function mirror_settings () {
   grep -q "reflector -c brazil" /etc/pacman.d/mirrorlist || sudo reflector -c brazil -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 }
 
-# Install the base packages and create the user folders
+# Basic font and doas config
 function base_config () {
   echo "FONT=FiraCode Nerd Font" | sudo tee -a /etc/vconsole.conf
-  echo "permit :wheel" | sudo tee -a /etc/doas.conf
+  echo "permit nopass :wheel" | sudo tee -a /etc/doas.conf
 }
 
 # Makes pacman pretty
@@ -38,19 +38,19 @@ function pacman_config () {
 # Create all the folder structure of my .dotfiles/home and make symbolic links of all files of it to my ${HOME} directory
 function setup_links () {
   echo "FOLDERS AND SYMBOLIC LINKS FOR DOTFILES"
-  local dot_home=${HOME}/git/.dotfiles/home/
+  local dot_home=$HOME/git/.dotfiles/home/
 
   sudo cp ./modprobe.d/* /etc/modprobe.d/
-  (cd "${dot_home}"
-  find . -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "${HOME}/%"
-  find . -type f -exec ln -sfv "$(pwd)"/{} "${HOME}"/{} \;)
+  (cd "$dot_home"
+  find . -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
+  find . -type f -exec ln -sfv "$PWD"/{} "$HOME"/{} \;)
 }
 
 # Install yay
 function setup_yay () {
   echo "INSTALLING YAY"
-  [ -d "${HOME}"/git/yay ] || git clone https://aur.archlinux.org/yay.git "${GDIR}"/yay
-  (cd "${GDIR}"/yay && makepkg -si PKGBUILD --noconfirm)
+  [ -d "$HOME"/git/yay ] || git clone https://aur.archlinux.org/yay.git "$GDIR"/yay
+  (cd "$GDIR"/yay && makepkg -si PKGBUILD --noconfirm)
 }
 
 # Install all the programs listed on .dotfiles/install/progs.csv
@@ -65,29 +65,29 @@ function install_loop () {
       "G") repinstall "$program" ;;
       *) pkginstall "$program" ;;
     esac
-  done < "${HOME}"/git/.dotfiles/install/progs.csv
+  done < "$HOME"/git/.dotfiles/install/progs.csv
 }
 
 # Install Oh-my-zsh
 function setup_zsh () {
   echo "INSTALLING OH-MY-ZSH"
-  export ZSH="${HOME}"/.config/zsh/.oh-my-zsh
-  [ -d "${HOME}"/.config/zsh/.oh-my-zsh ] || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  export ZSH="$HOME"/.config/zsh/.oh-my-zsh
+  [ -d "$HOME"/.config/zsh/.oh-my-zsh ] || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
   sudo chsh -s "$(which zsh)" "$(whoami)"
 }
 
 # Install tmux plugin manager
 function tmux_plug () {
   echo "INSTALLING TMUX_PLUG"
-  [ -d "${XDG_CONFIG_HOME}"/tmux/plugins ] || git clone https://github.com/tmux-plugins/tpm "${XDG_CONFIG_HOME}"/tmux/plugins/tpm
+  [ -d "$XDG_CONFIG_HOME"/tmux/plugins ] || git clone https://github.com/tmux-plugins/tpm "$XDG_CONFIG_HOME"/tmux/plugins/tpm
 }
 
 # Clean up home after install
 function clean_up () {
   echo "CLEANING UP"
-  cd "${HOME}" || exit
+  cd "$HOME" || exit
   rm -rf .bash* .mkshrc .profile .shell.pre-oh-my-zsh .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &> /dev/null
-  rm -rf "${GDIR}"/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
+  rm -rf "$GDIR"/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
   sudo reboot now
 }
 
