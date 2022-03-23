@@ -33,7 +33,7 @@ end
 
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
-nvim_tree.setup {
+nvim_tree.setup({
   disable_netrw = true,
   hijack_netrw = true,
   open_on_setup = false,
@@ -97,4 +97,4 @@ nvim_tree.setup {
     folder_arrows = 1,
     tree_width = 30,
   },
-}
+})

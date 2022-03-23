@@ -5,7 +5,7 @@ end
 
 local actions = require "telescope.actions"
 
-telescope.setup {
+telescope.setup({
   defaults = {
 
     prompt_prefix = " ",
@@ -14,7 +14,7 @@ telescope.setup {
 
     file_ignore_patterns = {
       "node_modules",
-      ".git/"
+      ".git/",
     },
     mappings = {
       i = {
@@ -82,7 +82,7 @@ telescope.setup {
   },
   pickers = {
     find_files = {
-      hidden = true
+      hidden = true,
     },
-  }
-}
+  },
+})
