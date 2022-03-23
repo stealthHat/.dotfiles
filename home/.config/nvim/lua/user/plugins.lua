@@ -51,8 +51,6 @@ return packer.startup(function(use)
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"  -- lsp completions
   use "hrsh7th/cmp-nvim-lua" -- completions for lua
-  use "tamago324/cmp-zsh" -- completion for zsh
-  use "Shougo/deol.nvim" -- recommended for cmp-zsh
 
   -- Snippets
   use "L3MON4D3/LuaSnip" --snippet engine
