@@ -17,7 +17,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 
 export XINITRC="${XDG_CONFIG_HOME}/X11/xinitrc"
 export XAUTHORITY="${XDG_CONFIG_HOME}/Xauthority"
-export ZDOTDIR="${XDG_CONFIG_HOME}/zsh/"
+export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 export WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
 export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"
 export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
