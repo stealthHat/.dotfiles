@@ -35,6 +35,13 @@ function pacman_config () {
   grep -q "^ILoveCandy" /etc/pacman.conf || sudo sed -i "37 i ILoveCandy" /etc/pacman.conf
 }
 
+# Install yay
+function setup_yay () {
+  echo "INSTALLING YAY"
+  [ -d "$HOME"/git/yay ] || git clone https://aur.archlinux.org/yay.git "$GDIR"/yay
+  (cd "$GDIR"/yay && makepkg -si PKGBUILD --noconfirm)
+}
+
 # Create all the folder structure of my .dotfiles/home and make symbolic links of all files of it to my ${HOME} directory
 function setup_links () {
   echo "FOLDERS AND SYMBOLIC LINKS FOR DOTFILES"
@@ -44,13 +51,6 @@ function setup_links () {
   (cd "$dot_home"
   find . -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
   find . -type f -exec ln -sfv "$PWD"/{} "$HOME"/{} \;)
-}
-
-# Install yay
-function setup_yay () {
-  echo "INSTALLING YAY"
-  [ -d "$HOME"/git/yay ] || git clone https://aur.archlinux.org/yay.git "$GDIR"/yay
-  (cd "$GDIR"/yay && makepkg -si PKGBUILD --noconfirm)
 }
 
 # Install all the programs listed on .dotfiles/install/progs.csv
