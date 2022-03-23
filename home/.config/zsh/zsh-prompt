@@ -15,7 +15,7 @@ NEWLINE='
 
 # Determination of Spaceship working directory
 # https://git.io/vdBH7
-export SPACESHIP_ROOT="$ZDOTDIR/plugins/spaceship/"
+export SPACESHIP_ROOT="$ZDOTDIR/plugins/spaceship-prompt"
 
 # ------------------------------------------------------------------------------
 # CONFIGURATION
