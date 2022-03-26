@@ -20,12 +20,6 @@ function mirror_settings () {
   grep -q "reflector -c brazil" /etc/pacman.d/mirrorlist || sudo reflector -c brazil -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 }
 
-# Basic font and doas config
-function base_config () {
-  echo "FONT=FiraCode Nerd Font" | sudo tee -a /etc/vconsole.conf
-  echo "permit nopass :wheel" | sudo tee -a /etc/doas.conf
-}
-
 # Makes pacman pretty
 function pacman_config () {
   echo "PACMAN CONFIG SETTINGS"
@@ -68,11 +62,10 @@ function install_loop () {
   done < "$HOME"/git/.dotfiles/install/progs.csv
 }
 
-# Install Oh-my-zsh
-function setup_zsh () {
-  echo "INSTALLING OH-MY-ZSH"
-  export ZSH="$HOME"/.config/zsh/.oh-my-zsh
-  [ -d "$HOME"/.config/zsh/.oh-my-zsh ] || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+# Font, doas config and make zsh the default shell
+function base_config () {
+  echo "FONT=FiraCode Nerd Font" | sudo tee -a /etc/vconsole.conf
+  echo "permit nopass :wheel" | sudo tee -a /etc/doas.conf
   sudo chsh -s "$(which zsh)" "$(whoami)"
 }
 
