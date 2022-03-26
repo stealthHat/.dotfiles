@@ -1,9 +1,7 @@
 export KEYTIMEOUT=1
 bindkey -v
-bindkey -M vicmd '?' history-incremental-search-backward
-bindkey -M vicmd '/' history-incremental-search-forward
-bindkey "^[OA" up-line-or-history
-bindkey "^[OB" down-line-or-history
+bindkey -M vicmd '?' history-beginning-search-backward
+bindkey -M vicmd '/' history-beginning-search-forward
 bindkey -M vicmd "k" up-line-or-history
 bindkey -M vicmd "j" down-line-or-history
 function zle-keymap-select() {
@@ -15,4 +13,3 @@ function vi_mode_prompt_info() {
   echo "${${KEYMAP/vicmd/[% NORMAL]%}/(main|viins)/[% INSERT]%}"
 }
 RPS1='$(vi_mode_prompt_info)'
-RPS2=$RPS1
