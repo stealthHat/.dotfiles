@@ -83,4 +83,6 @@ function clean_up () {
   rm -rf "$GDIR"/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
   sudo reboot now
 }
-setup_links
+
+sudo pacman -Syu --noconfirm
+mirror_settings && pacman_config && setup_links && setup_yay && install_loop && base_config && tmux_plug && clean_up || exit
