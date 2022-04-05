@@ -7,7 +7,7 @@ alias \
   podman='doas podman' \
   startx='startx $XINITRC' \
   zshrc='nvim $HOME/git/.dotfiles/home/.config/zsh/.zshrc' \
-  zshalias='nvim $HOME/git/.dotfiles/home/.config/zsh/.zsh_aliases' \
+  zshalias='nvim $HOME/git/.dotfiles/home/.config/zsh/zsh-aliases' \
   kittyconf='nvim $HOME/git/.dotfiles/home/.config/kitty/kitty.conf' \
   vimconf='nvim $HOME/git/.dotfiles/home/.config/nvim/init.vim' \
   tmuxconf='nvim $HOME/git/.dotfiles/home/.config/tmux/tmux.conf' \
@@ -32,8 +32,8 @@ alias \
   gpush='gtoken && git push' \
   jarvis='bash $HOME/git/jarvis/jarvis.sh' \
   g='cd $HOME/git' \
-  yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"' \
   devcluster="aws eks --region us-west-2 update-kubeconfig --name development-platform" \
+  alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config/.yarnrc"' \
   wget='wget --hsts-file $HOME/.config/wget/wget-hsts'
 
 
@@ -42,7 +42,7 @@ alias \
   h='helm' \
   k='kubectl' \
   ks='kubectl -n kube-system' \
-  ks='kubectl -n platform' \
+  kp='kubectl -n platform' \
   kd='kubectl -n dev' \
   km='kubectl -n monitoring' \
   kn='kubectl -n ingress-nginx' \
