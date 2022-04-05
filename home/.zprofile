@@ -2,6 +2,7 @@
 
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
+export PATH="$PATH:`yarn global bin`:$HOME/.local/share/yarn/global/node_modules/.bin"
 
 # Default programs:
 export BROWSER="brave"

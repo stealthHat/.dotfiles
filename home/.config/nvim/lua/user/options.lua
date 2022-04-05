@@ -30,7 +30,6 @@ local options = {
   signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
   wrap = true, -- display lines as one long line
   hidden = true, -- allow hidden buffers
-  scrolloff = 8, -- is one of my fav
   sidescrolloff = 8,
 }
 
