@@ -45,6 +45,7 @@ alias \
   kp='kubectl -n platform' \
   kd='kubectl -n dev' \
   km='kubectl -n monitoring' \
+  kr='kubectl -n rabbitmq' \
   kn='kubectl -n ingress-nginx' \
   kv='kubectl -n vault' \
   ka='kubectl -n argo' \
@@ -52,9 +53,12 @@ alias \
   kl='kubectl -n lens-metrics' \
   hn='helm -n ingress-nginx' \
   hw='helm -n vault-webhook' \
+  kc='helm -n cert-manager' \
+  kx='helm -n ' \
   tw='terraform workspace' \
   tapply='terraform apply -auto-approve ; echo "\a"' \
   tdestroy='terraform destroy -auto-approve' \
+  argo='argo -n argo' \
 
 # ssh
 alias \

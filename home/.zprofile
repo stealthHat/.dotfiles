@@ -2,7 +2,6 @@
 
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
-export PATH="$PATH:`yarn global bin`:$HOME/.local/share/yarn/global/node_modules/.bin"
 
 # Default programs:
 export BROWSER="brave"
@@ -30,7 +29,7 @@ export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export GOPATH="${XDG_DATA_HOME}/go"
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 export GEM_SPEC_CACHE="${XDG_CACHE_HOME}/gem"
+export RUBY_BUILD_CACHE_PATH="${XDG_CACHE_HOME}"
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME/java"
 export PSQL_HISTORY="$XDG_STATE_HOME/psql_history"
 export LESSHISTFILE="-"
-#export GEM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/gem"
