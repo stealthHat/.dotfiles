@@ -37,6 +37,7 @@ return packer.startup(function(use)
   use "kyazdani42/nvim-web-devicons" -- Used by lualine and nvim-tree
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use "lewis6991/gitsigns.nvim" -- Git changes
+  use 'lewis6991/impatient.nvim'
 
   -- Theme
   use "folke/tokyonight.nvim"
