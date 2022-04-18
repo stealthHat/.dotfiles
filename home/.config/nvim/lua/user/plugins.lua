@@ -3,14 +3,14 @@ local fn = vim.fn
 -- Automatically install packer
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system({
+  PACKER_BOOTSTRAP = fn.system {
     "git",
     "clone",
     "--depth",
     "1",
     "https://github.com/wbthomason/packer.nvim",
     install_path,
-  })
+  }
   print "Installing packer close and reopen Neovim..."
   vim.cmd [[packadd packer.nvim]]
 end
@@ -37,7 +37,7 @@ return packer.startup(function(use)
   use "kyazdani42/nvim-web-devicons" -- Used by lualine and nvim-tree
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use "lewis6991/gitsigns.nvim" -- Git changes
-  use 'lewis6991/impatient.nvim'
+  use "lewis6991/impatient.nvim"
 
   -- Theme
   use "folke/tokyonight.nvim"
@@ -67,10 +67,10 @@ return packer.startup(function(use)
   use "nvim-telescope/telescope-media-files.nvim"
 
   -- Treesitter
-  use({
+  use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
-  })
+  }
 
   -- File tree
   use "kyazdani42/nvim-tree.lua"
