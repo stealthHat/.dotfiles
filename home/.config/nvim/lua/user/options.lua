@@ -29,7 +29,7 @@ local options = {
   numberwidth = 4, -- set number column width to 2 {default 4}
   signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
   wrap = true, -- display lines as one long line
-  hidden = true, -- allow hidden buffers
+  bufhidden = "wipe", -- allow hidden buffers
   sidescrolloff = 8,
 }
 

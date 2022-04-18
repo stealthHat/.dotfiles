@@ -37,40 +37,41 @@ return packer.startup(function(use)
   use "kyazdani42/nvim-web-devicons" -- Used by lualine and nvim-tree
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use "lewis6991/gitsigns.nvim" -- Git changes
-  use "lewis6991/impatient.nvim"
-
-  -- Theme
-  use "folke/tokyonight.nvim"
-  use "nvim-lualine/lualine.nvim"
-  use "akinsho/bufferline.nvim"
-
-  -- CMP plugins
-  use "hrsh7th/nvim-cmp" -- The completion plugin
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- path completions
-  use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
-  use "hrsh7th/cmp-nvim-lsp" -- lsp completions
-  use "hrsh7th/cmp-nvim-lua" -- completions for lua
-
-  -- Snippets
-  use "L3MON4D3/LuaSnip" --snippet engine
-  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+  use "lewis6991/impatient.nvim" -- Improve startup time
+  use "folke/which-key.nvim"
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
 
-  -- Telescope
-  use "nvim-telescope/telescope.nvim"
-  use "nvim-telescope/telescope-media-files.nvim"
+  -- CMP plugins
+  use "hrsh7th/nvim-cmp" -- The completion plugin
+  use "hrsh7th/cmp-nvim-lsp" -- lsp completions
+  use "hrsh7th/cmp-buffer" -- buffer completions
+  use "hrsh7th/cmp-path" -- path completions
+  use "hrsh7th/cmp-cmdline" -- cmdline completions
+  use "hrsh7th/cmp-nvim-lua" -- completions for lua
+
+  -- Snippets
+  use "L3MON4D3/LuaSnip" --snippet engine
+  use "saadparwaiz1/cmp_luasnip" -- snippet completions
+  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
   -- Treesitter
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
+
+  -- Theme
+  use "folke/tokyonight.nvim"
+  use "nvim-lualine/lualine.nvim"
+  use "akinsho/bufferline.nvim"
+
+  -- Telescope
+  use "nvim-telescope/telescope.nvim"
+  use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 
   -- File tree
   use "kyazdani42/nvim-tree.lua"
