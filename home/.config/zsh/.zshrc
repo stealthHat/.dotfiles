@@ -4,13 +4,13 @@
 HISTSIZE=1000000
 SAVEHIST=1000000
 
-# some useful options (man zshoptions)
+# Some useful options (man zshoptions)
 unsetopt BEEP
 setopt appendhistory
 setopt autocd extendedglob nomatch menucomplete
 setopt interactive_comments
 
-# completions
+# Completions
 autoload -Uz compinit
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 unsetopt CASE_GLOB
@@ -20,10 +20,6 @@ zstyle ':completion:*:approximate:*' max-errors 2 numeric
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
-
-source /opt/asdf-vm/asdf.sh
-[ -f /bin/kubectl ] && source <(kubectl completion zsh)
-[ -f /bin/argocd ] && source <(argocd completion zsh)
 
 # Colors
 autoload -Uz colors && colors
@@ -41,3 +37,7 @@ zsh_add_plugin "spaceship-prompt/spaceship-prompt"
 zsh_add_plugin "zdharma-continuum/fast-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
+
+source /opt/asdf-vm/asdf.sh
+[ -f /bin/kubectl ] && source <(kubectl completion zsh)
+[ -f /bin/argocd ] && source <(argocd completion zsh)
