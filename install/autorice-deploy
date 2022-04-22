@@ -2,7 +2,8 @@
 set -euo pipefail
 
 export GDIR="$HOME/git"
-source "$GDIR"/.dotfiles/home/.zprofile
+mkdir -p "$HOME"/.local/bin
+source $HOME/git/.dotfiles/home/.zprofile
 
 function pkginstall(){ sudo pacman --noconfirm --needed -S "$1" ;}
 function aurinstall(){ yay --noconfirm --needed -S "$1" ;}
@@ -45,11 +46,10 @@ function setup_links () {
   find . -type f -exec ln -sfv "$PWD"/{} "$HOME"/{} \;)
 }
 
-# Install all the programs listed on .dotfiles/install/progs.csv
+# Install all
 # shellcheck disable=SC2034
 function install_loop () {
   echo "INSTALLING PROGRAMS FROM progs.csv FILE"
-  export GOPATH="${XDG_DATA_HOME:-${HOME}/.local/share}/go"
   while IFS=, read -r tag program comment; do
     [[ "$tag" =~ ^#.*$ ]] && continue
     case "$tag" in
