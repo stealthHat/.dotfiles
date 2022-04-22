@@ -61,10 +61,9 @@ function install_loop () {
 }
 
 function asdf_config () {
-  asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-  asdf install nodejs latest
-  asdf plugin-add yarn
-  asdf install yarn latest
+  source /opt/asdf-vm/asdf.sh
+  asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git &&  asdf install nodejs latest
+  asdf plugin-add yarn && asdf install yarn latest
   yarn global add neovim
 }
 
