@@ -1,10 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
 export GDIR="$HOME/git"
+source "$GDIR"/.dotfiles/home/.zprofile
 
 function pkginstall(){ sudo pacman --noconfirm --needed -S "$1" ;}
 function aurinstall(){ yay --noconfirm --needed -S "$1" ;}
@@ -62,11 +60,20 @@ function install_loop () {
   done < "$HOME"/git/.dotfiles/install/progs.csv
 }
 
+function asdf_config () {
+  asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+  asdf install nodejs latest
+  asdf plugin-add yarn
+  asdf install yarn latest
+  yarn global add neovim
+}
+
 # Font, doas config and make zsh the default shell
 function base_config () {
   echo "FONT=FiraCode Nerd Font" | sudo tee -a /etc/vconsole.conf
   echo "permit nopass :wheel" | sudo tee -a /etc/doas.conf
   sudo chsh -s "$(which zsh)" "$(whoami)"
+  zsh
 }
 
 # Install tmux plugin manager
@@ -85,4 +92,4 @@ function clean_up () {
 }
 
 sudo pacman -Syu --noconfirm
-mirror_settings && pacman_config && setup_links && setup_yay && install_loop && base_config && tmux_plug && clean_up || exit
+mirror_settings && pacman_config && setup_links && setup_yay && install_loop && asdf_config && base_config && tmux_plug && clean_up || exit
