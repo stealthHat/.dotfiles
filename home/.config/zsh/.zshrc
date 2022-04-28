@@ -38,6 +38,4 @@ zsh_add_plugin "zdharma-continuum/fast-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 
-. /opt/asdf-vm/asdf.sh
-[ -f /bin/kubectl ] && source <(kubectl completion zsh)
-[ -f /bin/argocd ] && source <(argocd completion zsh)
+source /opt/asdf-vm/asdf.sh

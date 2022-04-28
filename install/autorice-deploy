@@ -3,7 +3,7 @@ set -euo pipefail
 
 export GDIR="$HOME/git"
 mkdir -p "$HOME"/.local/bin
-source $HOME/git/.dotfiles/home/.zprofile
+source "$HOME"/git/.dotfiles/home/.zprofile
 
 function pkginstall(){ sudo pacman --noconfirm --needed -S "$1" ;}
 function aurinstall(){ yay --noconfirm --needed -S "$1" ;}
