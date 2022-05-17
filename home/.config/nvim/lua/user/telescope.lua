@@ -13,7 +13,7 @@ telescope.setup {
 
     prompt_prefix = " ",
     selection_caret = " ",
-    path_display = { "smart" },
+    path_display = { "truncate" },
 
     file_ignore_patterns = {
       "node_modules",
@@ -68,4 +68,4 @@ telescope.setup {
   },
 }
 
-telescope.load_extension "fzf"
+require("telescope").load_extension "fzf"
