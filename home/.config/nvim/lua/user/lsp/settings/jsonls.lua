@@ -119,9 +119,6 @@ local schemas = {
   {
     description = "golangci-lint configuration file",
     fileMatch = {
-      ".golangci.toml",
-      ".golangci.yaml",
-      ".golangci.yml",
       ".golangci.json",
     },
     url = "https://json.schemastore.org/golangci-lint.json",
