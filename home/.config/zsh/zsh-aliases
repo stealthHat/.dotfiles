@@ -17,6 +17,7 @@ alias \
   .='cd $HOME/git/.dotfiles' \
   .i='cd $HOME/git/.dotfiles/install' \
   .h='cd $HOME/git/.dotfiles/home' \
+  .v='cd $HOME/git/.dotfiles/home/.config/nvim' \
   l='ls -lha --color=auto' \
   ls='ls --color=auto' \
   grep='grep --color=auto' \

@@ -39,6 +39,7 @@ return packer.startup(function(use)
   use "lewis6991/gitsigns.nvim" -- Git changes
   use "lewis6991/impatient.nvim" -- Improve startup time
   use "folke/which-key.nvim"
+  use "tpope/vim-fugitive"
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
