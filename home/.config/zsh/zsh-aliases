@@ -45,11 +45,13 @@ alias \
   ks='kubectl -n kube-system' \
   kp='kubectl -n platform' \
   kd='kubectl -n dev' \
+  kdd='kubectl -n argocd' \
   km='kubectl -n monitoring' \
   kr='kubectl -n rabbitmq' \
   kn='kubectl -n ingress-nginx' \
   kv='kubectl -n vault' \
   ka='kubectl -n argo' \
+  ke='kubectl -n elk' \
   ko='kubectl -n argo-rollouts' \
   kl='kubectl -n lens-metrics' \
   hn='helm -n ingress-nginx' \

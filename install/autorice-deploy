@@ -1,19 +1,23 @@
 #!/bin/bash
 set -euo pipefail
 
-export GDIR="$HOME/git"
-mkdir -p "$HOME"/.local/bin
-source "$HOME"/git/.dotfiles/home/.zprofile
+readonly script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-function pkginstall(){ sudo pacman --noconfirm --needed -S "$1" ;}
-function aurinstall(){ yay --noconfirm --needed -S "$1" ;}
-function repinstall(){
+function pkginstall(){
+  sudo pacman --noconfirm --needed -S "$1"
+}
+
+function aurinstall(){
+  yay --noconfirm --needed -S "$1"
+}
+
+function repinstall() {
   repname="$(basename "$1" .git)"
-  [ -d "$GDIR"/"$repname" ] || (git -c http.sslVerify=false clone "$1" "$GDIR"/"$repname" && cd "$GDIR"/"$repname" && sudo make clean install)
+  [ -d "$GIT_HOME"/"$repname" ] || (git -c http.sslVerify=false clone "$1" "$GIT_HOME"/"$repname" && cd "$GIT_HOME"/"$repname" && sudo make clean install)
 }
 
 # Set the best mirrors for my country
-function mirror_settings () {
+function mirror_settings() {
   echo "SETTING MIRROR LIST"
   pkginstall reflector
   grep -q "reflector -c brazil" /etc/pacman.d/mirrorlist || sudo reflector -c brazil -a 6 --sort rate --save /etc/pacman.d/mirrorlist
@@ -31,8 +35,8 @@ function pacman_config () {
 # Install yay
 function setup_yay () {
   echo "INSTALLING YAY"
-  [ -d "$HOME"/git/yay ] || git clone https://aur.archlinux.org/yay.git "$GDIR"/yay
-  (cd "$GDIR"/yay && makepkg -si PKGBUILD --noconfirm)
+  [ -d "$HOME"/git/yay ] || git clone https://aur.archlinux.org/yay.git "$GIT_HOME"/yay
+  (cd "$GIT_HOME"/yay && makepkg -si PKGBUILD --noconfirm)
 }
 
 # Create all the folder structure of my .dotfiles/home and make symbolic links of all files of it to my ${HOME} directory
@@ -68,7 +72,7 @@ function asdf_config () {
 }
 
 # Font, doas config and make zsh the default shell
-function base_config () {
+function basic_config () {
   echo "FONT=FiraCode Nerd Font" | sudo tee -a /etc/vconsole.conf
   echo "permit nopass :wheel" | sudo tee -a /etc/doas.conf
   sudo chsh -s "$(which zsh)" "$(whoami)"
@@ -86,9 +90,14 @@ function clean_up () {
   echo "CLEANING UP"
   cd "$HOME" || exit
   rm -rf .bash* .mkshrc .profile .shell.pre-oh-my-zsh .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &> /dev/null
-  rm -rf "$GDIR"/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
+  rm -rf "$GIT_HOME"/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
   sudo reboot now
 }
 
+
+source "${script_dir%/*}/home/.zprofile"
+export GIT_HOME="$HOME/git"
+mkdir -p "$HOME"/.local/bin
+
 sudo pacman -Syu --noconfirm
-mirror_settings && pacman_config && setup_links && setup_yay && install_loop && asdf_config && base_config && tmux_plug && clean_up || exit
+mirror_settings && pacman_config && setup_links && setup_yay && install_loop && asdf_config && basic_config && tmux_plug && clean_up || exit
