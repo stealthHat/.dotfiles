@@ -41,19 +41,19 @@ alias \
 # k8s and helm
 alias \
   h='helm' \
-  k='kubectl' \
-  ks='kubectl -n kube-system' \
-  kp='kubectl -n platform' \
-  kd='kubectl -n dev' \
-  kdd='kubectl -n argocd' \
-  km='kubectl -n monitoring' \
-  kr='kubectl -n rabbitmq' \
-  kn='kubectl -n ingress-nginx' \
-  kv='kubectl -n vault' \
-  ka='kubectl -n argo' \
-  ke='kubectl -n elk' \
-  ko='kubectl -n argo-rollouts' \
-  kl='kubectl -n lens-metrics' \
+  k='kubecolor' \
+  ks='kubecolor -n kube-system' \
+  kp='kubecolor -n platform' \
+  kd='kubecolor -n dev' \
+  kdd='kubecolor -n argocd' \
+  km='kubecolor -n monitoring' \
+  kr='kubecolor -n rabbitmq' \
+  kn='kubecolor -n ingress-nginx' \
+  kv='kubecolor -n vault' \
+  ka='kubecolor -n argo' \
+  ke='kubecolor -n elk' \
+  ko='kubecolor -n argo-rollouts' \
+  kl='kubecolor -n lens-metrics' \
   hn='helm -n ingress-nginx' \
   hw='helm -n vault-webhook' \
   kc='helm -n cert-manager' \
@@ -62,6 +62,9 @@ alias \
   tapply='terraform apply -auto-approve ; echo "\a"' \
   tdestroy='terraform destroy -auto-approve' \
   argo='argo -n argo' \
+  alias bot-nati-deploy='ssh alfred "~/docker-login.sh && cd /home/admin/nati/bot-nati && git pull && docker build -t 762201808337.dkr.ecr.us-west-2.amazonaws.com/bot-nati:$(date +%Y%m%d%H%M) . && docker push 762201808337.dkr.ecr.us-west-2.amazonaws.com/bot-nati:$(date +%Y%m%d%H%M) && docker tag 762201808337.dkr.ecr.us-west-2.amazonaws.com/bot-nati:$(date +%Y%m%d%H%M) 762201808337.dkr.ecr.us-west-2.amazonaws.com/bot-nati:latest && docker push 762201808337.dkr.ecr.us-west-2.amazonaws.com/bot-nati:latest"'
+
+compdef kubecolor=kubectl
 
 # ssh
 alias \

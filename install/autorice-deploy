@@ -4,28 +4,35 @@ set -euo pipefail
 readonly script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 function pkginstall(){
-  sudo pacman --noconfirm --needed -S "$1"
+  printf "Installing %s: %s" "$1" "$2"
+  sudo pacman --noconfirm --needed -S "$1" > /dev/null
 }
 
 function aurinstall(){
-  yay --noconfirm --needed -S "$1"
+  printf "Installing %s: %s" "$1" "$2"
+  yay --noconfirm --needed -S "$1" > /dev/null
 }
 
 function repinstall() {
-  repname="$(basename "$1" .git)"
-  [ -d "$GIT_HOME"/"$repname" ] || (git -c http.sslVerify=false clone "$1" "$GIT_HOME"/"$repname" && cd "$GIT_HOME"/"$repname" && sudo make clean install)
+  printf "Cloning and building %s: %s" "$1" "$2"
+  repname="${1##*/}"
+  [ -d "$GIT_HOME/$repname" ] || (git clone "$1" "$GIT_HOME/$repname" > /dev/null && cd "$GIT_HOME/$repname" && sudo make clean install > /dev/null)
 }
 
 # Set the best mirrors for my country
 function mirror_settings() {
-  echo "SETTING MIRROR LIST"
+  printf "Setting mirror list"
   pkginstall reflector
   grep -q "reflector -c brazil" /etc/pacman.d/mirrorlist || sudo reflector -c brazil -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 }
 
-# Makes pacman pretty
-function pacman_config () {
-  echo "PACMAN CONFIG SETTINGS"
+# Font, doas config and pacman config
+function basic_config () {
+  printf "Font and doas config"
+  printf "FONT=FiraCode Nerd Font" | sudo tee -a /etc/vconsole.conf
+  printf "permit nopass :wheel" | sudo tee -a /etc/doas.conf
+
+  printf "Pacman config"
   grep -q "^Color" /etc/pacman.conf || sudo sed -i "s/^#Color$/Color/" /etc/pacman.conf
   grep -q "^VerbosePkgLists" /etc/pacman.conf || sudo sed -i "s/^#VerbosePkgLists$/VerbosePkgLists" /etc/pacman.conf
   grep -q "^TotalDownload" /etc/pacman.conf || sudo sed -i "s/^#TotalDownload$/TotalDownload" /etc/pacman.conf
@@ -34,34 +41,35 @@ function pacman_config () {
 
 # Install yay
 function setup_yay () {
-  echo "INSTALLING YAY"
+  printf "Installing yay"
   [ -d "$HOME"/git/yay ] || git clone https://aur.archlinux.org/yay.git "$GIT_HOME"/yay
   (cd "$GIT_HOME"/yay && makepkg -si PKGBUILD --noconfirm)
 }
 
 # Create all the folder structure of my .dotfiles/home and make symbolic links of all files of it to my ${HOME} directory
 function setup_links () {
-  echo "FOLDERS AND SYMBOLIC LINKS FOR DOTFILES"
-  local dot_home=$HOME/git/.dotfiles/home/
-
+  printf "Folders and symbolic links"
   sudo cp ./modprobe.d/* /etc/modprobe.d/
-  (cd "$dot_home"
+  (cd "${script_dir%/*}/home"
   find . -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
   find . -type f -exec ln -sfv "$PWD"/{} "$HOME"/{} \;)
 }
 
 # Install all
-# shellcheck disable=SC2034
 function install_loop () {
-  echo "INSTALLING PROGRAMS FROM progs.csv FILE"
+  printf "Installing packages from progs.csv file"
   while IFS=, read -r tag program comment; do
     [[ "$tag" =~ ^#.*$ ]] && continue
     case "$tag" in
-      "A") aurinstall "$program" ;;
-      "G") repinstall "$program" ;;
-      *) pkginstall "$program" ;;
+      "A") aurinstall "$program" "$comment" ;;
+      "G") repinstall "$program" "$comment" ;;
+      *) pkginstall "$program" "$comment";;
     esac
   done < "$HOME"/git/.dotfiles/install/progs.csv
+
+  printf "Set zsh as the default shell"
+  sudo chsh -s "$(which zsh)" "$(whoami)"
+  zsh
 }
 
 function asdf_config () {
@@ -71,33 +79,33 @@ function asdf_config () {
   yarn global add neovim
 }
 
-# Font, doas config and make zsh the default shell
-function basic_config () {
-  echo "FONT=FiraCode Nerd Font" | sudo tee -a /etc/vconsole.conf
-  echo "permit nopass :wheel" | sudo tee -a /etc/doas.conf
-  sudo chsh -s "$(which zsh)" "$(whoami)"
-  zsh
-}
-
 # Install tmux plugin manager
 function tmux_plug () {
-  echo "INSTALLING TMUX_PLUG"
+  printf "INSTALLING TMUX_PLUG"
   [ -d "$XDG_CONFIG_HOME"/tmux/plugins ] || git clone https://github.com/tmux-plugins/tpm "$XDG_CONFIG_HOME"/tmux/plugins/tpm
 }
 
 # Clean up home after install
 function clean_up () {
-  echo "CLEANING UP"
-  cd "$HOME" || exit
-  rm -rf .bash* .mkshrc .profile .shell.pre-oh-my-zsh .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &> /dev/null
+  printf "CLEANING UP"
+  cd "$HOME"
+  rm -rf .bash* .mkshrc .profile .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &> /dev/null
   rm -rf "$GIT_HOME"/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
   sudo reboot now
 }
-
 
 source "${script_dir%/*}/home/.zprofile"
 export GIT_HOME="$HOME/git"
 mkdir -p "$HOME"/.local/bin
 
 sudo pacman -Syu --noconfirm
-mirror_settings && pacman_config && setup_links && setup_yay && install_loop && asdf_config && basic_config && tmux_plug && clean_up || exit
+mirror_settings
+basic_config  &
+setup_links &
+wait
+setup_yay
+install_loop
+asdf_config &
+tmux_plug
+wait
+clean_up

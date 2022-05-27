@@ -61,10 +61,10 @@ cmp.setup {
     ["<C-e>"] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
 
     ["<Tab>"] = cmp.mapping(function(fallback)
-      if luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      elseif cmp.visible() then
+      if cmp.visible() then
         cmp.mapping.confirm() { select = true }
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
       else
         fallback()
       end
@@ -84,8 +84,8 @@ cmp.setup {
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
       -- Source
       vim_item.menu = ({
-        nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
+        nvim_lsp = "[LSP]",
         nvim_lua = "[Lua]",
         buffer = "[Buffer]",
         path = "[Path]",
