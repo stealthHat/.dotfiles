@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
+export GIT_HOME="$HOME/git"
 readonly script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 function pkginstall(){
@@ -23,7 +24,7 @@ function repinstall() {
 function mirror_settings() {
   printf "Setting mirror list"
   pkginstall reflector
-  grep -q "reflector -c brazil" /etc/pacman.d/mirrorlist || sudo reflector -c brazil -a 6 --sort rate --save /etc/pacman.d/mirrorlist
+  grep -q "reflector -c brazil" /etc/pacman.d/mirrorlist || sudo reflector -c chile -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 }
 
 # Font, doas config and pacman config
@@ -94,18 +95,20 @@ function clean_up () {
   sudo reboot now
 }
 
-source "${script_dir%/*}/home/.zprofile"
-export GIT_HOME="$HOME/git"
 mkdir -p "$HOME"/.local/bin
+source "${script_dir%/*}/home/.zprofile"
 
 sudo pacman -Syu --noconfirm
+
 mirror_settings
 basic_config  &
 setup_links &
 wait
+
 setup_yay
 install_loop
 asdf_config &
 tmux_plug
 wait
+
 clean_up
