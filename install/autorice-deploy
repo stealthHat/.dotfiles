@@ -60,11 +60,11 @@ function setup_links() {
 
 # Install all
 function install_loop() {
- 	printf "Installing packages from progs.csv file"
+	printf "Installing packages from progs.csv file"
 	while IFS=, read -r tag program comment; do
 		[[ "$tag" =~ ^#.*$ ]] && continue
 		case "$tag" in
-    "A") aurinstall "$program" "$comment" ;;
+		"A") aurinstall "$program" "$comment" ;;
 		"G") repinstall "$program" "$comment" ;;
 		*) pkginstall "$program" "$comment" ;;
 		esac
@@ -93,7 +93,7 @@ function tmux_plug() {
 function clean_up() {
 	printf "Cleaning Up"
 	cd "$HOME"
-  rm -rf .bash* .mkshrc .profile .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &>/dev/null
+	rm -rf .bash* .mkshrc .profile .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &>/dev/null
 	rm -rf "$GIT_HOME"/.dotfiles/home/.config/zsh/.zlogin &>/dev/null
 	# sudo reboot now
 }

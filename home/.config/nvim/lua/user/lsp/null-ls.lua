@@ -12,6 +12,7 @@ null_ls.setup {
     formatting.prettier,
     formatting.stylua,
     formatting.shellharden,
+    formatting.shfmt,
     diagnostics.shellcheck,
   },
 }
