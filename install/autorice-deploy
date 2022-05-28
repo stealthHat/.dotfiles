@@ -2,106 +2,109 @@
 set -euo pipefail
 
 export GIT_HOME="$HOME/git"
-readonly script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+readonly script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-function pkginstall(){
-  printf "Installing %s: %s" "$1" "$2"
-  sudo pacman --noconfirm --needed -S "$1" > /dev/null
+function pkginstall() {
+	printf "Installing %s: %s" "$1" "$2"
+	sudo pacman --noconfirm --needed -S "$1" >/dev/null
 }
 
-function aurinstall(){
-  printf "Installing %s: %s" "$1" "$2"
-  yay --noconfirm --needed -S "$1" > /dev/null
+function aurinstall() {
+	printf "Installing %s: %s" "$1" "$2"
+	yay --noconfirm --needed -S "$1" >/dev/null
 }
 
 function repinstall() {
-  printf "Cloning and building %s: %s" "$1" "$2"
-  repname="${1##*/}"
-  [ -d "$GIT_HOME/$repname" ] || (git clone "$1" "$GIT_HOME/$repname" > /dev/null && cd "$GIT_HOME/$repname" && sudo make clean install > /dev/null)
+	printf "Cloning and building %s: %s" "$1" "$2"
+	repname="${1##*/}"
+	[ -d "$GIT_HOME/$repname" ] || (git clone "$1" "$GIT_HOME/$repname" >/dev/null && cd "$GIT_HOME/$repname" && sudo make clean install >/dev/null)
 }
 
 # Set the best mirrors for my country
 function mirror_settings() {
-  printf "Setting mirror list"
-  pkginstall reflector
-  grep -q "reflector -c brazil" /etc/pacman.d/mirrorlist || sudo reflector -c chile -a 6 --sort rate --save /etc/pacman.d/mirrorlist
+	printf "Setting mirror list"
+	pkginstall reflector
+	grep -q "reflector -c Brazil" /etc/pacman.d/mirrorlist || sudo reflector -c Brazil --sort rate --save /etc/pacman.d/mirrorlist
 }
 
 # Font, doas config and pacman config
-function basic_config () {
-  printf "Font and doas config"
-  printf "FONT=FiraCode Nerd Font" | sudo tee -a /etc/vconsole.conf
-  printf "permit nopass :wheel" | sudo tee -a /etc/doas.conf
+function basic_config() {
+	printf "Font and doas config"
+	printf "FONT=FiraCode Nerd Font" | sudo tee -a /etc/vconsole.conf
+	printf "permit nopass :wheel" | sudo tee -a /etc/doas.conf
 
-  printf "Pacman config"
-  grep -q "^Color" /etc/pacman.conf || sudo sed -i "s/^#Color$/Color/" /etc/pacman.conf
-  grep -q "^VerbosePkgLists" /etc/pacman.conf || sudo sed -i "s/^#VerbosePkgLists$/VerbosePkgLists" /etc/pacman.conf
-  grep -q "^TotalDownload" /etc/pacman.conf || sudo sed -i "s/^#TotalDownload$/TotalDownload" /etc/pacman.conf
-  grep -q "^ILoveCandy" /etc/pacman.conf || sudo sed -i "37 i ILoveCandy" /etc/pacman.conf
+	printf "Pacman config"
+	grep -q "^Color" /etc/pacman.conf || sudo sed -i "s/^#Color$/Color/" /etc/pacman.conf
+	grep -q "^VerbosePkgLists" /etc/pacman.conf || sudo sed -i "s/^#VerbosePkgLists$/VerbosePkgLists" /etc/pacman.conf
+	grep -q "^TotalDownload" /etc/pacman.conf || sudo sed -i "s/^#TotalDownload$/TotalDownload" /etc/pacman.conf
+	grep -q "^ILoveCandy" /etc/pacman.conf || sudo sed -i "37 i ILoveCandy" /etc/pacman.conf
 }
 
 # Install yay
-function setup_yay () {
-  printf "Installing yay"
-  [ -d "$HOME"/git/yay ] || git clone https://aur.archlinux.org/yay.git "$GIT_HOME"/yay
-  (cd "$GIT_HOME"/yay && makepkg -si PKGBUILD --noconfirm)
+function setup_yay() {
+	printf "Installing yay"
+	[ -d "$HOME"/git/yay ] || git clone https://aur.archlinux.org/yay.git "$GIT_HOME"/yay
+	(cd "$GIT_HOME"/yay && makepkg -si PKGBUILD --noconfirm >/dev/null)
 }
 
 # Create all the folder structure of my .dotfiles/home and make symbolic links of all files of it to my ${HOME} directory
-function setup_links () {
-  printf "Folders and symbolic links"
-  sudo cp ./modprobe.d/* /etc/modprobe.d/
-  (cd "${script_dir%/*}/home"
-  find . -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
-  find . -type f -exec ln -sfv "$PWD"/{} "$HOME"/{} \;)
+function setup_links() {
+	printf "Folders and symbolic links"
+	sudo cp ./modprobe.d/* /etc/modprobe.d/
+	(
+		cd "${script_dir%/*}/home"
+		find . -type d -links 2 | sed 's/^.*\.config/\.config/;s/^.*\.local/\.local/' | xargs -I % mkdir -pv "$HOME/%"
+		find . -type f -exec ln -sfv "$PWD"/{} "$HOME"/{} \; >/dev/null
+	)
 }
 
 # Install all
-function install_loop () {
-  printf "Installing packages from progs.csv file"
-  while IFS=, read -r tag program comment; do
-    [[ "$tag" =~ ^#.*$ ]] && continue
-    case "$tag" in
-      "A") aurinstall "$program" "$comment" ;;
-      "G") repinstall "$program" "$comment" ;;
-      *) pkginstall "$program" "$comment";;
-    esac
-  done < "$HOME"/git/.dotfiles/install/progs.csv
+function install_loop() {
+ 	printf "Installing packages from progs.csv file"
+	while IFS=, read -r tag program comment; do
+		[[ "$tag" =~ ^#.*$ ]] && continue
+		case "$tag" in
+    "A") aurinstall "$program" "$comment" ;;
+		"G") repinstall "$program" "$comment" ;;
+		*) pkginstall "$program" "$comment" ;;
+		esac
+	done <"$HOME"/git/.dotfiles/install/progs.csv
 
-  printf "Set zsh as the default shell"
-  sudo chsh -s "$(which zsh)" "$(whoami)"
-  zsh
+	printf "Set zsh as the default shell"
+	sudo chsh -s "$(which zsh)" "$(whoami)"
+	zsh
 }
 
-function asdf_config () {
-  source /opt/asdf-vm/asdf.sh
-  asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git &&  asdf install nodejs latest
-  asdf plugin-add yarn && asdf install yarn latest
-  yarn global add neovim
+function asdf_config() {
+	printf "ASDF pluging install"
+	source /opt/asdf-vm/asdf.sh
+	asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git && asdf install nodejs latest
+	asdf plugin-add yarn && asdf install yarn latest
+	yarn global add neovim
 }
 
 # Install tmux plugin manager
-function tmux_plug () {
-  printf "INSTALLING TMUX_PLUG"
-  [ -d "$XDG_CONFIG_HOME"/tmux/plugins ] || git clone https://github.com/tmux-plugins/tpm "$XDG_CONFIG_HOME"/tmux/plugins/tpm
+function tmux_plug() {
+	printf "Installing tmux_plug"
+	[ -d "$XDG_CONFIG_HOME"/tmux/plugins ] || git clone https://github.com/tmux-plugins/tpm "$XDG_CONFIG_HOME"/tmux/plugins/tpm
 }
 
 # Clean up home after install
-function clean_up () {
-  printf "CLEANING UP"
-  cd "$HOME"
-  rm -rf .bash* .mkshrc .profile .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &> /dev/null
-  rm -rf "$GIT_HOME"/.dotfiles/home/.config/zsh/.zlogin &> /dev/null
-  sudo reboot now
+function clean_up() {
+	printf "Cleaning Up"
+	cd "$HOME"
+  rm -rf .bash* .mkshrc .profile .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &>/dev/null
+	rm -rf "$GIT_HOME"/.dotfiles/home/.config/zsh/.zlogin &>/dev/null
+	# sudo reboot now
 }
 
 mkdir -p "$HOME"/.local/bin
 source "${script_dir%/*}/home/.zprofile"
 
-sudo pacman -Syu --noconfirm
+sudo pacman -Syu --noconfirm >/dev/null
 
 mirror_settings
-basic_config  &
+basic_config &
 setup_links &
 wait
 
