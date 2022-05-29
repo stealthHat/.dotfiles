@@ -6,7 +6,7 @@ export PATH="$PATH:$HOME/.local/bin"
 # Default programs:
 export BROWSER="brave"
 export EDITOR="nvim"
-export TERMINAL="kitty"
+export TERMINAL="st"
 export READER="zathura"
 
 # Clean up $HOME
