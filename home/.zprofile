@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Adds `~/.local/bin` to $PATH
-export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
+export PATH="$PATH:$HOME/.local/bin"
 
 # Default programs:
 export BROWSER="brave"
