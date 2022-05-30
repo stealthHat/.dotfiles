@@ -2,18 +2,17 @@
 
 #my alias
 alias \
-  pacman='doas pacman' \
-  buildah='doas buildah' \
-  podman='doas podman' \
+  pacman='sudo pacman' \
+  buildah='sudo buildah' \
+  podman='sudo podman' \
   startx='startx $XINITRC' \
   zshrc='nvim $HOME/git/.dotfiles/home/.config/zsh/.zshrc' \
   zshalias='nvim $HOME/git/.dotfiles/home/.config/zsh/zsh-aliases' \
-  kittyconf='nvim $HOME/git/.dotfiles/home/.config/kitty/kitty.conf' \
   vimconf='nvim $HOME/git/.dotfiles/home/.config/nvim/init.vim' \
   tmuxconf='nvim $HOME/git/.dotfiles/home/.config/tmux/tmux.conf' \
 	tmux='tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf' \
 	w='watch -n1 ' \
-  ufw='doas ufw' \
+  ufw='sudo ufw' \
   .='cd $HOME/git/.dotfiles' \
   .i='cd $HOME/git/.dotfiles/install' \
   .h='cd $HOME/git/.dotfiles/home' \
@@ -27,8 +26,8 @@ alias \
   vim='nvim' \
   t='terraform' \
   ap='ansible-playbook' \
-  d='doas docker' \
-  sc='doas systemctl' \
+  d='sudo docker' \
+  sc='sudo systemctl' \
   diff='diff --color=auto' \
   gpush='gtoken && git push' \
   jarvis='bash $HOME/git/jarvis/jarvis.sh' \
@@ -36,7 +35,6 @@ alias \
   devcluster="aws eks --region us-west-2 update-kubeconfig --name development-platform" \
   alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config/.yarnrc"' \
   wget='wget --hsts-file $HOME/.config/wget/wget-hsts'
-
 
 # k8s and helm
 alias \
@@ -62,13 +60,11 @@ alias \
   tapply='terraform apply -auto-approve ; echo "\a"' \
   tdestroy='terraform destroy -auto-approve' \
   argo='argo -n argo' \
-  alias bot-nati-deploy='ssh alfred "~/docker-login.sh && cd /home/admin/nati/bot-nati && git pull && docker build -t 762201808337.dkr.ecr.us-west-2.amazonaws.com/bot-nati:$(date +%Y%m%d%H%M) . && docker push 762201808337.dkr.ecr.us-west-2.amazonaws.com/bot-nati:$(date +%Y%m%d%H%M) && docker tag 762201808337.dkr.ecr.us-west-2.amazonaws.com/bot-nati:$(date +%Y%m%d%H%M) 762201808337.dkr.ecr.us-west-2.amazonaws.com/bot-nati:latest && docker push 762201808337.dkr.ecr.us-west-2.amazonaws.com/bot-nati:latest"'
 
 compdef kubecolor=kubectl
 
 # ssh
 alias \
-  ssh='kitty +kitten ssh' \
   sshconfig='vim $HOME/.ssh/config' \
   sshkey='cat $HOME/.ssh/id_rsa.pub' \
   sshad='ssh-copy-id -i $HOME/.ssh/id_rsa.pub'
