@@ -7,7 +7,7 @@ A simple repo to save my .files with a [autorice](https://github.com/stealthHat/
   * Configure pacman to look pretty
   * Makes symbolic links of my dotfiles to $HOME (within their respective folders)
   * Install yay
-  * Install all the packages and repositories on [progs.cvs](https://github.com/stealthHat/.dotfiles/blob/master/install/progs.csv) (Including my builds of [suckless ](https://suckless.org/) DWM and Slstatus )
+  * Install all the packages and repositories on [progs.cvs](https://github.com/stealthHat/.dotfiles/blob/master/install/progs.csv) (Including my forks of [suckless ](https://suckless.org/) [DWM](https://github.com/stealthHat/dwm),[Slstatus](https://github.com/stealthHat/slstatus) and [St](https://github.com/stealthHat/st) )
   * Setup tmux
 
 disclaimer:

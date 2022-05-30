@@ -62,7 +62,7 @@ function setup_yay() {
 	(cd "$GIT_HOME"/yay && makepkg -si PKGBUILD --noconfirm >/dev/null 2>&1)
 }
 
-# Create all the folder structure of my .dotfiles/home and make symbolic links of all files of it to my ${HOME} directory
+# Create all the folder structure of my .dotfiles/home and make symbolic links of all files
 function setup_links() {
 	printf "Folders and symbolic links\n"
 	(
@@ -72,7 +72,7 @@ function setup_links() {
 	)
 }
 
-# Install all
+# Install all the packages on progs.csv
 function install_loop() {
 	printf "Installing packages from progs.csv file\n"
 	while IFS=, read -r tag program comment; do
@@ -119,7 +119,6 @@ function clean_up() {
 	printf "Cleaning Up\n"
 	cd "$HOME"
 	rm -rf .bash* .mkshrc .profile .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &>/dev/null
-	rm -rf "$GIT_HOME"/.dotfiles/home/.config/zsh/.zlogin &>/dev/null
 	sudo reboot now
 }
 
