@@ -11,18 +11,14 @@ function main() {
 	printf "Updating System\n"
 	sudo pacman -Syu --noconfirm >/dev/null
 
-	pacman_settings &
-	setup_links &
-	setup_yay &
-	wait
-
+	pacman_settings
+	setup_links
+	setup_yay
 	install_loop
-	tmux_plug &
-	basic_config &
-	asdf_config &
-	wait
-
-	clean_up
+	tmux_plug
+	basic_config
+	asdf_config
+	#	clean_up
 }
 
 function pkginstall() {
@@ -109,8 +105,11 @@ function basic_config() {
 # Install node and yarn
 function asdf_config() {
 	printf "ASDF pluging install\n"
+	source /opt/asdf-vm/asdf.sh
 	asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git && asdf install nodejs latest
+	asdf global nodejs latest
 	asdf plugin-add yarn && asdf install yarn latest
+	asdf global yarn latest
 	yarn global add neovim
 }
 

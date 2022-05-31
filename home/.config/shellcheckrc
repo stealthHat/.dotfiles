@@ -13,5 +13,3 @@ disable=SC2250
 disable=SC2312
 # SC2154: XDG_CONFIG_HOME is referenced but not assigned.
 disable=SC2154
-# SC2310: This function is invoked in an || condition so set -e will be disabled. Invoke separately if failures should cause the script to exit.
-disable=SC2310
