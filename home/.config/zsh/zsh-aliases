@@ -12,8 +12,7 @@ alias \
 	tmuxconf='nvim $HOME/git/.dotfiles/home/.config/tmux/tmux.conf' \
 	tmux='tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf' \
 	w='watch -n1 ' \
-	ufw='sudo ufw' \
-	.='cd $HOME/git/.dotfiles' \
+	dot='cd $HOME/git/.dotfiles' \
 	.i='cd $HOME/git/.dotfiles/install' \
 	.h='cd $HOME/git/.dotfiles/home' \
 	.v='cd $HOME/git/.dotfiles/home/.config/nvim' \

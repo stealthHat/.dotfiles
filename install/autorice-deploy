@@ -18,7 +18,7 @@ function main() {
 	tmux_plug
 	basic_config
 	asdf_config
-	#	clean_up
+	clean_up
 }
 
 function pkginstall() {
@@ -45,7 +45,7 @@ function pacman_settings() {
 
 	printf "Setting mirror list\n"
 	pkginstall reflector "Mirrors manager"
-	grep -q "reflector -c Brazil" /etc/pacman.d/mirrorlist || sudo reflector -c Brazil --save /etc/pacman.d/mirrorlist
+	grep -q "reflector -c Brazil" /etc/pacman.d/mirrorlist || sudo reflector -c Brazil --save /etc/pacman.d/mirrorlist >/dev/null
 }
 
 # Install yay
@@ -105,12 +105,13 @@ function basic_config() {
 # Install node and yarn
 function asdf_config() {
 	printf "ASDF pluging install\n"
+  local ASDF_DIR="/opt/asdf-vm"
 	source /opt/asdf-vm/asdf.sh
 	asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git && asdf install nodejs latest
 	asdf global nodejs latest
 	asdf plugin-add yarn && asdf install yarn latest
 	asdf global yarn latest
-	yarn global add neovim
+	npm i -g neovim prettier
 }
 
 # Clean up home after install

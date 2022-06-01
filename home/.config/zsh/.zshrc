@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # History
 HISTSIZE=1000000
@@ -38,4 +38,4 @@ zsh_add_plugin "zdharma-continuum/fast-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 
-source $ASDF_DIR/lib/asdf.sh
+. /opt/asdf-vm/asdf.sh
