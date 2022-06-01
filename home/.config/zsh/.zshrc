@@ -38,4 +38,4 @@ zsh_add_plugin "zdharma-continuum/fast-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 
-source /opt/asdf-vm/asdf.sh
+source $ASDF_DIR/lib/asdf.sh

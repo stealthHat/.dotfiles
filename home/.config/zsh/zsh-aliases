@@ -2,69 +2,69 @@
 
 #my alias
 alias \
-  pacman='sudo pacman' \
-  buildah='sudo buildah' \
-  podman='sudo podman' \
-  startx='startx $XINITRC' \
-  zshrc='nvim $HOME/git/.dotfiles/home/.config/zsh/.zshrc' \
-  zshalias='nvim $HOME/git/.dotfiles/home/.config/zsh/zsh-aliases' \
-  vimconf='nvim $HOME/git/.dotfiles/home/.config/nvim/init.vim' \
-  tmuxconf='nvim $HOME/git/.dotfiles/home/.config/tmux/tmux.conf' \
+	pacman='sudo pacman' \
+	buildah='sudo buildah' \
+	podman='sudo podman' \
+	startx='startx $XINITRC' \
+	zshrc='nvim $HOME/git/.dotfiles/home/.config/zsh/.zshrc' \
+	zshalias='nvim $HOME/git/.dotfiles/home/.config/zsh/zsh-aliases' \
+	vimconf='nvim $HOME/git/.dotfiles/home/.config/nvim/init.vim' \
+	tmuxconf='nvim $HOME/git/.dotfiles/home/.config/tmux/tmux.conf' \
 	tmux='tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf' \
 	w='watch -n1 ' \
-  ufw='sudo ufw' \
-  .='cd $HOME/git/.dotfiles' \
-  .i='cd $HOME/git/.dotfiles/install' \
-  .h='cd $HOME/git/.dotfiles/home' \
-  .v='cd $HOME/git/.dotfiles/home/.config/nvim' \
-  l='ls -lha --color=auto' \
-  ls='ls --color=auto' \
-  grep='grep --color=auto' \
+	ufw='sudo ufw' \
+	.='cd $HOME/git/.dotfiles' \
+	.i='cd $HOME/git/.dotfiles/install' \
+	.h='cd $HOME/git/.dotfiles/home' \
+	.v='cd $HOME/git/.dotfiles/home/.config/nvim' \
+	l='ls -lha --color=auto' \
+	ls='ls --color=auto' \
+	grep='grep --color=auto' \
 	diff='diff --color=auto' \
-  zshupdate='source $HOME/.config/zsh/.zshrc' \
-  s='git status' \
-  vim='nvim' \
-  t='terraform' \
-  ap='ansible-playbook' \
-  d='sudo docker' \
-  sc='sudo systemctl' \
-  diff='diff --color=auto' \
-  gpush='gtoken && git push' \
-  jarvis='bash $HOME/git/jarvis/jarvis.sh' \
-  g='cd $HOME/git' \
-  devcluster="aws eks --region us-west-2 update-kubeconfig --name development-platform" \
-  alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config/.yarnrc"' \
-  wget='wget --hsts-file $HOME/.config/wget/wget-hsts'
+	zshupdate='source $HOME/.config/zsh/.zshrc' \
+	s='git status' \
+	vim='nvim' \
+	t='terraform' \
+	ap='ansible-playbook' \
+	d='sudo docker' \
+	sc='sudo systemctl' \
+	diff='diff --color=auto' \
+	gpush='gtoken && git push' \
+	jarvis='bash $HOME/git/jarvis/jarvis.sh' \
+	g='cd $HOME/git' \
+	devcluster="aws eks --region us-west-2 update-kubeconfig --name development-platform" \
+	alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config/.yarnrc"' \
+	wget='wget --hsts-file $HOME/.config/wget/wget-hsts'
 
 # k8s and helm
 alias \
-  h='helm' \
-  k='kubecolor' \
-  ks='kubecolor -n kube-system' \
-  kp='kubecolor -n platform' \
-  kd='kubecolor -n dev' \
-  kdd='kubecolor -n argocd' \
-  km='kubecolor -n monitoring' \
-  kr='kubecolor -n rabbitmq' \
-  kn='kubecolor -n ingress-nginx' \
-  kv='kubecolor -n vault' \
-  ka='kubecolor -n argo' \
-  ke='kubecolor -n elk' \
-  ko='kubecolor -n argo-rollouts' \
-  kl='kubecolor -n lens-metrics' \
-  hn='helm -n ingress-nginx' \
-  hw='helm -n vault-webhook' \
-  kc='helm -n cert-manager' \
-  kx='helm -n ' \
-  tw='terraform workspace' \
-  tapply='terraform apply -auto-approve ; echo "\a"' \
-  tdestroy='terraform destroy -auto-approve' \
-  argo='argo -n argo' \
+	h='helm' \
+	k='kubecolor' \
+	ks='kubecolor -n kube-system' \
+	kp='kubecolor -n platform' \
+	kd='kubecolor -n dev' \
+	kdd='kubecolor -n argocd' \
+	km='kubecolor -n monitoring' \
+	kr='kubecolor -n rabbitmq' \
+	kn='kubecolor -n ingress-nginx' \
+	kv='kubecolor -n vault' \
+	ka='kubecolor -n argo' \
+	ke='kubecolor -n elk' \
+	ko='kubecolor -n argo-rollouts' \
+	kl='kubecolor -n lens-metrics' \
+	hn='helm -n ingress-nginx' \
+	hw='helm -n vault-webhook' \
+	kc='helm -n cert-manager' \
+	kx='helm -n ' \
+	tw='terraform workspace' \
+	tapply='terraform apply -auto-approve ; echo "\a"' \
+	tdestroy='terraform destroy -auto-approve' \
+	argo='argo -n argo'
 
 compdef kubecolor=kubectl
 
 # ssh
 alias \
-  sshconfig='vim $HOME/.ssh/config' \
-  sshkey='cat $HOME/.ssh/id_rsa.pub' \
-  sshad='ssh-copy-id -i $HOME/.ssh/id_rsa.pub'
+	sshconfig='vim $HOME/.ssh/config' \
+	sshkey='cat $HOME/.ssh/id_rsa.pub' \
+	sshad='ssh-copy-id -i $HOME/.ssh/id_rsa.pub'
