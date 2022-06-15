@@ -40,6 +40,7 @@ alias \
 	h='helm' \
 	k='kubecolor' \
 	ks='kubecolor -n kube-system' \
+	kss='kubecolor -n staging' \
 	kp='kubecolor -n platform' \
 	kd='kubecolor -n dev' \
 	kdd='kubecolor -n argocd' \
