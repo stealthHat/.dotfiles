@@ -5,121 +5,121 @@ readonly GIT_HOME="$HOME"/git
 readonly script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 function main() {
-	mkdir -p "$HOME"/.local/bin
-	source "${script_dir%/*}/home/.zprofile"
+  mkdir -p "$HOME"/.local/bin
+  source "${script_dir%/*}/home/.zprofile"
 
-	printf "Updating System\n"
-	sudo pacman -Syu --noconfirm >/dev/null
+  printf "Updating System\n"
+  sudo pacman -Syu --noconfirm >/dev/null
 
-	pacman_settings
-	setup_links
-	setup_yay
-	install_loop
-	tmux_plug
-	basic_config
-	asdf_config
-	clean_up
+  pacman_settings
+  setup_links
+  setup_yay
+  install_loop
+  tmux_plug
+  basic_config
+  asdf_config
+  clean_up
 }
 
 function pkginstall() {
-	printf "Installing %s: %s\n" "$1" "$2"
-	sudo pacman --noconfirm --needed -S "$1" >/dev/null
+  printf "Installing %s: %s\n" "$1" "$2"
+  sudo pacman --noconfirm --needed -S "$1" >/dev/null
 }
 
 function aurinstall() {
-	printf "Installing %s: %s\n" "$1" "$2"
-	yay --noconfirm --needed -S "$1" >/dev/null 2>&1
+  printf "Installing %s: %s\n" "$1" "$2"
+  yay --noconfirm --needed -S "$1" >/dev/null 2>&1
 }
 
 function repinstall() {
-	printf "Cloning and building %s: %s\n" "$1" "$2"
-	repname="${1##*/}"
-	[[ -d "$GIT_HOME/$repname" ]] || (git clone --quiet "$1" "$GIT_HOME/$repname" >/dev/null && cd "$GIT_HOME/$repname" && sudo make clean install >/dev/null 2>&1)
+  printf "Cloning and building %s: %s\n" "$1" "$2"
+  repname="${1##*/}"
+  [[ -d "$GIT_HOME/$repname" ]] || (git clone --quiet "$1" "$GIT_HOME/$repname" >/dev/null && cd "$GIT_HOME/$repname" && sudo make clean install >/dev/null 2>&1)
 }
 
 # Set the best mirrors for my country
 function pacman_settings() {
-	printf "Pacman config\n"
-	grep -q "ILoveCandy" /etc/pacman.conf || sudo sed -i "/VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
-	sudo sed -i '/Color/ s/^#//; /VerbosePkgLists/ s/^#//; /ParallelDownloads/ s/^#//' /etc/pacman.conf
+  printf "Pacman config\n"
+  grep -q "ILoveCandy" /etc/pacman.conf || sudo sed -i "/VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
+  sudo sed -i '/Color/ s/^#//; /VerbosePkgLists/ s/^#//; /ParallelDownloads/ s/^#//' /etc/pacman.conf
 
-	printf "Setting mirror list\n"
-	pkginstall reflector "Mirrors manager"
-	grep -q "reflector -c Brazil" /etc/pacman.d/mirrorlist || sudo reflector -c Brazil --save /etc/pacman.d/mirrorlist >/dev/null
+  printf "Setting mirror list\n"
+  pkginstall reflector "Mirrors manager"
+  grep -q "reflector -c Brazil" /etc/pacman.d/mirrorlist || sudo reflector -c Brazil -a 5 --sort rate --save /etc/pacman.d/mirrorlist >/dev/null
 }
 
 # Install yay
 function setup_yay() {
-	printf "Use all cores for compilation.\n"
-	sudo sed -i "s/-j2/-j$(nproc)/; /^#MAKEFLAGS/ s/^#//" /etc/makepkg.conf
+  printf "Use all cores for compilation.\n"
+  sudo sed -i "s/-j2/-j$(nproc)/; /^#MAKEFLAGS/ s/^#//" /etc/makepkg.conf
 
-	printf "Installing yay\n"
-	[[ -d "$HOME"/git/yay ]] || git clone --depth 1 --quiet https://aur.archlinux.org/yay.git "$GIT_HOME"/yay >/dev/null
-	(cd "$GIT_HOME"/yay && makepkg -si PKGBUILD --noconfirm >/dev/null 2>&1)
+  printf "Installing yay\n"
+  [[ -d "$HOME"/git/yay ]] || git clone --depth 1 --quiet https://aur.archlinux.org/yay.git "$GIT_HOME"/yay >/dev/null
+  (cd "$GIT_HOME"/yay && makepkg -si PKGBUILD --noconfirm >/dev/null 2>&1)
 }
 
 # Create all the folder structure of my .dotfiles/home and make symbolic links of all files
 function setup_links() {
-	printf "Folders and symbolic links\n"
-	(
-		cd "${script_dir%/*}/home"
-		find . -type d | sed 's/^..//' | xargs -I _ mkdir -pv "$HOME/_" >/dev/null
-		find . -type f | sed 's/^..//' | xargs -I _ ln -sv "$PWD/_" "$HOME/_" >/dev/null
-	)
+  printf "Folders and symbolic links\n"
+  (
+    cd "${script_dir%/*}/home"
+    find . -type d | sed 's/^..//' | xargs -I _ mkdir -pv "$HOME/_" >/dev/null
+    find . -type f | sed 's/^..//' | xargs -I _ ln -sv "$PWD/_" "$HOME/_" >/dev/null
+  )
 }
 
 # Install all the packages on progs.csv
 function install_loop() {
-	printf "Installing packages from progs.csv file\n"
-	while IFS=, read -r tag program comment; do
-		[[ "$tag" =~ ^#.*$ ]] && continue
-		case "$tag" in
-		"A") aurinstall "$program" "$comment" ;;
-		"G") repinstall "$program" "$comment" ;;
-		*) pkginstall "$program" "$comment" ;;
-		esac
-	done <"$HOME"/git/.dotfiles/install/progs.csv
+  printf "Installing packages from progs.csv file\n"
+  while IFS=, read -r tag program comment; do
+    [[ "$tag" =~ ^#.*$ ]] && continue
+    case "$tag" in
+      "A") aurinstall "$program" "$comment" ;;
+      "G") repinstall "$program" "$comment" ;;
+      *) pkginstall "$program" "$comment" ;;
+    esac
+  done <"$HOME"/git/.dotfiles/install/progs.csv
 }
 
 # Install tmux plugin manager
 function tmux_plug() {
-	printf "Installing tmux_plug\n"
-	[[ -d "$XDG_CONFIG_HOME"/tmux/plugins ]] || git clone https://github.com/tmux-plugins/tpm "$XDG_CONFIG_HOME"/tmux/plugins/tpm
+  printf "Installing tmux_plug\n"
+  [[ -d "$XDG_CONFIG_HOME"/tmux/plugins ]] || git clone https://github.com/tmux-plugins/tpm "$XDG_CONFIG_HOME"/tmux/plugins/tpm
 }
 
 # Basic system config
 function basic_config() {
-	printf "Creating Home folders\n"
-	xdg-user-dirs-update
+  printf "Creating Home folders\n"
+  xdg-user-dirs-update
 
-	printf "Font and doas config\n"
-	sudo sed -i "$ a FONT=FiraCode Nerd Font" /etc/vconsole.conf
+  printf "Font and doas config\n"
+  sudo sed -i "$ a FONT=FiraCode Nerd Font" /etc/vconsole.conf
 
-	printf "Modprobe\n"
-	sudo cp ./modprobe.d/* /etc/modprobe.d/
+  printf "Modprobe\n"
+  sudo cp ./modprobe.d/* /etc/modprobe.d/
 
-	printf "Set zsh as the default shell\n"
-	sudo chsh -s "$(which zsh)" "$(whoami)"
+  printf "Set zsh as the default shell\n"
+  sudo chsh -s "$(which zsh)" "$(whoami)"
 }
 
 # Install node and yarn
 function asdf_config() {
-	printf "ASDF pluging install\n"
+  printf "ASDF pluging install\n"
   local ASDF_DIR="/opt/asdf-vm"
-	source /opt/asdf-vm/asdf.sh
-	asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git && asdf install nodejs latest
-	asdf global nodejs latest
-	asdf plugin-add yarn && asdf install yarn latest
-	asdf global yarn latest
-	npm i -g neovim prettier
+  source /opt/asdf-vm/asdf.sh
+  asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git && asdf install nodejs latest
+  asdf global nodejs latest
+  asdf plugin-add yarn && asdf install yarn latest
+  asdf global yarn latest
+  npm i -g neovim prettier
 }
 
 # Clean up home after install
 function clean_up() {
-	printf "Cleaning Up\n"
-	cd "$HOME"
-	rm -rf .bash* .mkshrc .profile .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &>/dev/null
-	sudo reboot now
+  printf "Cleaning Up\n"
+  cd "$HOME"
+  rm -rf .bash* .mkshrc .profile .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &>/dev/null
+  sudo reboot now
 }
 
 main
