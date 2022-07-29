@@ -1,7 +1,29 @@
-[credential]
-	helper = store
 [user]
-	email = blinklgui@gmail.com
-	name = stealthhat
+  name = Guilherme
+  username  = stealthHat
+  email = blinklgui@gmail.com
+
+[core]
+  editor = nvim
+  whitespace = trailing-space
+
+[init]
+  defaultBranch = main
+
+[diff]
+  tool = vimdiff
+
+[difftool]
+  prompt = false
+  trustExitCode = true
+
+[merge]
+  tool = vimdiff
+  conflictstyle = diff3
+  prompt = false
+
 [alias]
 	logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+[credential]
+	helper = store
