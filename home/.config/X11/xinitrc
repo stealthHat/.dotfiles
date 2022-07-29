@@ -7,7 +7,7 @@ keyconfig &
 picom -f &
 
 # wallpaper
-xwallpaper --zoom "$HOME/git/.dotfiles/wallpapers/Other_27.jpg" &
+monitor-set &
 
 # Speed xrate up
 xset r rate 210 40 &
