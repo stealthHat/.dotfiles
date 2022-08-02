@@ -50,16 +50,20 @@ alias \
 	kv='kubecolor -n vault' \
 	ka='kubecolor -n argo' \
 	ke='kubecolor -n elk' \
+	kc='kubecolor -n cert-manager' \
 	ko='kubecolor -n argo-rollouts' \
 	kl='kubecolor -n lens-metrics' \
 	hn='helm -n ingress-nginx' \
 	hw='helm -n vault-webhook' \
-	kc='helm -n cert-manager' \
+	hm='helm -n monitoring' \
+	hc='helm -n cert-manager' \
 	kx='helm -n ' \
 	tw='terraform workspace' \
 	tapply='terraform apply -auto-approve ; echo "\a"' \
 	tdestroy='terraform destroy -auto-approve' \
-	argo='argo -n argo'
+	argo='argo -n argo' \
+  eks-basic='aws --profile basic-bro eks --region us-west-2  update-kubeconfig --name development-platform' \
+  eks-login='aws --profile default eks --region us-west-2  update-kubeconfig --name development-platform'
 
 compdef kubecolor=kubectl
 
