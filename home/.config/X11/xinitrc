@@ -1,13 +1,13 @@
 #!/bin/sh
 
+# wallpaper
+monitor-set
+
 # Keyboard Layout
 keyconfig &
 
 # Compositor
 picom -f &
-
-# wallpaper
-monitor-set &
 
 # Speed xrate up
 xset r rate 210 40 &

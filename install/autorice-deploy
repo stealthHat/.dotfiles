@@ -15,7 +15,6 @@ function main() {
   setup_links
   setup_yay
   install_loop
-  tmux_plug
   basic_config
   asdf_config
   clean_up
@@ -79,12 +78,6 @@ function install_loop() {
       *) pkginstall "$program" "$comment" ;;
     esac
   done <"$HOME"/git/.dotfiles/install/progs.csv
-}
-
-# Install tmux plugin manager
-function tmux_plug() {
-  printf "Installing tmux_plug\n"
-  [[ -d "$XDG_CONFIG_HOME"/tmux/plugins ]] || git clone https://github.com/tmux-plugins/tpm "$XDG_CONFIG_HOME"/tmux/plugins/tpm
 }
 
 # Basic system config
