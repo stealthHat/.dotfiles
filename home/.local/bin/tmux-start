@@ -1,1 +1,0 @@
-tmux new -s blinkl \; rename-window -t 0 main \; neww -n random_stuff \; neww -n notes
