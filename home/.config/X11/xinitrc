@@ -18,4 +18,6 @@ slstatus &
 
 dunst &
 
+unclutter -idle 1 -jitter 2 -root &
+
 exec dwm

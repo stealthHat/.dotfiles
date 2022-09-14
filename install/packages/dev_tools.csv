@@ -12,7 +12,7 @@
  ,bash-language-server,"Bash language server implementation based on Tree Sitter and its grammar for Bash"
  ,clang,"C language family frontend for LLVM"
  ,gopls,"Language server for Go programming language"
- ,golangci-lint,"Linters Runner for Go. 5x faster than gometalinter"
+A,golangci-lint-langserver-bin,"golangci-lint language server"
  ,typescript-language-server,"Language Server Protocol (LSP) implementation for TypeScript using tsserver"
  ,pyright,"Type checker for the Python language"
  ,yaml-language-server,"YAML Language Server"

@@ -14,8 +14,8 @@ function config.nvim_cmp()
   cmp.setup {
     preselect = cmp.PreselectMode.Item,
     window = {
-      -- completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
     },
     formatting = {
       fields = { "abbr", "kind", "menu" },

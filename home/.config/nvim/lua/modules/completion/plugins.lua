@@ -2,18 +2,20 @@ local plugin = require("core.pack").register_plugin
 local conf = require "modules.completion.config"
 
 local enable_lsp_filetype = {
-  "go",
   "lua",
   "sh",
-  "rust",
   "c",
   "cpp",
+  "go",
   "typescript",
   "typescriptreact",
   "javascript",
-  "json",
   "python",
   "yaml",
+  "yaml.ansible",
+  "terraform",
+  "dockerfile",
+  "json",
 }
 
 plugin { "neovim/nvim-lspconfig", ft = enable_lsp_filetype, config = conf.nvim_lsp }
@@ -36,5 +38,3 @@ plugin { "L3MON4D3/LuaSnip", event = "InsertCharPre", config = conf.lua_snip }
 plugin { "jose-elias-alvarez/null-ls.nvim", config = conf.null_ls }
 
 plugin { "windwp/nvim-autopairs", event = "InsertEnter", config = conf.auto_pairs }
-
-plugin { 'rhysd/vim-operator-surround', event = 'BufRead', requires = 'kana/vim-operator-user' }
