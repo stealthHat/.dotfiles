@@ -9,9 +9,6 @@ local cmd = keymap.cmd
 nmap {
   -- close buffer
   { "<C-x>k", cmd "bdelete", opts(noremap, silent) },
-  -- save quit
-  { "<Leader>w", cmd "wa!", opts(noremap) },
-  { "<Leader>q", cmd "q!", opts(noremap) },
   -- buffer jump
   { "]b", cmd "bn", opts(noremap) },
   { "[b", cmd "bp", opts(noremap) },

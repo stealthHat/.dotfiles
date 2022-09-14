@@ -52,6 +52,9 @@ nmap {
   { "sa", "<Plug>(operator-surround-append)", opts(noremap, silent) },
   { "sd", "<Plug>(operator-surround-delete)", opts(noremap, silent) },
   { "sr", "<Plug>(operator-surround-replace)", opts(noremap, silent) },
+  -- save quit
+  { "<Leader>w", cmd "wa!", opts(noremap) },
+  { "<Leader>q", cmd "q!", opts(noremap) },
 }
 
 -- Lspsaga floaterminal

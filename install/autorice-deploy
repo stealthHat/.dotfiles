@@ -1,12 +1,13 @@
 #!/bin/bash
 set -euo pipefail
 
-readonly GIT_HOME="$HOME"/git
+readonly root_dir=$(git rev-parse --show-toplevel)
 readonly script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+readonly git_dir="${root_dir%/*}"
 
 function main() {
   mkdir -p "$HOME"/.local/bin
-  source "${script_dir%/*}/home/.zprofile"
+  source "$root_dir/home/.zprofile"
 
   pacman_settings
   setup_links
@@ -14,6 +15,7 @@ function main() {
   install_loop
   basic_config
   asdf_config
+
   clean_up
 }
 
@@ -30,7 +32,7 @@ function aurinstall() {
 function repinstall() {
   printf "Cloning and building %s: %s\n" "$1" "$2"
   repname="${1##*/}"
-  [[ -d "$GIT_HOME/$repname" ]] || (git clone --quiet "$1" "$GIT_HOME/$repname" >/dev/null && cd "$GIT_HOME/$repname" && sudo make clean install >/dev/null 2>&1)
+  [[ -d "$git_dir/$repname" ]] || (git clone --quiet "$1" "$git_dir/$repname" >/dev/null && cd "$git_dir/$repname" && sudo make clean install >/dev/null 2>&1)
 }
 
 # Set the best mirrors for my country
@@ -47,7 +49,7 @@ function pacman_settings() {
   grep -q "reflector -c Brazil" /etc/pacman.d/mirrorlist || sudo reflector -c Brazil -a 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist >/dev/null
 
   printf "Updating System\n"
-  sudo pacman --noconfirm -Syu >/dev/null 
+  sudo pacman --noconfirm -Syu >/dev/null
 }
 
 # Install yay
@@ -56,15 +58,15 @@ function setup_yay() {
   sudo sed -i "s/-j2/-j$(nproc)/; /^#MAKEFLAGS/ s/^#//" /etc/makepkg.conf
 
   printf "Installing yay\n"
-  [[ -d "$HOME"/git/yay ]] || git clone --depth 1 --quiet https://aur.archlinux.org/yay.git "$GIT_HOME"/yay >/dev/null
-  (cd "$GIT_HOME"/yay && makepkg -si PKGBUILD --noconfirm >/dev/null 2>&1)
+  [[ -d "$git_dir"/yay ]] || git clone --depth 1 --quiet https://aur.archlinux.org/yay.git "$git_dir"/yay >/dev/null
+  (cd "$git_dir"/yay && makepkg -si PKGBUILD --noconfirm >/dev/null 2>&1)
 }
 
 # Create all the folder structure of my .dotfiles/home and make symbolic links of all files
 function setup_links() {
   printf "Folders and symbolic links\n"
   (
-    cd "${script_dir%/*}/home"
+    cd "$root_dir/home"
     find . -type d | sed 's/^..//' | xargs -I _ mkdir -pv "$HOME/_" >/dev/null
     find . -type f | sed 's/^..//' | xargs -I _ ln -sfv "$PWD/_" "$HOME/_" >/dev/null
   )
@@ -73,7 +75,7 @@ function setup_links() {
 # Install all the packages on packages folder
 function install_loop() {
   printf "Installing packages from packages folder\n"
-  for csv in "${script_dir%/*}"/install/packages/*.csv; do
+  for csv in "$script_dir"/packages/*.csv; do
     while IFS=, read -r tag program comment; do
       [[ "$tag" =~ ^#.*$ ]] && continue
       case "$tag" in
@@ -94,7 +96,7 @@ function basic_config() {
   sudo sed -i "$ a FONT=FiraCode Nerd Font" /etc/vconsole.conf
 
   printf "Modprobe\n"
-  sudo cp ./modprobe.d/* /etc/modprobe.d/
+  sudo cp "$script_dir"/modprobe.d/* /etc/modprobe.d/
 
   printf "Set zsh as the default shell\n"
   sudo chsh -s "$(which zsh)" "$(whoami)"
