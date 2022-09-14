@@ -49,99 +49,31 @@ local on_attach = function(client, bufnr)
   end
 end
 
-lspconfig.gopls.setup {
-  on_attach = on_attach,
-  cmd = { "gopls", "--remote=auto" },
-  capabilities = capabilities,
-  init_options = {
-    usePlaceholders = true,
-    completeUnimported = true,
-  },
-}
-
-lspconfig.sumneko_lua.setup {
-  on_attach = on_attach,
-  settings = {
-    Lua = {
-      diagnostics = {
-        enable = true,
-        globals = { "vim", "packer_plugins" },
-      },
-      runtime = { version = "LuaJIT" },
-      workspace = {
-        library = vim.list_extend({ [vim.fn.expand "$VIMRUNTIME/lua"] = true }, {}),
-      },
-    },
-  },
-}
-
-lspconfig.clangd.setup {
-  on_attach = on_attach,
-  cmd = {
-    "clangd",
-    "--background-index",
-    "--suggest-missing-includes",
-    "--clang-tidy",
-    "--header-insertion=iwyu",
-  },
-}
-
-lspconfig.rust_analyzer.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    imports = {
-      granularity = {
-        group = "module",
-      },
-      prefix = "self",
-    },
-    cargo = {
-      buildScripts = {
-        enable = true,
-      },
-    },
-    procMacro = {
-      enable = true,
-    },
-  },
-}
-
-lspconfig.ansiblels.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    ansible = {
-      ansible = {
-        path = "ansible",
-      },
-      ansibleLint = {
-        enabled = true,
-        path = "ansible-lint",
-      },
-      executionEnvironment = {
-        enabled = false,
-      },
-      python = {
-        interpreterPath = "python",
-      },
-    },
-  },
-}
-
 local servers = {
-  "dockerls",
-  "pyright",
+  "sumneko_lua",
   "bashls",
-  "tsserver",
+  "clangd",
+  "gopls",
   "golangci_lint_ls",
+  "tsserver",
+  "pyright",
   "yamlls",
+  "ansiblels",
   "terraformls",
+  "dockerls",
+  "jsonls",
 }
 
 for _, server in ipairs(servers) do
-  lspconfig[server].setup {
+  local opts = {
     on_attach = on_attach,
     capabilities = capabilities,
   }
+
+  local has_custom_opts, server_custom_opts = pcall(require, "modules.completion.settings." .. server)
+  if has_custom_opts then
+    opts = vim.tbl_deep_extend("force", server_custom_opts, opts)
+  end
+
+  lspconfig[server].setup(opts)
 end
