@@ -37,5 +37,12 @@ zsh_add_plugin "spaceship-prompt/spaceship-prompt"
 zsh_add_plugin "zdharma-continuum/fast-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
+zsh_add_plugin "jeffreytse/zsh-vi-mode"
+#https://github.com/jeffreytse/zsh-vi-mode/issues/19
+zvm_vi_yank () {
+	zvm_yank
+	printf %s "${CUTBUFFER}" | xclip -sel c
+	zvm_exit_visual_mode
+}
 
 . /opt/asdf-vm/asdf.sh
