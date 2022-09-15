@@ -22,7 +22,10 @@ nmap {
   { "<Leader>li", cmd "LspInfo", opts(noremap, silent) },
   { "<Leader>ll", cmd "LspLog", opts(noremap, silent) },
   { "<Leader>lr", cmd "LspRestart", opts(noremap, silent) },
-  { "<Leader>f", cmd "lua vim.lsp.buf.formatting()", opts(noremap, silent) },
+  { "<Leader>lf", cmd "lua vim.lsp.buf.formatting()", opts(noremap, silent) },
+  { "<Leader>le", cmd "lua vim.diagnostic.setloclist()", opts(noremap, silent) },
+  { "gi", cmd "vim.lsp.buf.implementation", opts(noremap, silent) },
+  { "gD", cmd "vim.lsp.buf.declaration", opts(noremap, silent) },
   -- Lspsaga
   { "[e", cmd "Lspsaga diagnostic_jump_next", opts(noremap, silent) },
   { "]e", cmd "Lspsaga diagnostic_jump_prev", opts(noremap, silent) },

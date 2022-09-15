@@ -9,9 +9,6 @@ keyconfig &
 # Compositor
 picom -f &
 
-# Speed xrate up
-xset r rate 210 40 &
-
 xset -dpms &
 
 slstatus &

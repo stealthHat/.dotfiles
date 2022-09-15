@@ -13,6 +13,9 @@ function config.nvim_cmp()
   local cmp = require "cmp"
   cmp.setup {
     preselect = cmp.PreselectMode.Item,
+    completion = {
+      completeopt = "menu,menuone,noinsert",
+    },
     window = {
       completion = cmp.config.window.bordered(),
       documentation = cmp.config.window.bordered(),
@@ -33,6 +36,7 @@ function config.nvim_cmp()
     sources = {
       { name = "nvim_lsp" },
       { name = "luasnip" },
+      { name = "nvim_lua" },
       { name = "path" },
       { name = "buffer" },
     },

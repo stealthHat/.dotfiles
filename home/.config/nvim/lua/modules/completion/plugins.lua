@@ -27,13 +27,14 @@ plugin {
   config = conf.nvim_cmp,
   requires = {
     { "hrsh7th/cmp-nvim-lsp", after = "nvim-lspconfig" },
+    { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
     { "hrsh7th/cmp-path", after = "nvim-cmp" },
     { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-    { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
+    { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
   },
 }
 
-plugin { "L3MON4D3/LuaSnip", event = "InsertCharPre", config = conf.lua_snip }
+plugin { "L3MON4D3/LuaSnip", event = "InsertCharPre", config = conf.lua_snip, requires = {"rafamadriz/friendly-snippets"}}
 
 plugin { "jose-elias-alvarez/null-ls.nvim", config = conf.null_ls }
 
