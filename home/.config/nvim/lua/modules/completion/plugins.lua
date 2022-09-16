@@ -12,7 +12,7 @@ local enable_lsp_filetype = {
   "javascript",
   "python",
   "yaml",
-  "yaml.ansible",
+  "yaml.ansible", -- https://github.com/neovim/nvim-lspconfig/issues/2046
   "terraform",
   "dockerfile",
   "json",
@@ -34,7 +34,7 @@ plugin {
   },
 }
 
-plugin { "L3MON4D3/LuaSnip", event = "InsertCharPre", config = conf.lua_snip, requires = {"rafamadriz/friendly-snippets"}}
+plugin { "L3MON4D3/LuaSnip", event = "InsertCharPre", config = conf.lua_snip, requires = { "rafamadriz/friendly-snippets" } }
 
 plugin { "mfussenegger/nvim-lint", config = conf.nvim_lint }
 

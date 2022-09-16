@@ -3,6 +3,7 @@ return {
     ansible = {
       ansible = {
         path = "ansible",
+        useFullyQualifiedCollectionNames = true,
       },
       ansibleLint = {
         enabled = true,
@@ -13,6 +14,10 @@ return {
       },
       python = {
         interpreterPath = "python",
+      },
+      completion = {
+        provideRedirectModules = true,
+        provideModuleOptionAliases = true,
       },
     },
   },
