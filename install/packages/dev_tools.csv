@@ -3,6 +3,7 @@
  ,shellharden,"Bash linter and syntax highlighter"
  ,shfmt,"Format shell programs"
  ,stylua,"Code formatter for Lua"
+ ,yamllint,"Linter for YAML files"
  ,prettier,"An opinionated code formatter for JS, JSON, CSS, YAML and much more"
  ,fzf,"is a fuzzy finder tool"
  ,fd,"Simple, fast and user-friendly alternative to find"

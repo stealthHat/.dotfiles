@@ -7,7 +7,7 @@ local cmd = keymap.cmd
 -- noremal remap
 nmap {
   -- close buffer
-  { "<C-x>k", cmd "bdelete", opts(noremap, silent) },
+  { "<C-x>x", cmd "bdelete", opts(noremap, silent) },
   -- buffer jump
   { "]b", cmd "bn", opts(noremap) },
   { "[b", cmd "bp", opts(noremap) },

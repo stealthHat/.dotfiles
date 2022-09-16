@@ -65,10 +65,21 @@ function config.lua_snip()
   }
 end
 
+function config.nvim_lint()
+  require("lint").linters_by_ft = {
+    sh = { "shellcheck" },
+    yaml = { "yamllint" },
+  }
+  vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+    callback = function()
+      require("lint").try_lint()
+    end,
+  })
+end
+
 function config.null_ls()
   local null_ls = require "null-ls"
   local formatting = null_ls.builtins.formatting
-  local diagnostics = null_ls.builtins.diagnostics
 
   null_ls.setup {
     debug = false,
@@ -76,7 +87,6 @@ function config.null_ls()
       formatting.prettier,
       formatting.stylua,
       formatting.shellharden,
-      diagnostics.shellcheck,
       formatting.shfmt.with { extra_args = { "-i", "2", "-ci", "-bn" } },
     },
   }
