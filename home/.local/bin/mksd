@@ -1,6 +1,6 @@
 #!/bin/bash
 
-doas dd if="$HOME"/Documents/ubuntu-20.04.2-preinstalled-server-arm64+raspi.img of=/dev/sdb status=progress
+doas dd if="$HOME/Documents/ubuntu-22.04.1-preinstalled-server-arm64+raspi.img" of=/dev/sdb status=progress
 doas mount /dev/sdb1 /media/sd/
 doas touch /media/sd/ssh
 doas umount /media/sd/
