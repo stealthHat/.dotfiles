@@ -24,6 +24,7 @@ nmap {
   { "<Leader>lr", cmd "LspRestart", opts(noremap, silent) },
   { "<Leader>lf", cmd "lua vim.lsp.buf.formatting()", opts(noremap, silent) },
   { "<Leader>le", cmd "lua vim.diagnostic.setloclist()", opts(noremap, silent) },
+  { "<Leader>la", cmd "set ft=yaml.ansible", opts(noremap, silent) },
   { "gi", cmd "vim.lsp.buf.implementation", opts(noremap, silent) },
   { "gD", cmd "vim.lsp.buf.declaration", opts(noremap, silent) },
   -- Lspsaga
