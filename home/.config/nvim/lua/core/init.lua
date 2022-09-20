@@ -1,6 +1,5 @@
 local vim = vim
 local home = os.getenv "HOME"
--- remove check is windows because I only use mac or linux
 local cache_dir = home .. "/.cache/nvim/"
 
 -- Create cache dir and subs dir
