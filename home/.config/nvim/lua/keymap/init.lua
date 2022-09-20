@@ -1,15 +1,8 @@
-require "keymap.config"
 local key = require "core.keymap"
-local nmap, imap, tmap = key.nmap, key.imap, key.tmap
-local silent, noremap, expr, remap = key.silent, key.noremap, key.expr, key.remap
+local nmap, tmap = key.nmap, key.tmap
+local silent, noremap = key.silent, key.noremap
 local opts = key.new_opts
 local cmd = key.cmd
-
-imap {
-  -- tab key
-  { "<TAB>", _G.smart_tab, opts(expr, silent, remap) },
-  { "<S-TAB>", _G.smart_shift_tab, opts(expr, silent, remap) },
-}
 
 nmap {
   -- close buffer

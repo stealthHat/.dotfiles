@@ -31,10 +31,11 @@ plugin {
     { "hrsh7th/cmp-path", after = "nvim-cmp" },
     { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
     { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
+    { "onsails/lspkind.nvim" },
   },
 }
 
-plugin { "L3MON4D3/LuaSnip", event = "InsertCharPre", config = conf.lua_snip, requires = { "rafamadriz/friendly-snippets" } }
+plugin { "L3MON4D3/LuaSnip", config = conf.lua_snip, requires = { "rafamadriz/friendly-snippets" } }
 
 plugin { "jose-elias-alvarez/null-ls.nvim", config = conf.null_ls }
 
