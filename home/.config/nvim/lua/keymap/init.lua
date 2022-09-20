@@ -5,6 +5,7 @@ local opts = key.new_opts
 local cmd = key.cmd
 
 nmap {
+  { "<esc>", cmd "noh", opts(noremap, silent) },
   -- close buffer
   { "<C-x>x", cmd "bdelete", opts(noremap, silent) },
   -- buffer jump
@@ -55,10 +56,6 @@ nmap {
   { "<Leader>gc", cmd "Telescope git_commits", opts(noremap, silent) },
   -- Gitsings
   { "<Leader>gd", cmd "Gitsigns diffthis", opts(noremap, silent) },
-  -- Vim-operator-surround
-  { "sa", "<Plug>(operator-surround-append)", opts(noremap, silent) },
-  { "sd", "<Plug>(operator-surround-delete)", opts(noremap, silent) },
-  { "sr", "<Plug>(operator-surround-replace)", opts(noremap, silent) },
   -- save quit
   { "<Leader>w", cmd "wa!", opts(noremap) },
   { "<Leader>q", cmd "q!", opts(noremap) },

@@ -37,4 +37,9 @@ function config.telescope()
   require("telescope").load_extension "fzy_native"
 end
 
+function config.mini_nvim()
+  require("mini.surround").setup()
+  require("mini.trailspace").setup()
+end
+
 return config

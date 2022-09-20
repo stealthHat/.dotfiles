@@ -14,4 +14,4 @@ plugin {
 
 plugin { "christoomey/vim-tmux-navigator" }
 
-plugin { 'rhysd/vim-operator-surround', event = 'BufRead', requires = 'kana/vim-operator-user' }
+plugin { "echasnovski/mini.nvim", config = conf.mini_nvim }
