@@ -46,7 +46,7 @@ function pacman_settings() {
 
   printf "Setting mirror list\n"
   pkginstall reflector "Mirrors manager"
-  grep -q "reflector -c Brazil" /etc/pacman.d/mirrorlist || sudo reflector -c Brazil -a 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist >/dev/null
+  grep -q "reflector -c Brazil" /etc/pacman.d/mirrorlist || sudo reflector -c Brazil -a 12 -p https --sort rate --save /etc/pacman.d/mirrorlist >/dev/null
 
   printf "Updating System\n"
   sudo pacman --noconfirm -Syu >/dev/null
