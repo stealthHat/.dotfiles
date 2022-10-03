@@ -1,4 +1,3 @@
-local api = vim.api
 local lspconfig = require "lspconfig"
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -29,23 +28,27 @@ vim.diagnostic.config {
   },
 }
 
+local lsp_formatting = function(bufnr)
+  vim.lsp.buf.format {
+    filter = function(client)
+      return client.name == "null-ls"
+    end,
+    bufnr = bufnr,
+  }
+end
+
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
 local on_attach = function(client, bufnr)
-  if client.server_capabilities.documentFormattingProvider then
-    api.nvim_create_autocmd("BufWritePre", {
-      pattern = client.config.filetypes,
+  if client.supports_method "textDocument/formatting" then
+    vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
       callback = function()
-        vim.lsp.buf.format {
-          bufnr = bufnr,
-          async = true,
-        }
+        lsp_formatting(bufnr)
       end,
     })
-  end
---  if client.name == "tsserver" then
---    client.resolved_capabilities.document_formatting = false
---  end
-  if client.name == "sumneko_lua" then
-    client.resolved_capabilities.document_formatting = false
   end
 end
 

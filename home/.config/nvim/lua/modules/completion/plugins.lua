@@ -38,5 +38,3 @@ plugin {
 plugin { "L3MON4D3/LuaSnip", config = conf.lua_snip, requires = { "rafamadriz/friendly-snippets" } }
 
 plugin { "jose-elias-alvarez/null-ls.nvim", config = conf.null_ls }
-
-plugin { "windwp/nvim-autopairs", event = "InsertEnter", config = conf.auto_pairs }

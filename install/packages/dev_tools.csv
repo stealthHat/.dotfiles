@@ -18,6 +18,7 @@ A,terraform-ls,"Terraform Language Server (terraformls)"
 A,dockerfile-language-server,"Language server for Dockerfiles (dockerls)"
 A,vscode-langservers-extracted,"Language servers extracted from VSCode (html,cssls,jsonls,eslint)"
 A,golangci-lint-langserver-bin,"golangci-lint language server (golangci_lint_ls)"
+A,golangci-lint,"Linters Runner for Go. 5x faster than gometalinter (golanci_lint client)"
 #Linters
  ,shellcheck,"Shell script analysis tool (used in bashls)"
  ,yamllint,"Linter for YAML files (used in ansiblels)"
