@@ -39,8 +39,8 @@ end
 
 function config.mini_nvim()
   require("mini.surround").setup()
-  require("mini.trailspace").setup()
   require("mini.pairs").setup()
+  require("mini.trailspace").setup { only_in_normal_buffers = false }
 end
 
 return config

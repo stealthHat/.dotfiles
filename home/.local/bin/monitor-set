@@ -4,7 +4,7 @@ intern=eDP1
 extern=HDMI2
 
 paper() {
-  xwallpaper --center "$HOME/git/.dotfiles/wallpapers/gunter.jpg"
+  xwallpaper --center "$HOME/git/.dotfiles/home/.config/wallpapers/gunter.jpg"
 }
 
 if xrandr | grep "$extern disconnected"; then

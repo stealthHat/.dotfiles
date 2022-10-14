@@ -23,12 +23,12 @@ function config.lua_snip()
     ext_opts = {
       [types.choiceNode] = {
         active = {
-          virt_text = { { "●", "GruvboxOrange" } },
+          virt_text = { { "", "GruvboxOrange" } },
         },
       },
       [types.insertNode] = {
         active = {
-          virt_text = { { "●", "GruvboxBlue" } },
+          virt_text = { { "", "GruvboxBlue" } },
         },
       },
     },
