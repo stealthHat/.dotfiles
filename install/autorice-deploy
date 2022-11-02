@@ -46,7 +46,8 @@ function pacman_settings() {
 
   printf "Setting mirror list\n"
   pkginstall reflector "Mirrors manager"
-  grep -q "reflector -c Brazil" /etc/pacman.d/mirrorlist || sudo reflector -c Brazil -a 12 -p https --sort rate --save /etc/pacman.d/mirrorlist >/dev/null
+  sudo cp "$script_dir"/etc/xdg/reflector/reflector.conf /etc/xdg/reflector/reflector.conf
+  sudo systemctl enable --now reflector
 
   printf "Updating System\n"
   sudo pacman --noconfirm -Syu >/dev/null
