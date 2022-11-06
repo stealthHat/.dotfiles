@@ -39,6 +39,7 @@ function repinstall() {
 function pacman_settings() {
   printf "Pacman keyring\n"
   sudo pacman --noconfirm -Sy archlinux-keyring >/dev/null
+  sudo pacman -Syu --noconfirm
 
   printf "Pacman config\n"
   grep -q "ILoveCandy" /etc/pacman.conf || sudo sed -i "/VerbosePkgLists/a ILoveCandy" /etc/pacman.conf

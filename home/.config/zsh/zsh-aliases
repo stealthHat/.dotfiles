@@ -70,5 +70,4 @@ compdef kubecolor=kubectl
 # ssh
 alias \
 	sshconfig='vim $HOME/.ssh/config' \
-	sshkey='cat $HOME/.ssh/id_rsa.pub' \
 	sshad='ssh-copy-id -i $HOME/.ssh/id_ed25519.pub'

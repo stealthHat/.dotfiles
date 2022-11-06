@@ -5,7 +5,6 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 # Some useful options (man zshoptions)
-unsetopt BEEP
 setopt appendhistory
 setopt autocd extendedglob nomatch menucomplete
 setopt interactive_comments
@@ -27,15 +26,15 @@ autoload -Uz colors && colors
 # Useful Functions
 source "$ZDOTDIR/zsh-functions"
 
-# Normal files to .
-zsh_add_file "zsh-vim-mode"
-zsh_add_file "zsh-aliases"
-zsh_add_file "zsh-prompt"
-
 # Plugins
 zsh_add_plugin "spaceship-prompt/spaceship-prompt"
+zsh_add_plugin "spaceship-prompt/spaceship-vi-mode"
 zsh_add_plugin "zdharma-continuum/fast-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
+
+# Normal files to .
+zsh_add_file "zsh-vim-mode"
+zsh_add_file "zsh-aliases"
 
 . /opt/asdf-vm/asdf.sh

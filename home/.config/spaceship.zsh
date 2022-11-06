@@ -1,5 +1,3 @@
-source $ZDOTDIR/plugins/spaceship-prompt/spaceship.zsh
-
 SPACESHIP_PROMPT_ORDER=(
   user          # Username section
   dir           # Current directory section
