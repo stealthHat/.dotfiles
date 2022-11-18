@@ -59,7 +59,7 @@ alias \
 	hc='helm -n cert-manager' \
 	kx='helm -n ' \
 	tw='terraform workspace' \
-	tapply='terraform apply -auto-approve ; echo "\a"' \
+	tapply='terraform apply -auto-approve ; notify-send -u critical "Terraform Done!"' \
 	tdestroy='terraform destroy -auto-approve' \
 	argo='argo -n argo' \
   eks-basic='aws --profile basic-bro eks --region us-west-2  update-kubeconfig --name development-platform' \
