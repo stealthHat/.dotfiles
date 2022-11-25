@@ -5,34 +5,26 @@ readonly root_dir=$(git rev-parse --show-toplevel)
 readonly script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 readonly git_dir="${root_dir%/*}"
 
-function main() {
-  mkdir -p "$HOME"/.local/bin
-  source "$root_dir/home/.zprofile"
-
-  pacman_settings
-  setup_links
-  setup_yay
-  install_loop
-  basic_config
-  asdf_config
-
-  clean_up
-}
-
-function pkginstall() {
+function __pkg_install() {
   printf "Installing %s: %s\n" "$1" "$2"
   sudo pacman --noconfirm --needed -S "$1" >/dev/null
 }
 
-function aurinstall() {
+function __aur_install() {
   printf "Installing %s: %s\n" "$1" "$2"
   yay --noconfirm --needed -S "$1" >/dev/null 2>&1
 }
 
-function repinstall() {
+function __repo_install() {
   printf "Cloning and building %s: %s\n" "$1" "$2"
   repname="${1##*/}"
-  [[ -d "$git_dir/$repname" ]] || (git clone --quiet "$1" "$git_dir/$repname" >/dev/null && cd "$git_dir/$repname" && sudo make clean install >/dev/null 2>&1)
+  if [[ -d "${git_dir}/${repname}" ]]; then
+    (
+      git clone --quiet "$1" "${git_dir}/${repname}" >/dev/null
+      cd "${git_dir}/${repname}"
+      sudo make clean install >/dev/null 2>&1
+    )
+  fi
 }
 
 # Set the best mirrors for my country
@@ -46,8 +38,8 @@ function pacman_settings() {
   sudo sed -i '/Color/ s/^#//; /VerbosePkgLists/ s/^#//; /ParallelDownloads/ s/^#//' /etc/pacman.conf
 
   printf "Setting mirror list\n"
-  pkginstall reflector "Mirrors manager"
-  sudo cp "$script_dir"/etc/xdg/reflector/reflector.conf /etc/xdg/reflector/reflector.conf
+  __pkg_install reflector "Mirrors manager"
+  sudo cp "${script_dir}"/etc/xdg/reflector/reflector.conf /etc/xdg/reflector/reflector.conf
   sudo systemctl enable --now reflector
 
   printf "Updating System\n"
@@ -57,35 +49,36 @@ function pacman_settings() {
 # Install yay
 function setup_yay() {
   printf "Use all cores for compilation.\n"
-  sudo sed -i "s/-j2/-j$(nproc)/; /^#MAKEFLAGS/ s/^#//" /etc/makepkg.conf
+  local cores=$(nproc)
+  sudo sed -i "s/-j2/-j${cores}/; /^#MAKEFLAGS/ s/^#//" /etc/makepkg.conf
 
   printf "Installing yay\n"
-  [[ -d "$git_dir"/yay ]] || git clone --depth 1 --quiet https://aur.archlinux.org/yay.git "$git_dir"/yay >/dev/null
-  (cd "$git_dir"/yay && makepkg -si PKGBUILD --noconfirm >/dev/null 2>&1)
+  [[ -d "${git_dir}"/yay ]] || git clone --depth 1 --quiet https://aur.archlinux.org/yay.git "${git_dir}"/yay >/dev/null
+  (cd "${git_dir}"/yay && makepkg -si PKGBUILD --noconfirm >/dev/null 2>&1)
 }
 
 # Create all the folder structure of my .dotfiles/home and make symbolic links of all files
 function setup_links() {
   printf "Folders and symbolic links\n"
   (
-    cd "$root_dir/home"
-    find . -type d | sed 's/^..//' | xargs -I _ mkdir -pv "$HOME/_" >/dev/null
-    find . -type f | sed 's/^..//' | xargs -I _ ln -sfv "$PWD/_" "$HOME/_" >/dev/null
+    cd "${root_dir}/home"
+    find . -type d | sed 's/^..//' | xargs -I _ mkdir -pv "${HOME}/_" >/dev/null
+    find . -type f | sed 's/^..//' | xargs -I _ ln -sfv "${PWD}/_" "${HOME}/_" >/dev/null
   )
 }
 
 # Install all the packages on packages folder
 function install_loop() {
   printf "Installing packages from packages folder\n"
-  for csv in "$script_dir"/packages/*.csv; do
+  for csv in "${script_dir}"/packages/*.csv; do
     while IFS=, read -r tag program comment; do
-      [[ "$tag" =~ ^#.*$ ]] && continue
-      case "$tag" in
-        "A") aurinstall "$program" "$comment" ;;
-        "G") repinstall "$program" "$comment" ;;
-        *) pkginstall "$program" "$comment" ;;
+      [[ "${tag}" =~ ^#.*$ ]] && continue
+      case "${tag}" in
+        "A") __aur_install "${program}" "${comment}" ;;
+        "G") __repo_install "${program}" "${comment}" ;;
+        *) __pkg_install "${program}" "${comment}" ;;
       esac
-    done <"$csv"
+    done <"${csv}"
   done
 }
 
@@ -98,10 +91,12 @@ function basic_config() {
   sudo sed -i "$ a FONT=FiraCode Nerd Font" /etc/vconsole.conf
 
   printf "Modprobe\n"
-  sudo cp "$script_dir"/modprobe.d/* /etc/modprobe.d/
+  sudo cp "${script_dir}"/modprobe.d/* /etc/modprobe.d/
 
   printf "Set zsh as the default shell\n"
-  sudo chsh -s "$(which zsh)" "$(whoami)"
+  local shell=$(which zsh)
+  local user=$(whoami)
+  sudo chsh -s "${shell}" "${user}"
 }
 
 # Install node and yarn
@@ -119,9 +114,32 @@ function asdf_config() {
 # Clean up home after install
 function clean_up() {
   printf "Cleaning Up\n"
-  cd "$HOME"
+  cd "${HOME}"
   rm -rf .bash* .mkshrc .profile .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &>/dev/null
   sudo reboot now
 }
 
-main
+function throw_error() {
+  printf "%s\n" "$1"
+  exit 1
+}
+
+case "${1}" in
+  links)
+    setup_links
+    ;;
+  fresh-install)
+    mkdir -p "${HOME}"/.local/bin
+    source "${root_dir}/home/.zprofile"
+
+    pacman_settings
+    setup_links
+    setup_yay
+    install_loop
+    basic_config
+    asdf_config
+    clean_up
+    ;;
+  "") throw_error ":: autorice needs a argument ::" ;;
+  *) throw_error ":: Invalid option: $1 ::" ;;
+esac
