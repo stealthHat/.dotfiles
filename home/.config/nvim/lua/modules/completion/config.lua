@@ -46,7 +46,6 @@ function config.null_ls()
     sources = {
       formatting.prettier,
       formatting.stylua,
-      formatting.shellharden,
       formatting.shfmt.with { extra_args = { "-i", "2", "-ci", "-bn" } },
     },
   }

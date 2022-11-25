@@ -2,66 +2,57 @@
 
 #my alias
 alias \
-	pacman='sudo pacman' \
-	buildah='sudo buildah' \
-	podman='sudo podman' \
-	startx='startx $XINITRC' \
-	zshrc='nvim $HOME/git/.dotfiles/home/.config/zsh/.zshrc' \
-	zshalias='nvim $HOME/git/.dotfiles/home/.config/zsh/zsh-aliases' \
-	vimconf='nvim $HOME/git/.dotfiles/home/.config/nvim/init.vim' \
-	tmuxconf='nvim $HOME/git/.dotfiles/home/.config/tmux/tmux.conf' \
-	tmux='tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf' \
-	w='watch -n1 ' \
-	dot='cd $HOME/git/.dotfiles' \
-	.i='cd $HOME/git/.dotfiles/install' \
-	.h='cd $HOME/git/.dotfiles/home' \
-	.v='cd $HOME/git/.dotfiles/home/.config/nvim' \
-	l='ls -lha --color=auto' \
-	ls='ls --color=auto' \
-	grep='grep --color=auto' \
-	diff='diff --color=auto' \
-	zshupdate='source $HOME/.config/zsh/.zshrc' \
-	s='git status' \
-	vim='nvim' \
-	t='terraform' \
-	ap='ansible-playbook' \
-	d='sudo docker' \
-	sc='sudo systemctl' \
-	diff='diff --color=auto' \
-	gpush='gtoken && git push' \
-	jarvis='bash $HOME/git/jarvis/jarvis.sh' \
-	g='cd $HOME/git' \
-	devcluster="aws eks --region us-west-2 update-kubeconfig --name development-platform" \
-	alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config/.yarnrc"' \
-	wget='wget --hsts-file $HOME/.config/wget/wget-hsts'
+  pacman='sudo pacman' \
+  startx='startx $XINITRC' \
+  clear='clear -x' \
+  w='watch -n1 ' \
+  dot='cd $HOME/git/.dotfiles' \
+  .i='cd $HOME/git/.dotfiles/install' \
+  .h='cd $HOME/git/.dotfiles/home' \
+  .v='cd $HOME/git/.dotfiles/home/.config/nvim' \
+  l='ls -lha --color=auto' \
+  ls='ls --color=auto' \
+  grep='grep --color=auto' \
+  diff='diff --color=auto' \
+  zshupdate='source $HOME/.config/zsh/.zshrc' \
+  vim='nvim' \
+  t='terraform' \
+  ap='ansible-playbook' \
+  sc='sudo systemctl' \
+  g='cd $HOME/git' \
+  s='git status' \
+  devcluster="aws eks --region us-west-2 update-kubeconfig --name development-platform" \
+  alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config/.yarnrc"' \
+  wget='wget --hsts-file $HOME/.config/wget/wget-hsts' \
+  jarvis='bash $HOME/git/jarvis/jarvis.sh'
 
 # k8s and helm
 alias \
-	h='helm' \
-	k='kubecolor' \
-	ks='kubecolor -n kube-system' \
-	kss='kubecolor -n staging' \
-	kp='kubecolor -n platform' \
-	kd='kubecolor -n dev' \
-	kdd='kubecolor -n argocd' \
-	km='kubecolor -n monitoring' \
-	kr='kubecolor -n rabbitmq' \
-	kn='kubecolor -n ingress-nginx' \
-	kv='kubecolor -n vault' \
-	ka='kubecolor -n argo' \
-	ke='kubecolor -n elk' \
-	kc='kubecolor -n cert-manager' \
-	ko='kubecolor -n argo-rollouts' \
-	kl='kubecolor -n lens-metrics' \
-	hn='helm -n ingress-nginx' \
-	hw='helm -n vault-webhook' \
-	hm='helm -n monitoring' \
-	hc='helm -n cert-manager' \
-	kx='helm -n ' \
-	tw='terraform workspace' \
-	tapply='terraform apply -auto-approve ; notify-send -u critical "Terraform Done!"' \
-	tdestroy='terraform destroy -auto-approve' \
-	argo='argo -n argo' \
+  h='helm' \
+  k='kubecolor' \
+  ks='kubecolor -n kube-system' \
+  kss='kubecolor -n staging' \
+  kp='kubecolor -n platform' \
+  kd='kubecolor -n dev' \
+  kdd='kubecolor -n argocd' \
+  km='kubecolor -n monitoring' \
+  kr='kubecolor -n rabbitmq' \
+  kn='kubecolor -n ingress-nginx' \
+  kv='kubecolor -n vault' \
+  ka='kubecolor -n argo' \
+  ke='kubecolor -n elk' \
+  kc='kubecolor -n cert-manager' \
+  ko='kubecolor -n argo-rollouts' \
+  kl='kubecolor -n lens-metrics' \
+  hn='helm -n ingress-nginx' \
+  hw='helm -n vault-webhook' \
+  hm='helm -n monitoring' \
+  hc='helm -n cert-manager' \
+  kx='helm -n ' \
+  tw='terraform workspace' \
+  tapply='terraform apply -auto-approve ; notify-send -u critical "Terraform Done!"' \
+  tdestroy='terraform destroy -auto-approve' \
+  argo='argo -n argo' \
   eks-basic='aws --profile basic-bro eks --region us-west-2  update-kubeconfig --name development-platform' \
   eks-login='aws --profile default eks --region us-west-2  update-kubeconfig --name development-platform'
 
@@ -69,5 +60,5 @@ compdef kubecolor=kubectl
 
 # ssh
 alias \
-	sshconfig='vim $HOME/.ssh/config' \
-	sshad='ssh-copy-id -i $HOME/.ssh/id_ed25519.pub'
+  sshconfig='vim $HOME/.ssh/config' \
+  sshad='ssh-copy-id -i $HOME/.ssh/id_ed25519.pub'

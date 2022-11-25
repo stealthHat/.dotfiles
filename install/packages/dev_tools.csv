@@ -16,11 +16,10 @@
 A,ansible-language-server,"Ansible Language Server (ansiblels)"
 A,terraform-ls,"Terraform Language Server (terraformls)"
 A,dockerfile-language-server,"Language server for Dockerfiles (dockerls)"
-A,vscode-langservers-extracted,"Language servers extracted from VSCode (html,cssls,jsonls,eslint)"
 A,golangci-lint-langserver-bin,"golangci-lint language server (golangci_lint_ls)"
 A,golangci-lint,"Linters Runner for Go. 5x faster than gometalinter (golanci_lint client)"
+A,vscode-langservers-extracted,"Language servers extracted from VSCode (html,cssls,jsonls,eslint)"
 #Linters
  ,shellcheck,"Shell script analysis tool (used in bashls)"
  ,yamllint,"Linter for YAML files (used in ansiblels)"
- ,shellharden,"Bash linter and syntax highlighter (used in null-ls)"
 A,ansible-lint,"Checks playbooks for practices and behaviour that could potentially be improved (used in ansiblels)"

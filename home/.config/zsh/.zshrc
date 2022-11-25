@@ -5,6 +5,7 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 # Some useful options (man zshoptions)
+setopt SHARE_HISTORY
 setopt appendhistory
 setopt autocd extendedglob nomatch menucomplete
 setopt interactive_comments
