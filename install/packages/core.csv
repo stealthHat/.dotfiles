@@ -8,6 +8,7 @@
  ,xwallpaper,"sets the wallpaper"
  ,xdg-user-dirs,"Manage user directories like ~/Desktop and ~/Music"
  ,picom,"X compositor that may fix tearing issues"
+ ,catppuccin-gtk-theme-mocha,"Soothing pastel theme for GTK3 - Mocha"
  ,pipewire,"Low-latency audio/video router and processor"
  ,pipewire-pulse,"Low-latency audio/video router and processor - PulseAudio replacement"
  ,pulsemixer,"CLI and curses mixer for pulseaudio"
