@@ -1,5 +1,4 @@
 #!/bin/sh
 
-capacity=$(cat /sys/class/power_supply/BAT1/capacity)
-status=$(cat /sys/class/power_supply/BAT0/status)
-[ "$capacity" -le 20 ] && [ "$status" = "Discharging" ] && notify-send -u critical "Battery low"
+battery=( $(cat /sys/class/power_supply/{BAT0,BAT1}/capacity) )
+[[ "${battery[0]}" -le 25 ]] && [[ "${battery[1]}" -le 25 ]] && notify-send -u critical "Battery low"
