@@ -21,8 +21,7 @@ alias \
   sc='sudo systemctl' \
   g='cd $HOME/git' \
   s='git status' \
-  devcluster="aws eks --region us-west-2 update-kubeconfig --name development-platform" \
-  alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config/.yarnrc"' \
+  yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config/.yarnrc"' \
   wget='wget --hsts-file $HOME/.config/wget/wget-hsts' \
   jarvis='bash $HOME/git/jarvis/jarvis.sh'
 

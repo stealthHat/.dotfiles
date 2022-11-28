@@ -1,15 +1,19 @@
-#!/bin/bash
+#!/bin/sh
+
+readonly plugin_dir="${ZDOTDIR}/plugins/"
 
 # Function to source files if they exist
 function zsh_add_file() {
-  [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
+  [[ -f "${ZDOTDIR}/$1" ]] && . "${ZDOTDIR}/$1"
 }
 
+# Download and source plugin
 function zsh_add_plugin() {
-  PLUGIN_NAME=${1#*/}
-  if [[ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]]; then
-    zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || zsh_add_file "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
+  local plugin_name=${1#*/}
+
+  if [[ -d "${plugin_dir}/${plugin_name}" ]]; then
+    zsh_add_file "plugins/${plugin_name}/${plugin_name}.plugin.zsh"
   else
-    git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME" --depth=1
+    git clone "https://github.com/$1.git" "${plugin_dir}/${plugin_name}" --depth=1
   fi
 }
