@@ -25,5 +25,3 @@ zsh_add_plugin "zdharma-continuum/fast-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zap-zsh/vim"
-
-. /opt/asdf-vm/asdf.sh

@@ -1,14 +1,13 @@
-#!/bin/sh
+#!/bin/zsh
 
-autoload -Uz vcs_info
 autoload -U colors && colors
 
-zstyle ':vcs_info:*' enable git
-
+autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
 
+zstyle ':vcs_info:*' enable git 
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 +vi-git-untracked(){
     if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
@@ -18,7 +17,8 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 }
 
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:git:*' formats " %{$fg[blue]%}(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%} %b%{$fg[blue]%})%{$reset_color%}"
+zstyle ':vcs_info:git:*' formats "%{$fg_bold[blue]%}(%{$fg_bold[red]%}%m%u%c%{$fg_bold[yellow]%}  %{$fg_bold[magenta]%}%b%{$fg_bold[blue]%})"
 
-PROMPT="%B%(?:%{$fg_bold[green]%}❯ :%{$fg_bold[red]%}❯ )%{$fg[cyan]%}%c%{$reset_color%}"
-PROMPT+="\$vcs_info_msg_0_ "
+NEWLINE=$'\n'
+PS1="%{$fg_bold[cyan]%}%~ \$vcs_info_msg_0_"
+PS1+="${NEWLINE}%(?:%{$fg_bold[green]%}❯ :%{$fg_bold[red]%}❯ )"

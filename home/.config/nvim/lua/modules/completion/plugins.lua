@@ -12,8 +12,9 @@ local enable_lsp_filetype = {
   "javascript",
   "python",
   "yaml",
-  "yaml.ansible", -- https://github.com/neovim/nvim-lspconfig/issues/2046
+  "ansible", -- https://github.com/neovim/nvim-lspconfig/issues/2046
   "terraform",
+  "terraform-vars",
   "dockerfile",
   "json",
 }
