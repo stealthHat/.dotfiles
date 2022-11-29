@@ -8,11 +8,44 @@ precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
 
 zstyle ':vcs_info:*' enable git 
-zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-st git-stash
+
+# Show count of untracked changes
 +vi-git-untracked(){
     if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
         git status --porcelain | grep '??' &> /dev/null ; then
-        hook_com[staged]+='!' # signify new files with a bang
+        hook_com[staged]+='T'
+    fi
+}
+
+# Show +N/-N when your local branch is ahead-of or behind remote HEAD.
+function +vi-git-st() {
+    local ahead behind
+    local -a gitstatus
+
+    # Exit early in case the worktree is on a detached HEAD
+    git rev-parse ${hook_com[branch]}@{upstream} >/dev/null 2>&1 || return 0
+
+    local -a ahead_and_behind=(
+        $(git rev-list --left-right --count HEAD...${hook_com[branch]}@{upstream} 2>/dev/null)
+    )
+
+    ahead=${ahead_and_behind[1]}
+    behind=${ahead_and_behind[2]}
+
+    (( $ahead )) && gitstatus+=( "+${ahead}" )
+    (( $behind )) && gitstatus+=( "-${behind}" )
+
+    hook_com[misc]+=${(j:/:)gitstatus}
+}
+
+# Show count of stashed changes
+function +vi-git-stash() {
+    local -a stashes
+
+    if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
+        stashes=$(git stash list 2>/dev/null | wc -l)
+        hook_com[misc]+=" (${stashes} )"
     fi
 }
 
@@ -21,4 +54,4 @@ zstyle ':vcs_info:git:*' formats "%{$fg_bold[blue]%}(%{$fg_bold[red]%}%m%u%c%{$f
 
 NEWLINE=$'\n'
 PS1="%{$fg_bold[cyan]%}%~ \$vcs_info_msg_0_"
-PS1+="${NEWLINE}%(?:%{$fg_bold[green]%}❯ :%{$fg_bold[red]%}❯ )"
+PS1+="${NEWLINE}%(?:%{$fg_bold[green]%}❯ :%{$fg_bold[red]%}❯ )%{$reset_color%}"
