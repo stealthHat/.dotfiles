@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 HISTSIZE=50000
 SAVEHIST=50000

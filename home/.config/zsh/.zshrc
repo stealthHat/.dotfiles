@@ -1,5 +1,13 @@
 #!/bin/zsh
 
+source "$ZDOTDIR/zsh_manager"
+
+# Normal files to .
+add_file "zsh_opt"
+add_file "zsh_prompt"
+add_file "zsh_vim"
+add_file "zsh_aliases"
+
 # Completions
 autoload -Uz compinit
 zstyle ':completion:*' menu yes select
@@ -12,18 +20,9 @@ for dump in "${ZDOTDIR}/.zcompdump"(N.mh+24); do
 done
 compinit -C
 
-# Useful Functions
-source "$ZDOTDIR/zsh-functions"
-
-# Normal files to .
-zsh_add_file "zsh-opt"
-zsh_add_file "zsh-aliases"
-zsh_add_file "zsh-prompt"
-
 # Plugins
-zsh_add_plugin "zdharma-continuum/fast-syntax-highlighting"
-zsh_add_plugin "hlissner/zsh-autopair"
-zsh_add_plugin "zsh-users/zsh-autosuggestions"
-zsh_add_plugin "zap-zsh/vim"
+add_plugin "zdharma-continuum/fast-syntax-highlighting"
+add_plugin "hlissner/zsh-autopair"
+add_plugin "zsh-users/zsh-autosuggestions"
 
 . /opt/asdf-vm/asdf.sh

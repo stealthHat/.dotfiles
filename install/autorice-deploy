@@ -17,7 +17,7 @@ function __aur_install() {
 
 function __repo_install() {
   printf "Cloning and building %s: %s\n" "$1" "$2"
-  repname="${1##*/}"
+  local repname="${1##*/}"
   if [[ -d "${git_dir}/${repname}" ]]; then
     (
       git clone --quiet "$1" "${git_dir}/${repname}" >/dev/null
