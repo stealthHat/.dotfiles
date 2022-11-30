@@ -6,18 +6,16 @@ autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 
-setopt prompt_subst
-
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-st git-stash
-zstyle ':vcs_info:git*:*' formats "%B on${fg[blue]}  %b%f %m%c%u"
+zstyle ':vcs_info:git*:*' formats '%B on %F{blue} %b%f %m%F{red}%u%f%F{green}%c%f'
 
 # Show count of untracked changes
 function +vi-git-untracked(){
   if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
     git status --porcelain | grep '??' &> /dev/null ; then
-    hook_com[staged]+="$fg[red] ?"
+    hook_com[staged]+="$fg[red]?"
   fi
 }
 
@@ -48,10 +46,9 @@ function +vi-git-stash() {
 
   if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
     stashes=$(git stash list 2>/dev/null | wc -l)
-    hook_com[misc]+=" (${stashes} ${fg[yellow]})"
+    hook_com[misc]+="${fg[yellow]}[${stashes} ]"
   fi
 }
 
 PS1='%B${fg[cyan]}%~${reset_color}$vcs_info_msg_0_'
-#PS1+=$'\n%(?:${fg[green]}❯ :${fg[red]}❯ )%b${reset_color}'
-PS1+=$'\n''%(?:%{$fg[green]%}❯ :%{$fg[red]%}❯ )%b%{$reset_color%}'
+PS1+=$'\n''%(?:%F{green}❯ %f:%F{red}❯ %f)%{$reset_color%}'

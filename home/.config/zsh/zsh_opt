@@ -3,6 +3,7 @@
 HISTSIZE=50000
 SAVEHIST=50000
 unsetopt BEEP
+setopt PROMPT_SUBST
 setopt AUTO_CD
 setopt GLOB_DOTS
 setopt NOMATCH
