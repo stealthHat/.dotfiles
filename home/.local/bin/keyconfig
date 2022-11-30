@@ -8,3 +8,10 @@ setxkbmap -layout br -variant abnt2 -model thinkpad
 
 # Map the caps lock key to ctrl and ESC when press one time
 setxkbmap -option ctrl:nocaps && xcape -e 'Control_L=Escape'
+
+## add `alt_r` + `h/j/k/l` => left/up/down/right - per vim bindings
+xmodmap -e "keycode 108 = Mode_switch" # set Alt_r as the "Mode_switch"
+xmodmap -e "keycode 43 = h H Left H" # h
+xmodmap -e "keycode 44 = j J Down J" # j
+xmodmap -e "keycode 45 = k K Up K" # k
+xmodmap -e "keycode 46 = l L Right L" # l
