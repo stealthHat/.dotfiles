@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+HISTFILE="${ZDOTDIR}/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=50000
 setopt APPEND_HISTORY         # If this is set, zsh sessions will append their history list to the history file, rather than replace it.
