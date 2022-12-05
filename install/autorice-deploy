@@ -63,7 +63,7 @@ function setup_links() {
   (
     cd "${root_dir}/home"
     find . -type d | sed 's/^..//' | xargs -I _ mkdir -pv "${HOME}/_" >/dev/null
-    find . -type f | sed 's/^..//' | xargs -I _ ln -sfv "${PWD}/_" "${HOME}/_" >/dev/null
+    find . -type f | sed 's/^..//' | xargs -I _ ln -sf "${PWD}/_" "${HOME}/_" >/dev/null
   )
 }
 

@@ -9,7 +9,7 @@ precmd_functions+=( precmd_vcs_info )
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-st git-stash
-zstyle ':vcs_info:git*:*' formats '%B on %F{blue} %b%f %m%F{red}%u%f%F{green}%c%f'
+zstyle ':vcs_info:git*:*' formats "$fg[white]on $fg[blue] %b $fg[red]%u$fg[green]%c%m"
 
 # Show count of untracked changes
 function +vi-git-untracked(){
@@ -34,8 +34,8 @@ function +vi-git-st() {
   ahead=${ahead_and_behind[1]}
   behind=${ahead_and_behind[2]}
 
-  (( $ahead )) && gitstatus+=( "$fg[green] ⇡${ahead}" )
-  (( $behind )) && gitstatus+=( "$fg[red] ⇣${behind}" )
+  (( $ahead )) && gitstatus+=( "$fg[green]⇡${ahead}" )
+  (( $behind )) && gitstatus+=( "$fg[red]⇣${behind}" )
 
   hook_com[misc]+=${(j:/:)gitstatus}
 }
@@ -50,5 +50,5 @@ function +vi-git-stash() {
   fi
 }
 
-PS1='%B${fg[cyan]}%~${reset_color}$vcs_info_msg_0_'
-PS1+=$'\n''%(?:%F{green}❯ %f:%F{red}❯ %f)%{$reset_color%}'
+PS1='$fg_bold[cyan]%~ $vcs_info_msg_0_ $reset_color'
+PS1+=$'\n%(?.%F{green}.%F{red})❯ %f'
