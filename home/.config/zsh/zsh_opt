@@ -3,8 +3,10 @@
 HISTFILE="${ZDOTDIR}/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=50000
+setopt ALWAYS_TO_END          # Move cursor to the end of a completed word.
 setopt APPEND_HISTORY         # If this is set, zsh sessions will append their history list to the history file, rather than replace it.
 setopt AUTO_LIST              # Automatically list choices on ambiguous completion.
+setopt AUTO_PARAM_SLASH       # If completed parameter is a directory, add a trailing slash.
 setopt BANG_HIST              # Treat the '!' character specially during expansion.
 setopt COMPLETE_IN_WORD       # Complete from both ends of a word.
 setopt EXTENDED_GLOB          # Treat the ‘#’, ‘~’ and ‘^’ characters as part of patterns for filename generation, etc.
@@ -22,5 +24,6 @@ setopt INC_APPEND_HISTORY     # Write to the history file immediately, not when 
 setopt INTERACTIVE_COMMENTS   # Allow comments even in interactive shells.
 setopt MENU_COMPLETE          # Automatically highlight first element of completion menu.
 setopt NOMATCH                # If a pattern for filename generation has no matches, print an error, instead of leaving it unchanged in the argument list.
+setopt PATH_DIRS              # Perform path search even on command names with slashes.
 setopt PROMPT_SUBST           # Prompt string is first subjected to parameter expansion, command substitution and arithmetic expansion.
 setopt SHARE_HISTORY          # Share history between all sessions.
