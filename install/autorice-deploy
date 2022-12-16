@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -eo pipefail
 
 readonly root_dir=$(git rev-parse --show-toplevel)
 readonly script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
@@ -20,7 +20,7 @@ function __repo_install() {
   local repname="${1##*/}"
   if [[ ! -d "${git_dir}/${repname}" ]]; then
     (
-      git clone --quiet "$1" "${git_dir}/${repname}" >/dev/null
+      git clone --quiet --depth 1 "$1" "${git_dir}/${repname}" >/dev/null
       cd "${git_dir}/${repname}"
       sudo make clean install >/dev/null 2>&1
     )
@@ -53,8 +53,12 @@ function setup_yay() {
   sudo sed -i "s/-j2/-j${cores}/; /^#MAKEFLAGS/ s/^#//" /etc/makepkg.conf
 
   printf "Installing yay\n"
-  [[ -d "${git_dir}"/yay ]] || git clone --depth 1 --quiet https://aur.archlinux.org/yay.git "${git_dir}"/yay >/dev/null
-  (cd "${git_dir}"/yay && makepkg -si PKGBUILD --noconfirm >/dev/null 2>&1)
+  if [[ ! -d "${git_dir}"/yay ]]; then
+    (
+      git clone --depth 1 --quiet https://aur.archlinux.org/yay.git "${git_dir}"/yay >/dev/null
+      cd "${git_dir}"/yay && makepkg -si PKGBUILD --noconfirm >/dev/null 2>&1
+    )
+  fi
 }
 
 # Create all the folder structure of my .dotfiles/home and make symbolic links of all files
@@ -120,12 +124,7 @@ function clean_up() {
   sudo reboot now
 }
 
-function throw_error() {
-  printf "%s\n" "$1"
-  exit 1
-}
-
-case "${1}" in
+case "$1" in
   links)
     setup_links
     ;;
@@ -138,6 +137,6 @@ case "${1}" in
     asdf_config
     clean_up
     ;;
-  "") throw_error ":: autorice needs a argument ::" ;;
-  *) throw_error ":: Invalid option: $1 ::" ;;
+  "") printf ":: autorice needs a argument ::\n" ;;
+  *) printf ":: Invalid option: %s ::\n" "$1" ;;
 esac
