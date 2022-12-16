@@ -1,4 +1,4 @@
-local key = require "core.keymap"
+local key = require "keymaps.keymaps"
 local nmap, tmap = key.nmap, key.tmap
 local silent, noremap = key.silent, key.noremap
 local opts = key.new_opts
@@ -19,7 +19,7 @@ nmap {
   -- Packer
   { "<Leader>pu", cmd "PackerUpdate", opts(noremap, silent) },
   { "<Leader>pi", cmd "PackerInstall", opts(noremap, silent) },
-  { "<Leader>pc", cmd "PackerCompile", opts(noremap, silent) },
+  { "<Leader>pc", cmd "PackerSync", opts(noremap, silent) },
   -- Lsp
   { "<Leader>li", cmd "LspInfo", opts(noremap, silent) },
   { "<Leader>ll", cmd "LspLog", opts(noremap, silent) },
