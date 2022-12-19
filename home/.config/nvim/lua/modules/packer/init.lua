@@ -15,10 +15,9 @@ return require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
 
   -- general
-  use "echasnovski/mini.nvim"
   use "christoomey/vim-tmux-navigator"
 
-  -- lsp/completions
+  -- completion
   use "neovim/nvim-lspconfig"
   use "jose-elias-alvarez/null-ls.nvim"
   use "glepnir/lspsaga.nvim"
@@ -36,7 +35,9 @@ return require("packer").startup(function(use)
     },
   }
 
-  -- treesitter
+  -- tools
+  use "echasnovski/mini.nvim"
+  use { "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim", opt = true } }
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
@@ -46,8 +47,6 @@ return require("packer").startup(function(use)
       { "nvim-treesitter/nvim-treesitter-context" },
     },
   }
-
-  -- telescope
   use {
     "nvim-telescope/telescope.nvim",
     requires = {
@@ -56,16 +55,11 @@ return require("packer").startup(function(use)
     },
   }
 
-  -- theme
+  -- ui
   use "glepnir/zephyr-nvim"
-  -- status line
   use { "glepnir/galaxyline.nvim", requires = "kyazdani42/nvim-web-devicons" }
-  --  buffer line
   use { "akinsho/nvim-bufferline.lua", requires = "kyazdani42/nvim-web-devicons" }
-  -- file tree
   use { "kyazdani42/nvim-tree.lua", requires = "kyazdani42/nvim-web-devicons" }
-  -- git labels
-  use { "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim", opt = true } }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
