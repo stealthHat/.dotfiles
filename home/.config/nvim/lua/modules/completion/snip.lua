@@ -19,5 +19,5 @@ ls.config.set_config {
   },
 }
 
-ls.loaders.from_vscode.lazy_load()
-ls.loaders.from_vscode.lazy_load { paths = { "./snippets/" } }
+--ls.loaders.from_vscode.lazy_load()
+--ls.loaders.from_vscode.lazy_load { paths = { "./snippets/" } }
