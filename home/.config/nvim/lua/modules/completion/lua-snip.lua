@@ -1,7 +1,7 @@
-local ls = require "luasnip"
 local types = require "luasnip.util.types"
+local loaders = require "luasnip.loaders.from_vscode"
 
-ls.config.set_config {
+require("luasnip").config.set_config {
   history = true,
   enable_autosnippets = true,
   updateevents = "TextChanged,TextChangedI",
@@ -19,5 +19,5 @@ ls.config.set_config {
   },
 }
 
---ls.loaders.from_vscode.lazy_load()
---ls.loaders.from_vscode.lazy_load { paths = { "./snippets/" } }
+loaders.lazy_load()
+loaders.lazy_load { paths = { "./snippets/" } }

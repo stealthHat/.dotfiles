@@ -16,8 +16,8 @@ return require("packer").startup(function(use)
 
   -- general
   use "nvim-lua/plenary.nvim"
-  use "christoomey/vim-tmux-navigator"
   use "kyazdani42/nvim-web-devicons"
+  use "christoomey/vim-tmux-navigator"
 
   -- completion
   use "neovim/nvim-lspconfig"
@@ -40,7 +40,7 @@ return require("packer").startup(function(use)
   -- tools
   use "echasnovski/mini.nvim"
   use { "lewis6991/gitsigns.nvim" }
-  use { "nvim-telescope/telescope.nvim", requires = { { "nvim-telescope/telescope-fzy-native.nvim" } } }
+  use { "nvim-telescope/telescope.nvim" }
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",

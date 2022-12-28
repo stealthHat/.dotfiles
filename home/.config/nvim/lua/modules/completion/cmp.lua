@@ -1,6 +1,5 @@
 local cmp = require "cmp"
 local luasnip = require "luasnip"
-local lspkind = require "lspkind"
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -48,7 +47,7 @@ cmp.setup {
   },
   formatting = {
     fields = { "menu", "abbr", "kind" },
-    format = lspkind.cmp_format {
+    format = require("lspkind").cmp_format {
       mode = "symbol_text",
       menu = {
         nvim_lsp = "[LSP]",
