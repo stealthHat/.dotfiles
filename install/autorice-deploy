@@ -1,26 +1,26 @@
 #!/bin/bash
-set -euo pipefail
+set -eo pipefail
 
 readonly root_dir=$(git rev-parse --show-toplevel)
 readonly script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 readonly git_dir="${root_dir%/*}"
 
 function __pkg_install() {
-  printf "Installing %s: %s\n" "$1" "$2"
+  printf "Installing %s\n" "$1: $2"
   sudo pacman --noconfirm --needed -S "$1" >/dev/null
 }
 
 function __aur_install() {
-  printf "Installing %s: %s\n" "$1" "$2"
+  printf "Installing %s\n" "$1: $2"
   yay --noconfirm --needed -S "$1" >/dev/null 2>&1
 }
 
 function __repo_install() {
-  printf "Cloning and building %s: %s\n" "$1" "$2"
+  printf "Cloning and building %s\n" "$1: $2"
   local repname="${1##*/}"
-  if [[ -d "${git_dir}/${repname}" ]]; then
+  if [[ ! -d "${git_dir}/${repname}" ]]; then
     (
-      git clone --quiet "$1" "${git_dir}/${repname}" >/dev/null
+      git clone --quiet --depth 1 "$1" "${git_dir}/${repname}" >/dev/null
       cd "${git_dir}/${repname}"
       sudo make clean install >/dev/null 2>&1
     )
@@ -31,7 +31,7 @@ function __repo_install() {
 function pacman_settings() {
   printf "Pacman keyring\n"
   sudo pacman --noconfirm -Sy archlinux-keyring >/dev/null
-  sudo pacman -Syu --noconfirm
+  sudo pacman -Syu --noconfirm >/dev/null
 
   printf "Pacman config\n"
   grep -q "ILoveCandy" /etc/pacman.conf || sudo sed -i "/VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
@@ -53,8 +53,12 @@ function setup_yay() {
   sudo sed -i "s/-j2/-j${cores}/; /^#MAKEFLAGS/ s/^#//" /etc/makepkg.conf
 
   printf "Installing yay\n"
-  [[ -d "${git_dir}"/yay ]] || git clone --depth 1 --quiet https://aur.archlinux.org/yay.git "${git_dir}"/yay >/dev/null
-  (cd "${git_dir}"/yay && makepkg -si PKGBUILD --noconfirm >/dev/null 2>&1)
+  if [[ ! -d "${git_dir}"/yay ]]; then
+    (
+      git clone --depth 1 --quiet https://aur.archlinux.org/yay.git "${git_dir}"/yay >/dev/null
+      cd "${git_dir}"/yay && makepkg -si PKGBUILD --noconfirm >/dev/null 2>&1
+    )
+  fi
 }
 
 # Create all the folder structure of my .dotfiles/home and make symbolic links of all files
@@ -70,6 +74,7 @@ function setup_links() {
 # Install all the packages on packages folder
 function install_loop() {
   printf "Installing packages from packages folder\n"
+  source "${root_dir}/home/.zprofile"
   for csv in "${script_dir}"/packages/*.csv; do
     while IFS=, read -r tag program comment; do
       [[ "${tag}" =~ ^#.*$ ]] && continue
@@ -88,7 +93,7 @@ function basic_config() {
   xdg-user-dirs-update
 
   printf "Font and doas config\n"
-  sudo sed -i "$ a FONT=FiraCode Nerd Font" /etc/vconsole.conf
+  grep -q "FONT" /etc/vconsole.conf || sudo sed -i "$ a FONT=FiraCode Nerd Font" /etc/vconsole.conf
 
   printf "Modprobe\n"
   sudo cp "${script_dir}"/modprobe.d/* /etc/modprobe.d/
@@ -115,23 +120,15 @@ function asdf_config() {
 function clean_up() {
   printf "Cleaning Up\n"
   cd "${HOME}"
-  rm -rf .bash* .mkshrc .profile .zcompdump* .zlogin .zshrc .zsh_history .Xauthority &>/dev/null
+  rm -rf .bash* .mkshrc .profile .zcompdump* .zlogin .zshrc .zsh_history .Xauthority >/dev/null
   sudo reboot now
 }
 
-function throw_error() {
-  printf "%s\n" "$1"
-  exit 1
-}
-
-case "${1}" in
+case "$1" in
   links)
     setup_links
     ;;
   fresh-install)
-    mkdir -p "${HOME}"/.local/bin
-    source "${root_dir}/home/.zprofile"
-
     pacman_settings
     setup_links
     setup_yay
@@ -140,6 +137,6 @@ case "${1}" in
     asdf_config
     clean_up
     ;;
-  "") throw_error ":: autorice needs a argument ::" ;;
-  *) throw_error ":: Invalid option: $1 ::" ;;
+  "") printf ":: autorice needs a argument ::\n" ;;
+  *) printf ":: Invalid option: %s ::\n" "$1" ;;
 esac

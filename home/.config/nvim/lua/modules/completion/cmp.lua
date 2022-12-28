@@ -1,5 +1,4 @@
 local cmp = require "cmp"
-local lspkind = require "lspkind"
 local luasnip = require "luasnip"
 
 local has_words_before = function()
@@ -10,7 +9,7 @@ end
 cmp.setup {
   snippet = {
     expand = function(args)
-      require("luasnip").lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
   sources = {
@@ -48,7 +47,7 @@ cmp.setup {
   },
   formatting = {
     fields = { "menu", "abbr", "kind" },
-    format = lspkind.cmp_format {
+    format = require("lspkind").cmp_format {
       mode = "symbol_text",
       menu = {
         nvim_lsp = "[LSP]",
