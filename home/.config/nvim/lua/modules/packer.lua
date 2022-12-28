@@ -20,9 +20,8 @@ return require("packer").startup(function(use)
   use "christoomey/vim-tmux-navigator"
 
   -- completion
-  use "neovim/nvim-lspconfig"
   use "jose-elias-alvarez/null-ls.nvim"
-  use "glepnir/lspsaga.nvim"
+  use { "neovim/nvim-lspconfig", requires = { "glepnir/lspsaga.nvim" } }
   use {
     "hrsh7th/nvim-cmp",
     requires = {
@@ -39,8 +38,8 @@ return require("packer").startup(function(use)
 
   -- tools
   use "echasnovski/mini.nvim"
-  use { "lewis6991/gitsigns.nvim" }
   use { "nvim-telescope/telescope.nvim" }
+  use { "lewis6991/gitsigns.nvim" }
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",

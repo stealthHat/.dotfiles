@@ -28,7 +28,7 @@ setcmd("<C-Right>", "vertical resize +2")
 -- Packer
 setcmd("<Leader>pu", "PackerUpdate")
 setcmd("<Leader>pi", "PackerInstall")
-setcmd("<Leader>pc", "PackerSync")
+setcmd("<Leader>pc", "PackerCompile")
 
 -- Lsp
 setcmd("<Leader>li", "LspInfo")
