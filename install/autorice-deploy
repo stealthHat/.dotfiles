@@ -27,8 +27,23 @@ function __repo_install() {
   fi
 }
 
+# Create all the folder structure of my .dotfiles/home and make symbolic links of all files
+function setup_links() {
+  printf "Folders and symbolic links\n"
+  (
+    cd "${root_dir}/home"
+    find . -type d | sed 's/^..//' | xargs -I _ mkdir -pv "${HOME}/_"
+    find . -type f | sed 's/^..//' | xargs -I _ ln -sf "${PWD}/_" "${HOME}/_"
+
+    cd "${script_dir}"
+    sudo find etc/ -type d -exec mkdir -p /{} \;
+    sudo find etc/ -type f -exec cp {} /{} \;
+
+  )
+}
+
 # Set the best mirrors for my country
-function pacman_settings() {
+function basic_config() {
   printf "Pacman keyring\n"
   sudo pacman --noconfirm -Sy archlinux-keyring >/dev/null
   sudo pacman -Syu --noconfirm >/dev/null
@@ -39,7 +54,6 @@ function pacman_settings() {
 
   printf "Setting mirror list\n"
   __pkg_install reflector "Mirrors manager"
-  sudo cp "${script_dir}"/etc/xdg/reflector/reflector.conf /etc/xdg/reflector/reflector.conf
   sudo systemctl enable --now reflector
 
   printf "Updating System\n"
@@ -61,16 +75,6 @@ function setup_yay() {
   fi
 }
 
-# Create all the folder structure of my .dotfiles/home and make symbolic links of all files
-function setup_links() {
-  printf "Folders and symbolic links\n"
-  (
-    cd "${root_dir}/home"
-    find . -type d | sed 's/^..//' | xargs -I _ mkdir -pv "${HOME}/_" >/dev/null
-    find . -type f | sed 's/^..//' | xargs -I _ ln -sf "${PWD}/_" "${HOME}/_" >/dev/null
-  )
-}
-
 # Install all the packages on packages folder
 function install_loop() {
   printf "Installing packages from packages folder\n"
@@ -85,21 +89,12 @@ function install_loop() {
       esac
     done <"${csv}"
   done
-}
 
-# Basic system config
-function basic_config() {
   printf "Creating Home folders\n"
   xdg-user-dirs-update
 
-  printf "Font and doas config\n"
-  grep -q "FONT" /etc/vconsole.conf || sudo sed -i "$ a FONT=FiraCode Nerd Font" /etc/vconsole.conf
-
-  printf "Modprobe\n"
-  sudo cp "${script_dir}"/modprobe.d/* /etc/modprobe.d/
-
   printf "Set zsh as the default shell\n"
-  local shell=$(which zsh)
+  local shell=$(command -v zsh)
   local user=$(whoami)
   sudo chsh -s "${shell}" "${user}"
 }
@@ -129,11 +124,10 @@ case "$1" in
     setup_links
     ;;
   fresh-install)
-    pacman_settings
     setup_links
+    basic_config
     setup_yay
     install_loop
-    basic_config
     asdf_config
     clean_up
     ;;
