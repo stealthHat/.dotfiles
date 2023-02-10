@@ -21,7 +21,15 @@ return require("packer").startup(function(use)
 
   -- completion
   use "jose-elias-alvarez/null-ls.nvim"
-  use { "neovim/nvim-lspconfig", requires = { "glepnir/lspsaga.nvim" } }
+  use "neovim/nvim-lspconfig"
+  use {
+    "glepnir/lspsaga.nvim",
+    branch = "main",
+    config = function()
+      require("lspsaga").setup {}
+    end,
+    requires = { { "nvim-tree/nvim-web-devicons" } },
+  }
   use {
     "hrsh7th/nvim-cmp",
     requires = {
