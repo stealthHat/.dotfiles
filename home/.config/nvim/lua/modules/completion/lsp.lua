@@ -50,7 +50,7 @@ local on_attach = function(client, bufnr)
 end
 
 local servers = {
-  "sumneko_lua",
+  "lua_ls",
   "bashls",
   "clangd",
   "gopls",
