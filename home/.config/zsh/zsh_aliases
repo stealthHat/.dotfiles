@@ -6,7 +6,6 @@ alias \
   startx='startx $XINITRC' \
   clear='clear -x' \
   w='watch -n1 ' \
-  dot='cd $HOME/git/.dotfiles' \
   .i='cd $HOME/git/.dotfiles/install' \
   .h='cd $HOME/git/.dotfiles/home' \
   .v='cd $HOME/git/.dotfiles/home/.config/nvim' \
@@ -17,6 +16,7 @@ alias \
   zshupdate='source $HOME/.config/zsh/.zshrc' \
   vim='nvim' \
   t='terraform' \
+  tt='terragrunt' \
   ap='ansible-playbook' \
   sc='sudo systemctl' \
   g='cd $HOME/git' \

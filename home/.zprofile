@@ -4,7 +4,7 @@
 export PATH="${PATH}:${HOME}/.local/bin"
 
 # Default programs:
-export BROWSER="brave"
+export BROWSER="librewolf"
 export EDITOR="nvim"
 export READER="zathura"
 export TERMINAL="st"
