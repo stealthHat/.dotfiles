@@ -1,7 +1,7 @@
 #!/bin/bash
 
 intern=eDP1
-extern=DP1
+extern=HDMI2
 
 paper() {
   xwallpaper --center "$HOME/git/.dotfiles/home/.config/wallpapers/wpezyRn.jpeg"

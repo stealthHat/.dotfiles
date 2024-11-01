@@ -16,14 +16,15 @@ alias \
   zshupdate='source $HOME/.config/zsh/.zshrc' \
   vim='nvim' \
   t='terraform' \
-  tt='terragrunt' \
   ap='ansible-playbook' \
   sc='sudo systemctl' \
   g='cd $HOME/git' \
   s='git status' \
   yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config/.yarnrc"' \
   wget='wget --hsts-file $HOME/.config/wget/wget-hsts' \
-  jarvis='bash $HOME/git/jarvis/jarvis.sh'
+  jarvis='bash $HOME/git/jarvis/jarvis.sh' \
+  cd='z'
+
 
 # k8s and helm
 alias \
@@ -37,6 +38,7 @@ alias \
   km='kubecolor -n monitoring' \
   kr='kubecolor -n rabbitmq' \
   kn='kubecolor -n ingress-nginx' \
+  kb='kubecolor -n backstage' \
   kv='kubecolor -n vault' \
   ka='kubecolor -n argo' \
   ke='kubecolor -n elk' \
@@ -44,8 +46,9 @@ alias \
   ko='kubecolor -n argo-rollouts' \
   kl='kubecolor -n lens-metrics' \
   hn='helm -n ingress-nginx' \
+  hs='helm -n kube-system' \
   hw='helm -n vault-webhook' \
-  hm='helm -n monitoring' \
+  hm='helm -n monitoring ' \
   hc='helm -n cert-manager' \
   kx='helm -n ' \
   tw='terraform workspace' \
