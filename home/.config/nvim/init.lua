@@ -1,2 +1,1 @@
-require "core"
-require "modules"
+require "config.lazy"

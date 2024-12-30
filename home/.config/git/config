@@ -1,7 +1,6 @@
 [user]
-  name = Guilherme
-  username  = stealthHat
-  email = blinklgui@gmail.com
+	name = stealthHat
+	email = blinklgui@gmail.com
 
 [core]
   editor = nvim

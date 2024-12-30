@@ -6,7 +6,6 @@ alias \
   startx='startx $XINITRC' \
   clear='clear -x' \
   w='watch -n1 ' \
-  dot='cd $HOME/git/.dotfiles' \
   .i='cd $HOME/git/.dotfiles/install' \
   .h='cd $HOME/git/.dotfiles/home' \
   .v='cd $HOME/git/.dotfiles/home/.config/nvim' \
@@ -23,7 +22,9 @@ alias \
   s='git status' \
   yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config/.yarnrc"' \
   wget='wget --hsts-file $HOME/.config/wget/wget-hsts' \
-  jarvis='bash $HOME/git/jarvis/jarvis.sh'
+  jarvis='bash $HOME/git/jarvis/jarvis.sh' \
+  cd='z'
+
 
 # k8s and helm
 alias \
@@ -37,6 +38,7 @@ alias \
   km='kubecolor -n monitoring' \
   kr='kubecolor -n rabbitmq' \
   kn='kubecolor -n ingress-nginx' \
+  kb='kubecolor -n backstage' \
   kv='kubecolor -n vault' \
   ka='kubecolor -n argo' \
   ke='kubecolor -n elk' \
@@ -44,8 +46,9 @@ alias \
   ko='kubecolor -n argo-rollouts' \
   kl='kubecolor -n lens-metrics' \
   hn='helm -n ingress-nginx' \
+  hs='helm -n kube-system' \
   hw='helm -n vault-webhook' \
-  hm='helm -n monitoring' \
+  hm='helm -n monitoring ' \
   hc='helm -n cert-manager' \
   kx='helm -n ' \
   tw='terraform workspace' \

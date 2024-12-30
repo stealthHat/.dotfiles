@@ -97,6 +97,9 @@ install_loop() {
   local shell=$(command -v zsh)
   local user=$(whoami)
   sudo chsh -s "${shell}" "${user}"
+
+  printf "Enable systemd user services\n"
+  find "${HOME}"/.config/systemd/user -name "*.service" -exec systemctl --user enable {} +
 }
 
 # Install node and yarn
@@ -104,11 +107,8 @@ asdf_config() {
   printf "ASDF pluging install\n"
   local ASDF_DIR="/opt/asdf-vm"
   source /opt/asdf-vm/asdf.sh
-  asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git && asdf install nodejs latest
-  asdf global nodejs latest
-  asdf plugin-add yarn && asdf install yarn latest
-  asdf global yarn latest
-  npm i -g neovim prettier
+  asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+  asdf install nodejs latest
 }
 
 # Clean up home after install
