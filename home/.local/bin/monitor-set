@@ -11,6 +11,6 @@ if xrandr | grep "$extern disconnected"; then
   xrandr --output "$extern" --off
   paper
 else
-  xrandr --output "$intern" --primary --auto --output "$extern" --right-of "$intern" --auto
+  xrandr --output "$intern" --primary --auto --output "$extern" --above "$intern" --auto
   paper
 fi
