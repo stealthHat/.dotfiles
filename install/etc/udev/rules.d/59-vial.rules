@@ -1,0 +1,2 @@
+# Beekeeb 3w6hs Keyboard
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", ATTRS{idVendor}=="beeb", ATTRS{idProduct}=="0002", MODE="0660", GROUP="input", TAG+="uaccess", TAG+="udev-acl"

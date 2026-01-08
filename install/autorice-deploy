@@ -7,12 +7,12 @@ readonly git_dir="${root_dir%/*}"
 
 __pkg_install() {
   printf "Installing %s\n" "$1: $2"
-  sudo pacman --noconfirm --needed -S "$1" 
+  sudo pacman --noconfirm --needed -S "$1"
 }
 
 __aur_install() {
   printf "Installing %s\n" "$1: $2"
-  yay --noconfirm --needed -S "$1" 
+  yay --noconfirm --needed -S "$1"
 }
 
 __repo_install() {
@@ -32,29 +32,25 @@ setup_links() {
   printf "Folders and symbolic links\n"
   (
     cd "${root_dir}/home"
-    find . -type d | sed 's/^..//' | xargs -I _ mkdir -pv "${HOME}/_"
-    find . -type f | sed 's/^..//' | xargs -I _ ln -sf "${PWD}/_" "${HOME}/_"
+    find . -type d -exec mkdir -pv "${HOME}/{}" \;
+    find . -type f -exec ln -sf "${PWD}/{}" "${HOME}/{}" \;
 
     cd "${script_dir}"
     sudo find etc/ -type d -exec mkdir -p /{} \;
-    sudo find etc/ -type f -exec cp {} /{} \;
+    sudo find etc/ -type f -exec ln -sf "${PWD}/{}" "/{}" \;
   )
 }
 
 # Set the best mirrors for my country
 basic_config() {
-  printf "Pacman keyring\n"
-  sudo pacman --noconfirm -Sy archlinux-keyring reflector >/dev/null
-  sudo pacman -Syu --noconfirm >/dev/null
-
   printf "Pacman config\n"
   grep -q "ILoveCandy" /etc/pacman.conf || sudo sed -i "/VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
   sudo sed -i '/Color/ s/^#//; /VerbosePkgLists/ s/^#//; /ParallelDownloads/ s/^#//' /etc/pacman.conf
 
-  sudo reflector --country Brazil,Chile --protocol https --sort rate --save /etc/pacman.d/mirrorlist
-
-  printf "Updating System\n"
-  sudo pacman --noconfirm -Syu >/dev/null
+  printf "Pacman keyring\n"
+  sudo pacman --noconfirm -Sy archlinux-keyring reflector >/dev/null
+  sudo reflector --country Brazil,Chile --protocol https --sort rate --save /etc/pacman.d/mirrorlist || true
+  sudo pacman -Syu --noconfirm >/dev/null
 }
 
 # Install yay
@@ -94,16 +90,11 @@ install_loop() {
   local shell=$(command -v zsh)
   local user=$(whoami)
   sudo chsh -s "${shell}" "${user}"
-
-  printf "Enable systemd user services\n"
-  find "${HOME}"/.config/systemd/user -name "*.service" -exec systemctl --user enable {} +
 }
 
 # Install node and yarn
 asdf_config() {
   printf "ASDF pluging install\n"
-  local ASDF_DIR="/opt/asdf-vm"
-  source /opt/asdf-vm/asdf.sh
   asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
   asdf install nodejs latest
 }
@@ -121,12 +112,22 @@ case "$1" in
     setup_links
     ;;
   fresh-install)
-#    setup_links
-#    basic_config
-#    setup_yay
+    setup_links
+    basic_config
+    setup_yay
     install_loop
-#    asdf_config
-#    clean_up
+    asdf_config
+    clean_up
+    ;;
+  vm)
+    #    setup_links
+    #    basic_config
+    #    setup_yay
+    #    install_loop
+    #    asdf_config
+    sudo pacman -S spice-vdagent --noconfirm
+    sudo systemctl enable --now spice-vdagentd
+    #    clean_up
     ;;
   "") printf ":: autorice needs a argument ::\n" ;;
   *) printf ":: Invalid option: %s ::\n" "$1" ;;

@@ -11,6 +11,7 @@ if xrandr | grep "$extern disconnected"; then
   xrandr --output "$extern" --off
   paper
 else
-  xrandr --output "$intern" --primary --auto --output "$extern" --above "$intern" --auto
+  #  xrandr --output "$intern" --primary --auto --output "$extern" --above "$intern" --auto
+  xrandr --output "$intern" --primary --auto --output "$extern" --mode 2560x1440 --rate 59.95 --above "$intern"
   paper
 fi

@@ -1,8 +1,5 @@
 #!/bin/zsh
 
-# Adds `~/.local/bin` to $PATH
-export PATH="${PATH}:${HOME}/.local/bin"
-
 # Default programs:
 export BROWSER="librewolf"
 export EDITOR="nvim"
@@ -25,8 +22,6 @@ export GEM_SPEC_CACHE="${XDG_CACHE_HOME}/gem"
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 export GOPATH="${XDG_DATA_HOME}/go"
 export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc"
-export LESSHISTFILE="-"
-export MANPAGER="less -R --use-color -Dd+r -Du+b"
 export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/pass"
 export PSQL_HISTORY="${XDG_STATE_HOME}/psql_history"
@@ -36,7 +31,22 @@ export XAUTHORITY="${XDG_CONFIG_HOME}/Xauthority"
 export XINITRC="${XDG_CONFIG_HOME}/X11/xinitrc"
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME}/java"
-export TERRAGRUNT_STRICT_INCLUDE=true
+
+#less
+export GROFF_NO_SGR=1
+export LESSHISTFILE="-"
+export LESSHISTSIZE=0
+export LESS='-R -M -i -j.5 --incsearch'
+export LESS_TERMCAP_mb=$'\e[1;38;5;196m'
+export LESS_TERMCAP_md=$'\e[1;38;5;75m' 
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[48;5;60;38;5;255m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[4;38;5;155m'
+export LESS_TERMCAP_ue=$'\e[0m'
 
 # LS_COLORS
 eval "$(dircolors "${XDG_CONFIG_HOME}/dircolors")"
+
+# Adds `~/.local/bin` to $PATH
+export PATH="$ASDF_DATA_DIR/shims:${PATH}:${HOME}/.local/bin"

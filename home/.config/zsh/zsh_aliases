@@ -23,8 +23,9 @@ alias \
   yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config/.yarnrc"' \
   wget='wget --hsts-file $HOME/.config/wget/wget-hsts' \
   jarvis='bash $HOME/git/jarvis/jarvis.sh' \
-  cd='z'
-
+  f='cd "$(fd --type d --exclude ".*" | fzf)"' \
+  cd='z' \
+  ip='ip -c=always'
 
 # k8s and helm
 alias \
@@ -37,7 +38,9 @@ alias \
   kdd='kubecolor -n argocd' \
   km='kubecolor -n monitoring' \
   kr='kubecolor -n rabbitmq' \
+  krr='kubecolor -n rabbitmq-system' \
   kn='kubecolor -n ingress-nginx' \
+  knn='kubecolor -n public-ingress-nginx' \
   kb='kubecolor -n backstage' \
   kv='kubecolor -n vault' \
   ka='kubecolor -n argo' \

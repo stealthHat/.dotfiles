@@ -34,6 +34,7 @@
  ,pass,"Stores, retrieves, generates, and synchronizes passwords securely"
  ,pass-otp,"A pass extension for managing one-time-password (OTP) tokens."
 A,pass-update,"A pass extension that provides an easy flow for updating passwords."
+A,passmenu-otp-git, "A simple extension of passmenu friendly to one-time passwords (OTP), often used in two-factor authentication (2FA)."
 A,asdf-vm,"Extendable version manager with support for Ruby, Node.js, Elixir, Erlang & more"
 A,dracula-gtk-theme,"Dark theme for GTK"
 #A,librewolf-bin,"Community-maintained fork of Firefox, focused on privacy, security and freedom."

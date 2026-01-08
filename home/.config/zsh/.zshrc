@@ -14,5 +14,4 @@ add_plugin "zdharma-continuum/fast-syntax-highlighting"
 add_plugin "hlissner/zsh-autopair"
 add_plugin "zsh-users/zsh-autosuggestions"
 
-. /opt/asdf-vm/asdf.sh
 eval "$(zoxide init zsh)"
