@@ -1,0 +1,9 @@
+#TAG,NAME IN REPO ,PURPOSE
+ ,kubectl,"A command line tool for communicating with a Kubernetes API server"
+A,kubecolor,"Colorize your kubectl output"
+ ,docker,"Pack, ship and run any application as a lightweight container"
+ ,podman,"Tool and library for running OCI-based containers in pods"
+ ,buildah,"A tool which facilitates building OCI images"
+ ,aws-cli-v2,"Universal Command Line Interface for Amazon Web Services (version 2)"
+ ,helm,"The Kubernetes Package Manager"
+A,slack-desktop,"Slack Desktop for Linux"

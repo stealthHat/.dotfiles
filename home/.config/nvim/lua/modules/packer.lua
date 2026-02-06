@@ -48,15 +48,15 @@ return require("packer").startup(function(use)
   use "echasnovski/mini.nvim"
   use { "nvim-telescope/telescope.nvim" }
   use { "lewis6991/gitsigns.nvim" }
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-    requires = {
-      { "nvim-treesitter/nvim-treesitter-textobjects" },
-      { "p00f/nvim-ts-rainbow" },
-      { "nvim-treesitter/nvim-treesitter-context" },
-    },
-  }
+--  use {
+--    "nvim-treesitter/nvim-treesitter",
+--    run = ":TSUpdate",
+--    requires = {
+--      { "nvim-treesitter/nvim-treesitter-textobjects" },
+--      { "p00f/nvim-ts-rainbow" },
+--      { "nvim-treesitter/nvim-treesitter-context" },
+--    },
+--  }
 
   -- ui
   use "glepnir/zephyr-nvim"
