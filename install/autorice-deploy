@@ -73,7 +73,7 @@ setup_yay() {
 # Install all the packages on packages folder
 install_loop() {
   printf "Installing packages from packages folder\n"
-  #  source "${root_dir}/home/.zprofile"
+  source "${root_dir}/home/.zprofile"
   for csv in "${script_dir}"/packages/*.csv; do
     while IFS=, read -r tag program comment; do
       [[ "${tag}" =~ ^#.*$ ]] && continue
@@ -84,14 +84,14 @@ install_loop() {
       esac
     done <"${csv}"
   done
-  #
-  #  printf "Creating Home folders\n"
-  #  xdg-user-dirs-update
-  #
-  #  printf "Set zsh as the default shell\n"
-  #  local shell=$(command -v zsh)
-  #  local user=$(whoami)
-  #  sudo chsh -s "${shell}" "${user}"
+
+  printf "Creating Home folders\n"
+  xdg-user-dirs-update
+
+  printf "Set zsh as the default shell\n"
+  local shell=$(command -v zsh)
+  local user=$(whoami)
+  sudo chsh -s "${shell}" "${user}"
 }
 
 # Clean up home after install
