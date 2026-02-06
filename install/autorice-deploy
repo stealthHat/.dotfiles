@@ -28,16 +28,18 @@ __repo_install() {
 }
 
 # Create all the folder structure of my .dotfiles/home and make symbolic links of all files
+# shellcheck disable=SC2035
 setup_links() {
-  printf "Folders and symbolic links\n"
   (
+    printf "Folders and symbolic links\n"
+    shopt -s dotglob
     cd "${root_dir}/home"
-    find . -type d -exec mkdir -pv "${HOME}/{}" \;
-    find . -type f -exec ln -sf "${PWD}/{}" "${HOME}/{}" \;
+    find * -type d -exec mkdir -v "${HOME}/{}" \;
+    find * -type f -exec ln -sfv "${PWD}/{}" "${HOME}/{}" \;
 
     cd "${script_dir}"
-    sudo find etc/ -type d -exec mkdir -p /{} \;
-    sudo find etc/ -type f -exec ln -sf "${PWD}/{}" "/{}" \;
+    sudo find etc/ -type d -exec mkdir -v /{} \;
+    sudo find etc/ -type f -exec ln -sfv "${PWD}/{}" "/{}" \;
   )
 }
 
@@ -92,13 +94,6 @@ install_loop() {
   sudo chsh -s "${shell}" "${user}"
 }
 
-# Install node and yarn
-asdf_config() {
-  printf "ASDF pluging install\n"
-  asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-  asdf install nodejs latest
-}
-
 # Clean up home after install
 clean_up() {
   printf "Cleaning Up\n"
@@ -116,7 +111,6 @@ case "$1" in
     basic_config
     setup_yay
     install_loop
-    asdf_config
     clean_up
     ;;
   vm)
