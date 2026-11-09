@@ -1,0 +1,17 @@
+[settings]
+minimum_release_age = "7d"
+disable_backends = ["asdf", "vfox"]
+paranoid = ["provenance"]
+
+[tool_alias]
+terragrunt-ls = "github:gruntwork-io/terragrunt-ls"
+
+[tools]
+terraform = "1.15.7"
+terragrunt = "1.1.0"
+packer = "1.16.1"
+
+kubecolor = "latest"
+terraform-ls = "latest"
+terragrunt-ls = "latest"
+golangci-lint-langserver = "latest"

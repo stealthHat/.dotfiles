@@ -1,2 +1,2 @@
-require "core"
-require "modules"
+require "config"
+require "plugins"

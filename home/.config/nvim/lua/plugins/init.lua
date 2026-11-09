@@ -1,0 +1,8 @@
+require "plugins.catppuccin"
+require "plugins.mini"
+require "plugins.lspconfig"
+require "plugins.oil"
+require "plugins.treesitter"
+require "plugins.telescope"
+require "plugins.tmux-navigator"
+require "plugins.gitsigns"

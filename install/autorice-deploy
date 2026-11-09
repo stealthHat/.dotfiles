@@ -10,11 +10,6 @@ __pkg_install() {
   sudo pacman --noconfirm --needed -S "$1"
 }
 
-__aur_install() {
-  printf "Installing %s\n" "$1: $2"
-  yay --noconfirm --needed -S "$1"
-}
-
 __repo_install() {
   local repname="${1##*/}"
   if [[ ! -d "${git_dir}/${repname}" ]]; then
@@ -27,64 +22,47 @@ __repo_install() {
   fi
 }
 
-# Create all the folder structure of my .dotfiles/home and make symbolic links of all files
 # shellcheck disable=SC2035
 setup_links() {
   (
     printf "Folders and symbolic links\n"
     shopt -s dotglob
     cd "${root_dir}/home"
-    find * -type d -exec mkdir -v "${HOME}/{}" \;
+    find * -type d -exec mkdir -pv "${HOME}/{}" \;
     find * -type f -exec ln -sfv "${PWD}/{}" "${HOME}/{}" \;
+    find . -type d -exec find "${HOME}/{}" -maxdepth 1 -xtype l -lname "${root_dir}/home/*" -print -delete \;
 
     cd "${script_dir}"
-    sudo find etc/ -type d -exec mkdir -v /{} \;
+    sudo find etc/ -type d -exec mkdir -pv /{} \;
     sudo find etc/ -type f -exec ln -sfv "${PWD}/{}" "/{}" \;
   )
 }
 
-# Set the best mirrors for my country
-basic_config() {
-  printf "Pacman config\n"
-  grep -q "ILoveCandy" /etc/pacman.conf || sudo sed -i "/VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
-  sudo sed -i '/Color/ s/^#//; /VerbosePkgLists/ s/^#//; /ParallelDownloads/ s/^#//' /etc/pacman.conf
-
-  printf "Pacman keyring\n"
-  sudo pacman --noconfirm -Sy archlinux-keyring reflector >/dev/null
+mirror_update() {
+  printf "Mirrors update\n"
+  sudo pacman --noconfirm -Syu reflector
   sudo reflector --country Brazil,Chile --protocol https --sort rate --save /etc/pacman.d/mirrorlist || true
-  sudo pacman -Syu --noconfirm >/dev/null
 }
 
-# Install yay
-setup_yay() {
-  printf "Use all cores for compilation.\n"
-  local cores=$(nproc)
-  sudo sed -i "s/-j2/-j${cores}/; /^#MAKEFLAGS/ s/^#//" /etc/makepkg.conf
-
-  printf "Installing yay\n"
-  if [[ ! -d "${git_dir}"/yay ]]; then
-    (
-      git clone --depth 1 --quiet https://aur.archlinux.org/yay.git "${git_dir}"/yay >/dev/null
-      cd "${git_dir}"/yay && makepkg -si PKGBUILD --noconfirm >/dev/null 2>&1
-    )
-  fi
-}
-
-# Install all the packages on packages folder
 install_loop() {
   printf "Installing packages from packages folder\n"
   source "${root_dir}/home/.zprofile"
+
   for csv in "${script_dir}"/packages/*.csv; do
     while IFS=, read -r tag program comment; do
       [[ "${tag}" =~ ^#.*$ ]] && continue
       case "${tag}" in
-        "A") __aur_install "${program}" "${comment}" ;;
         "G") __repo_install "${program}" "${comment}" ;;
         *) __pkg_install "${program}" "${comment}" ;;
       esac
     done <"${csv}"
   done
 
+  printf "Installing mise tools\n"
+  mise install --locked
+}
+
+basic_config() {
   printf "Creating Home folders\n"
   xdg-user-dirs-update
 
@@ -92,9 +70,12 @@ install_loop() {
   local shell=$(command -v zsh)
   local user=$(whoami)
   sudo chsh -s "${shell}" "${user}"
+
+  printf "Pacman config\n"
+  grep -q "ILoveCandy" /etc/pacman.conf || sudo sed -i "/VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
+  sudo sed -i '/Color/ s/^#//; /VerbosePkgLists/ s/^#//; /ParallelDownloads/ s/^#//' /etc/pacman.conf
 }
 
-# Clean up home after install
 clean_up() {
   printf "Cleaning Up\n"
   cd "${HOME}"
@@ -106,11 +87,11 @@ case "$1" in
   links)
     setup_links
     ;;
-  fresh-install)
+  fresh)
     setup_links
-    basic_config
-    setup_yay
+    mirror_update
     install_loop
+    basic_config
     clean_up
     ;;
   install)

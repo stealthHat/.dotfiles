@@ -16,13 +16,10 @@ alias \
   zshupdate='source $HOME/.config/zsh/.zshrc' \
   vim='nvim' \
   t='terraform' \
-  ap='ansible-playbook' \
   sc='sudo systemctl' \
   g='cd $HOME/git' \
   s='git status' \
-  yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config/.yarnrc"' \
   wget='wget --hsts-file $HOME/.config/wget/wget-hsts' \
-  jarvis='bash $HOME/git/jarvis/jarvis.sh' \
   f='cd "$(fd --type d --exclude ".*" | fzf)"' \
   cd='z' \
   ip='ip -c=always'
