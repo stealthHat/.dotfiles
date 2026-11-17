@@ -5,7 +5,6 @@
  ,xorg-xrandr,"Primitive command line interface to RandR extension"
  ,xorg-xset,"User preference utility for X"
  ,xclip,"allows for copying and pasting from the command line"
- ,xcape,"keybind map tool"
  ,xwallpaper,"sets the wallpaper"
  ,xdg-user-dirs,"Manage user directories like ~/Desktop and ~/Music"
  ,base-devel,"Basic tools to build Arch Linux packages"
