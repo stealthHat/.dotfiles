@@ -34,7 +34,7 @@ setup_links() {
 
     cd "${script_dir}"
     sudo find etc/ -type d -exec mkdir -pv /{} \;
-    sudo find etc/ -type f -exec ln -sfv "${PWD}/{}" "/{}" \;
+    sudo find etc/ -type f -exec cp -v --remove-destination "{}" "/{}" \;
   )
 }
 
