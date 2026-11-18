@@ -11,7 +11,9 @@ terraform = "1.15.7"
 terragrunt = "1.1.0"
 packer = "1.16.1"
 
-kubecolor = "latest"
 terraform-ls = "latest"
 terragrunt-ls = "latest"
 golangci-lint-langserver = "latest"
+
+cliamp = "latest"
+kubecolor = "latest"

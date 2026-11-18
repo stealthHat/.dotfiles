@@ -2,6 +2,17 @@
 
 lockfile_version = 3
 
+[[tools.cliamp]]
+version = "2.4.0"
+backend = "github:bjarneo/cliamp"
+specifiers = ["latest"]
+
+[tools.cliamp."platforms.linux-x64"]
+checksum = "sha256:2ee17d8f613d9dd23d124b8f5580111610f5aa396b20f2818e388f7b7a227152"
+checksum_source = "mise-versions"
+url = "https://github.com/bjarneo/cliamp/releases/download/v2.4.0/cliamp-linux-amd64"
+url_api = "https://api.github.com/repos/bjarneo/cliamp/releases/assets/714241345"
+
 [[tools.golangci-lint-langserver]]
 version = "0.0.12"
 backend = "aqua:nametake/golangci-lint-langserver"

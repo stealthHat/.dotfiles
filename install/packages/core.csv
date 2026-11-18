@@ -19,6 +19,8 @@
  ,dunst,"is a suckless notification system"
  ,sxiv,"is a minimalist image viewer"
  ,mpv,"is the patrician's choice video player"
+ ,yt-dlp,"A youtube-dl fork with additional features and fixes"
+ ,ffmpeg,"Complete solution to record, convert and stream audio and video"
  ,man-db,"lets you read man pages of programs"
  ,maim,"can take quick screenshots at your request"
  ,unclutter,"hides an inactive mouse"
