@@ -10,6 +10,7 @@
  ,base-devel,"Basic tools to build Arch Linux packages"
  ,picom,"X compositor that may fix tearing issues"
  ,pipewire,"Low-latency audio/video router and processor"
+ ,pipewire-alsa,"Low-latency audio/video router and processor - ALSA configuration"
  ,pipewire-pulse,"Low-latency audio/video router and processor - PulseAudio replacement"
  ,rtkit,"Realtime Policy and Watchdog Daemon"
  ,wiremix,"A simple TUI audio mixer for PipeWire"
