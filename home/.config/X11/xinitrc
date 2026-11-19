@@ -11,12 +11,10 @@ fi
 monitor-set
 
 # Compositor
-picom -f &
+picom &
 
 slstatus &
 
-dunst &
-
-unclutter -idle 1 -jitter 2 -root &
+unclutter --timeout 1 &
 
 exec dwm
