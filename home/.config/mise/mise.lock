@@ -69,6 +69,7 @@ specifiers = ["1.2.2"]
 
 [tools.terragrunt."platforms.linux-x64"]
 checksum = "sha256:14b076f509478202701d8c6c7338c3d5842f160e0f9d9f98b6518ab389f7d7a3"
+checksum_source = "mise-versions"
 url = "https://github.com/gruntwork-io/terragrunt/releases/download/v1.2.2/terragrunt_linux_amd64.tar.gz"
 url_api = "https://api.github.com/repos/gruntwork-io/terragrunt/releases/assets/735922735"
 
