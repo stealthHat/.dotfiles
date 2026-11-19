@@ -1,7 +1,6 @@
 #TAG,NAME IN REPO ,PURPOSE
  ,xorg-server,"Xorg X server"
  ,xorg-xinit,"X.Org initialisation program"
- ,xorg-xbacklight,"enables changing screen brightness levels"
  ,xorg-xrandr,"Primitive command line interface to RandR extension"
  ,xorg-xset,"User preference utility for X"
  ,xclip,"allows for copying and pasting from the command line"
