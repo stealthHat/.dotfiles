@@ -1,25 +1,12 @@
 #!/bin/bash
 
-intern=eDP-1
-#extern=HDMI-1
-extern=DP-1-1-5
+outputs=$(xrandr)
 
-paper() {
-  xwallpaper --center "$HOME/git/.dotfiles/home/.config/wallpapers/wpezyRn.jpeg"
-}
-
-stale=$(xrandr | awk '/ disconnected (primary )?[0-9]/ {printf "--output %s --off ", $1}')
-
-if xrandr | grep "$extern disconnected"; then
-  xrandr --output "$extern" --off
-  paper
+if grep -q '^DP-1-1-5 connected' <<<"${outputs}"; then
+  xrandr --auto --output eDP-1 --primary --auto \
+    --output DP-1-1-5 --above eDP-1 --mode 2560x1440 --rate 59.95 --set "Broadcast RGB" "Full"
 else
-  xrandr $stale --output "$intern" --primary --auto \
-    --output "$extern" --above "$intern" \
-    --mode 2560x1440 --rate 59.95 \
-    --set "Broadcast RGB" "Full"
-  #  xrandr --output "$intern" --primary --auto \
-  #    --output "$extern" --above "$intern" --auto \
-  #    --set "Broadcast RGB" "Full"
-  paper
+  xrandr --auto --output eDP-1 --primary --auto
 fi
+
+xwallpaper --center "${HOME}/git/.dotfiles/home/.config/wallpapers/wpezyRn.jpeg"
