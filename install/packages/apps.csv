@@ -1,0 +1,11 @@
+#TAG,NAME IN REPO ,PURPOSE
+ ,librewolf,"Community-maintained fork of Firefox, focused on privacy, security and freedom"
+ ,passff-host,"PassFF native messaging host application for Firefox, Chromium, Chrome, Vivaldi"
+ ,discord,"All-in-one voice and text chat for gamers"
+ ,sxiv,"Simple X Image Viewer"
+ ,mpv,"a free, open source, and cross-platform media player"
+ ,ffmpeg,"Complete solution to record, convert and stream audio and video"
+ ,yt-dlp,"A youtube-dl fork with additional features and fixes"
+ ,zathura,"Minimalistic document viewer"
+ ,zathura-pdf-mupdf,"PDF support for Zathura (MuPDF backend) (Supports PDF, ePub, and OpenXPS)"
+ ,komikku,"Manga and comics reader for GNOME"

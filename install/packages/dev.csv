@@ -1,5 +1,5 @@
-#Language server protocols
- ,lua-language-server,"Lua Language Server coded by Lua (sumneko_lua)"
+#TAG,NAME IN REPO ,PURPOSE
+ ,lua-language-server,"Lua Language Server coded by Lua"
  ,stylua,"Deterministic code formatter for Lua"
  ,go,"Core compiler tools for the Go programming language"
  ,gopls,"Language server for Go programming language"
@@ -18,3 +18,5 @@
  ,tree-sitter-cli,"CLI tool for developing, testing, and using Tree-sitter parsers"
  ,github-cli,"The GitHub CLI"
  ,difftastic,"An experimental diff tool that compares files based on their syntax"
+ ,jq,"Command-line JSON processor"
+ ,yq,"Command-line YAML, XML, TOML processor - jq wrapper for YAML/XML/TOML documents"

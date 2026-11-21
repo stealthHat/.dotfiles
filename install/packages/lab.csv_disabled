@@ -1,0 +1,6 @@
+#TAG,NAME IN REPO ,PURPOSE
+ ,qemu-base,"A basic QEMU setup for headless environments"
+ ,qemu-chardev-spice,"QEMU spice chardev driver"
+ ,libvirt,"API for controlling virtualization engines (openvz,kvm,qemu,virtualbox,xen,etc)"
+ ,virt-manager,"Desktop user interface for managing virtual machines"
+ ,dnsmasq,"Lightweight, easy to configure DNS forwarder and DHCP server"
